@@ -1,0 +1,208 @@
+/* ----------- 💫 Fusión Personalizada - Bottom Bar CSS 💫 -------- */
+/* --- Tamaños de Crystal Clear + Catppuccin Mocha Colors --- */
+
+@import '../../.config/waybar/wallust/colors-waybar.css';
+
+/* --- Catppuccin Mocha Palette --- */
+@define-color mocha-rosewater #f5e0dc;
+@define-color mocha-flamingo #f2cdcd;
+@define-color mocha-pink #f5c2e7;
+@define-color mocha-mauve #cba6f7;
+@define-color mocha-red #f38ba8;
+@define-color mocha-maroon #eba0ac;
+@define-color mocha-peach #fab387;
+@define-color mocha-yellow #f9e2af;
+@define-color mocha-green #a6e3a1;
+@define-color mocha-teal #94e2d5;
+@define-color mocha-sky #89dceb;
+@define-color mocha-sapphire #74c7ec;
+@define-color mocha-blue #89b4fa;
+@define-color mocha-lavender #b4befe;
+@define-color mocha-text #cdd6f4;
+@define-color mocha-subtext0 #a6adc8;
+
+@define-color critical @mocha-red; 
+@define-color warning @mocha-yellow;  
+@define-color bg @color7;  /* Mantenemos el fondo de Wallust por si acaso */
+
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    min-height: 0;  
+    font-size: 97%;
+    font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+}
+    
+window#waybar {
+    background: transparent;
+    border-radius: 1px;
+    color: @mocha-text;
+}
+    
+window#waybar.hidden {
+    opacity: 0.5;
+}
+
+window#waybar.empty,
+window#waybar.empty #window {
+   padding: 0px;
+   border: 0px;
+   background-color: transparent;
+}
+
+/* --- Tooltips --- */
+tooltip {
+    color: @mocha-text;
+    background: #1e1e2e; /* Fondo Base de Catppuccin */
+    opacity: 0.9;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: @mocha-mauve;
+}
+
+/* --- Workspaces y Taskbar --- */
+#taskbar button,       
+#workspaces button {
+    color: @mocha-subtext0;
+    box-shadow: none;
+    text-shadow: none;
+    padding: 0px;
+    border-radius: 9px;
+    padding-left: 4px;
+    padding-right: 4px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* Espacio de trabajo activo */
+#workspaces button.active {
+    color: @mocha-mauve; /* Círculo activo en morado */
+    border-radius: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+/* App activa en la barra de tareas (SIN FONDO, SOLO NORMAL) */
+#taskbar button.active {
+    background-color: transparent; 
+    color: @mocha-text; /* Blanco brillante para destacar que está activa */
+    border-radius: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+  
+#workspaces button.focused {
+    color: @mocha-text;
+}
+   
+#workspaces button.urgent {
+    color: @warning;
+    border-radius: 10px;
+}
+       
+#taskbar button:hover,
+#workspaces button:hover {
+    color: @mocha-text;
+    border-radius: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
+    animation: gradient_f 20s ease-in infinite;
+    transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
+}
+    
+/* --- Padding General de Módulos --- */
+#backlight, #battery, #bluetooth, #clock, #cpu, #disk,
+#idle_inhibitor, #keyboard-state, #memory, #mode, #mpris,
+#network, #power-profiles-daemon, #pulseaudio, #taskbar,
+#temperature, #tray, #window, #wireplumber, #workspaces,
+#custom-backlight, #custom-nightlight, #custom-browser,
+#custom-cava_mviz, #custom-cycle_wall, #custom-dot_update,
+#custom-file_manager, #custom-keybinds, #custom-keyboard,
+#custom-light_dark, #custom-nightlight, #custom-lock,
+#custom-hint, #custom-hypridle, #custom-menu,
+#custom-playerctl, #custom-power_vertical, #custom-power,
+#custom-quit, #custom-reboot, #custom-settings,
+#custom-spotify, #custom-swaync, #custom-tty,
+#custom-updater, #custom-hyprpicker, #custom-weather {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+    padding-left: 6px;
+}
+
+/* --- COLORES PERSONALIZADOS CATPPUCCIN POR MÓDULO --- */
+#clock { color: @mocha-blue; }
+#custom-weather { color: @mocha-sapphire; }
+
+#cpu { color: @mocha-peach; }
+#memory { color: @mocha-green; }
+#disk { color: @mocha-teal; }
+#temperature { color: @mocha-yellow; }
+
+#battery { color: @mocha-green; }
+#battery.charging { color: @mocha-sky; }
+#power-profiles-daemon { color: @mocha-flamingo; }
+
+#network { color: @mocha-sky; }
+#bluetooth { color: @mocha-sapphire; }
+
+#pulseaudio { color: @mocha-lavender; }
+#backlight { color: @mocha-lavender; }
+
+#mpris { color: @mocha-pink; }
+#custom-cava_mviz { color: @mocha-pink; }
+
+#group-notify { color: @mocha-maroon; }
+#custom-power { color: @mocha-red; }
+     
+/* --- Animaciones e Indicadores --- */
+@keyframes blink {
+    to {
+        color: #1e1e2e;
+    }
+}
+
+#temperature.critical {
+    background-color: @critical;
+    color: #1e1e2e;
+}
+       
+#battery.critical:not(.charging) {
+    color: @critical;
+    animation-name: blink;
+    animation-duration: 3.0s;
+    animation-timing-function: steps(12);
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* --- Sliders de Volumen y Brillo --- */
+#backlight-slider slider,
+#pulseaudio-slider slider {
+    min-width: 0px;
+    min-height: 0px;
+    opacity: 0;
+    background-image: none;
+    border: none;
+    box-shadow: none;
+}
+
+#backlight-slider trough,
+#pulseaudio-slider trough {
+    min-width: 80px;  
+    min-height: 10px; 
+    border-radius: 5px;
+    background-color: rgba(30, 30, 46, 0.6); /* Crust de Catppuccin con transparencia */
+}
+
+#backlight-slider highlight,
+#pulseaudio-slider highlight {
+    min-height: 10px; 
+    border-radius: 5px;
+    background-color: @mocha-lavender; 
+}

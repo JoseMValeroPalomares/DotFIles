@@ -1,0 +1,106 @@
+/* ---- 💫 Fusión Personalizada - Bottom Bar 💫 ---- */
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules"
+  ],
+"layer": "top", 
+"position": "bottom", 
+"exclusive": true,
+"passthrough": false,
+"gtk-layer-shell": true,
+"spacing": 5,
+"margin-left": 8,
+"margin-right": 8,
+"margin-bottom": 4, 
+"margin-top": 0,
+
+"modules-left": [
+    "power-profiles-daemon",
+    "battery",
+    "custom/separator#line",
+    "temperature",
+    "cpu",
+    "memory",
+    "disk",
+    "custom/separator#blank_3",
+    "custom/separator#blank_3",
+    "custom/separator#blank_3",
+    "custom/separator#blank_3",
+    "custom/cava_mviz",
+    "mpris"
+    
+    ],
+    
+"modules-center": [
+    "custom/separator#blank_3",
+    "custom/separator#blank_3",
+    "group/notify",
+    "custom/separator#line",
+    "custom/weather",
+    "custom/separator#line",
+    "clock",
+    "custom/separator#line",
+    "custom/separator#blank",
+    "wlr/taskbar"
+    
+    
+    
+    ],
+    
+"modules-right": [
+    "network#speed",
+    "custom/separator#line",
+    "tray",
+    "custom/separator#line",
+    "custom/cycle_wall",
+    "backlight",
+    "pulseaudio",
+    "custom/separator#line",
+    "custom/power"
+    ],
+
+// --- CONFIGURACIONES ESPECÍFICAS AÑADIDAS --- //
+
+// 1. Espacios de trabajo con círculos (rellenos y vacíos)
+"hyprland/workspaces#circulos": {
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{icon}",
+    "show-special": false,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+    },
+    "format-icons": {
+        "active": "",    // Círculo relleno para el actual
+        "default": "",   // Círculo vacío para los que tienen algo pero no estás en ellos
+        "empty": "",     // Círculo vacío para los que no tienen nada
+        "urgent": ""     // Icono de alerta si una app requiere atención
+    }
+},
+
+// 2. Ventanas abiertas (Solo iconos)
+"wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+        "Alacritty",
+        "kitty"
+    ]
+}
+
+}

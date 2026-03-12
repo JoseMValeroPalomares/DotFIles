@@ -1,0 +1,37 @@
+set nohelp
+set constantshow
+set linenumbers
+set softwrap
+set tabsize 4
+set tabstospaces
+set indicator
+
+# --- Colores de la Interfaz (Estilo Mocha Dark) ---
+# Formato: color_texto,color_fondo
+set titlecolor white,black
+set statuscolor white,black
+set numbercolor cyan
+set keycolor blue
+set functioncolor white
+set selectedcolor white,magenta
+set stripecolor ,yellow
+
+# --- Resaltado de Sintaxis ---
+# Importante: Primero cargamos el tema general
+#include "~/.nano/ini.nanorc"
+
+# Cargamos el resto de lenguajes
+include "~/.nano/*.nanorc"
+
+# --- Configuración específica para archivos .conf (Hyprland/Waybar) ---
+syntax "config" "\.(conf|cfg|ini)$"
+# Comentarios en Gris (Surface 1)
+color brightblack "^[[:space:]]*#.*$"
+# Variables en Azul (Blue)
+color blue "^[[:space:]]*[a-zA-Z0-9_.-]+"
+# Operadores y signos en Lavanda
+color magenta "[=:]"
+# Valores entre comillas en Verde
+color green "\"(\\.|[^\"])*\""
+# Números en Melocotón
+color yellow "\<[0-9.]+\>"

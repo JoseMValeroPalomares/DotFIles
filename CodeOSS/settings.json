@@ -1,0 +1,58 @@
+{
+    "workbench.colorTheme": "Catppuccin Noctis Mocha",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "chat.agent.enabled": false,
+    "chat.agent.thinking.generateTitles": false,
+    "chat.agent.thinking.terminalTools": false,
+    "chat.agentsControl.enabled": false,
+    "chat.checkpoints.enabled": false,
+    "chat.detectParticipant.enabled": false,
+    "chat.editing.confirmEditRequestRemoval": false,
+    "chat.editing.confirmEditRequestRetry": false,
+
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "hidden",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        },
+        "fish": {
+            "path": "/usr/bin/fish"
+        }
+    },
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "workbench.layoutControl.enabled": false,
+    "explorer.compactFolders": true,
+    
+    // Ocultar las barras de scroll completamente
+    "editor.scrollbar.vertical": "hidden",
+    "editor.scrollbar.horizontal": "hidden",
+
+    // Movimiento del cursor súper suave (como en las terminales modernas)
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "smooth",
+
+    // Scroll fluido en el código y en las listas (explorador)
+    "editor.smoothScrolling": true,
+    "workbench.list.smoothScrolling": true
+    
+
+    
+
+
+
+    
+
+}

@@ -1,0 +1,55 @@
+* {
+    background-image: none;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14pt;
+}
+
+window {
+    background-color: rgba(17, 17, 27, 0.7); /* Fondo oscuro semitransparente */
+}
+
+button {
+    color: #cdd6f4;
+    background-color: #313244;
+    border: 2px solid #313244;
+    border-radius: 20px;
+    
+    /* Esta es la clave para que parezcan cajas */
+    margin: 50 35px; 
+    
+    background-repeat: no-repeat;
+    background-position: center 40%; /* Sube un poco el icono */
+    background-size: 20%; /* Tamaño del icono */
+    
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+
+
+button:focus,
+button:hover {
+    background-color: #cba6f7;
+    color: #11111b;
+    border: 2px solid #cba6f7;
+    box-shadow: 0 4px 15px 0 rgba(203, 166, 247, 0.4);
+    outline: none;
+}
+
+/* Rutas absolutas hacia tus iconos (asumiendo que están en la carpeta por defecto de wlogout) */
+#lock { background-image: image(url("/home/jose/.config/wlogout/icons/lock.png")); }
+#lock:focus, #lock:hover { background-image: image(url("/home/jose/.config/wlogout/icons/lock-hover.png")); }
+
+#logout { background-image: image(url("/home/jose/.config/wlogout/icons/logout.png")); }
+#logout:focus, #logout:hover { background-image: image(url("/home/jose/.config/wlogout/icons/logout-hover.png")); }
+
+#suspend { background-image: image(url("/home/jose/.config/wlogout/icons/sleep.png")); }
+#suspend:focus, #suspend:hover { background-image: image(url("/home/jose/.config/wlogout/icons/sleep-hover.png")); }
+
+#hibernate { background-image: image(url("/home/jose/.config/wlogout/icons/hibernate.png")); }
+#hibernate:focus, #hibernate:hover { background-image: image(url("/home/jose/.config/wlogout/icons/hibernate-hover.png")); }
+
+#shutdown { background-image: image(url("/home/jose/.config/wlogout/icons/power.png")); }
+#shutdown:focus, #shutdown:hover { background-image: image(url("/home/jose/.config/wlogout/icons/power-hover.png")); }
+
+#reboot { background-image: image(url("/home/jose/.config/wlogout/icons/restart.png")); }
+#reboot:focus, #reboot:hover { background-image: image(url("/home/jose/.config/wlogout/icons/restart-hover.png")); }
