@@ -1,0 +1,82 @@
+# ~/.config/nano/nanorc — GNU nano 9.x
+
+# --- Interfaz ---
+set nohelp
+set constantshow
+set linenumbers
+set indicator
+set stateflags            # muestra I/M/R/S/U… arriba a la derecha
+set guidestripe 100       # guía vertical en la columna 100
+# set minibar             # descomenta para una barra inferior mínima (sin barra de título)
+
+# --- Edición ---
+set zap                   # Supr/Retroceso borran la selección entera
+set mouse                 # clic para mover el cursor, arrastrar para seleccionar
+set autoindent
+set smarthome             # Inicio salta primero al primer carácter no blanco
+set softwrap
+set atblanks              # el ajuste suave corta por espacios, no a mitad de palabra
+set tabsize 4
+set tabstospaces
+set trimblanks            # quita espacios finales al ajustar líneas
+set afterends             # Ctrl+→ salta al final de palabra
+set matchbrackets "(<[{)>]}"
+
+# --- Archivos e historial ---
+set multibuffer           # Ctrl+R abre archivos en buffers nuevos
+set historylog            # recuerda búsquedas
+set positionlog           # reabre el archivo donde lo dejaste
+set locking               # avisa si otro nano edita el mismo archivo
+
+# --- Colores de la Interfaz (Estilo Mocha Dark) ---
+# Formato: color_texto,color_fondo
+set titlecolor white,black
+set statuscolor white,black
+set promptcolor white,black
+set minicolor white,black
+set errorcolor brightwhite,red
+set numbercolor cyan
+set keycolor blue
+set functioncolor white
+set selectedcolor white,magenta
+set spotlightcolor black,yellow
+set scrollercolor magenta
+set stripecolor ,black
+
+# --- Atajos estilo editor moderno ---
+bind ^S savefile main
+bind ^Q exit main
+bind ^Q exit help
+bind ^Q exit browser
+bind ^Z undo main
+bind ^Y redo main
+bind ^C copy main
+bind ^X cut main
+bind ^V paste main
+bind ^F whereis main
+bind ^G findnext main
+bind M-G findprevious main
+bind ^R replace main
+bind ^O insert main         # abrir archivo (guardar como: F3)
+bind ^A "{firstline}{home}{mark}{lastline}{end}" main   # seleccionar todo
+bind ^L gotoline main
+bind ^E execute main
+bind ^D comment main
+bind M-D center main
+# Ctrl+Retroceso / Ctrl+Supr ya borran palabra; Mayús+flechas ya seleccionan.
+
+# --- Resaltado de Sintaxis ---
+include "~/.nano/*.nanorc"
+
+# --- Configuración específica para archivos .conf (Hyprland/Waybar) ---
+syntax "config" "\.(conf|cfg|ini)$"
+# Comentarios en Gris (Surface 1)
+color brightblack "^[[:space:]]*#.*$"
+# Variables en Azul (Blue)
+color blue "^[[:space:]]*[a-zA-Z0-9_.-]+"
+# Operadores y signos en Lavanda
+color magenta "[=:]"
+# Valores entre comillas en Verde
+color green "\"(\\.|[^\"])*\""
+# Números en Melocotón
+color yellow "\<[0-9.]+\>"

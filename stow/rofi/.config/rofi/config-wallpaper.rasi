@@ -1,0 +1,78 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Selector de fondos (SUPER+U) y fondo del bloqueo (SUPER+CTRL+U): cuadrícula 8 × 4 = 32 fondos a la vista */
+/* con miniaturas cuadradas en caché (UserScripts/lib/wallthumbs.sh). Sin nombres: se busca escribiendo.   */
+
+@import "~/.config/rofi/config.rasi"
+
+* {
+  /* Selección clara de Wallust (como el resto de menús renovados) */
+  selected: @color15;
+}
+
+/* ---- Window: al 96 %, como la calculadora (con 0,7 se leía lo de detrás entre las miniaturas) ---- */
+window {
+  width:            80%;
+  border-color:     @color13;
+  background-color: rgba(10, 10, 12, 0.96);
+}
+
+mainbox {
+  children: [ "inputbar", "listview" ];
+}
+
+/* ---- Inputbar: franja fina con el fondo actual ---- */
+inputbar {
+  padding: 1.0em 1.4em;
+}
+
+entry {
+  expand:           true;
+  padding:          0.55em 0.9em;
+  placeholder:      " 🎞️  Buscar por nombre · Intro: poner · Shift+Intro: probar";
+  horizontal-align: 0.5;
+}
+
+/* ---- Cuadrícula 8 × 4 ---- */
+listview {
+  columns:          8;
+  lines:            4;
+  flow:             horizontal;
+  fixed-columns:    true;
+  fixed-height:     true;
+  spacing:          10px;
+  padding:          12px;
+  scrollbar:        true;
+  cycle:            false;
+  background-color: transparent;
+}
+
+scrollbar {
+  handle-color: @color13;
+  handle-width: 4px;
+}
+
+/* ---- Miniaturas: sin texto visible; la seleccionada con marco claro ---- */
+element {
+  orientation:      vertical;
+  padding:          6px;
+  border-radius:    12px;
+  background-color: transparent;
+}
+
+element normal.normal,
+element alternate.normal {
+  background-color: transparent;
+}
+
+element selected.normal {
+  background-color: @selected;
+}
+
+element-icon {
+  size:   168px;
+  cursor: inherit;
+}
+
+element-text {
+  enabled: false;
+}

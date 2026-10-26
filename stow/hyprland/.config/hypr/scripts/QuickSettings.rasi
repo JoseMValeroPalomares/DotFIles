@@ -1,0 +1,65 @@
+/* Menú Ajustes rápidos (SUPER+SHIFT+E): hereda tu tema de rofi y sus colores de wallust;
+   mismo lenguaje que KeyBinds.rasi, en una columna estrecha con secciones. */
+
+@import "~/.config/rofi/config.rasi"
+
+configuration {
+    show-icons: false;
+    hover-select: true;
+}
+
+window {
+    width: 36em;
+}
+
+mainbox {
+    children: [ "inputbar", "message", "listbox" ];
+}
+
+inputbar {
+    padding: 1.6em 2em;
+}
+
+entry {
+    placeholder: "Buscar ajuste…";
+}
+
+/* Lista y mensaje opacos: lo que haya detrás no compite con el texto */
+message {
+    padding: 0.6em 1.4em 0em 1.4em;
+    background-color: @normal-background;
+}
+
+textbox {
+    text-color: @foreground;
+    background-color: transparent;
+    markup: true;
+}
+
+listbox {
+    background-color: @normal-background;
+}
+
+listview {
+    columns: 1;
+    lines: 16;
+    fixed-height: true;
+    scrollbar: true;
+    spacing: 0.1em;
+    padding: 0.6em 1em 1em 1em;
+}
+
+element {
+    padding: 0.45em 0.9em;
+    border-radius: 0.8em;
+}
+
+element-text {
+    markup: true;
+    vertical-align: 0.5;
+}
+
+element-text selected,
+element selected.normal {
+    border-radius: 0.8em;
+}

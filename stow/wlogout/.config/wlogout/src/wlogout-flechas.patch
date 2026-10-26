@@ -1,0 +1,93 @@
+diff --git a/main.c b/main.c
+index 1031af6..c27f371 100644
+--- a/main.c
++++ b/main.c
+@@ -510,8 +510,79 @@ static void execute(GtkWidget *widget, char *action)
+     gtk_main_quit();
+ }
+ 
++/* Mueve el foco con las flechas; al llegar a un borde da la vuelta al lado
++ * contrario. Si la celda de destino está vacía (última fila incompleta), en
++ * horizontal sigue avanzando y en vertical toma el botón más cercano a la
++ * izquierda en esa fila. */
++static gboolean move_focus(GtkWidget *widget, guint keyval)
++{
++    int dx = 0, dy = 0;
++    switch (keyval)
++    {
++    case GDK_KEY_Left:
++    case GDK_KEY_KP_Left:
++        dx = -1;
++        break;
++    case GDK_KEY_Right:
++    case GDK_KEY_KP_Right:
++        dx = 1;
++        break;
++    case GDK_KEY_Up:
++    case GDK_KEY_KP_Up:
++        dy = -1;
++        break;
++    case GDK_KEY_Down:
++    case GDK_KEY_KP_Down:
++        dy = 1;
++        break;
++    default:
++        return FALSE;
++    }
++
++    GtkWidget *focus = gtk_window_get_focus(GTK_WINDOW(widget));
++    if (!focus || !GTK_IS_GRID(gtk_widget_get_parent(focus)))
++    {
++        return FALSE;
++    }
++    GtkGrid *grid = GTK_GRID(gtk_widget_get_parent(focus));
++
++    int cols = buttons_per_row;
++    int rows = (num_buttons + buttons_per_row - 1) / buttons_per_row;
++    int col = 0, row = 0;
++    gtk_container_child_get(GTK_CONTAINER(grid), focus, "left-attach", &col,
++                            "top-attach", &row, NULL);
++
++    GtkWidget *target = NULL;
++    if (dx != 0)
++    {
++        for (int step = 0; step < cols && !target; step++)
++        {
++            col = (col + dx + cols) % cols;
++            target = gtk_grid_get_child_at(grid, col, row);
++        }
++    }
++    else
++    {
++        row = (row + dy + rows) % rows;
++        for (int c = col; c >= 0 && !target; c--)
++        {
++            target = gtk_grid_get_child_at(grid, c, row);
++        }
++    }
++
++    if (target)
++    {
++        gtk_widget_grab_focus(target);
++    }
++    return TRUE;
++}
++
+ static gboolean check_key(GtkWidget *widget, GdkEventKey *event, gpointer data)
+ {
++    if (move_focus(widget, event->keyval))
++    {
++        return TRUE;
++    }
+     if (event->keyval == GDK_KEY_Escape)
+     {
+         gtk_main_quit();
+@@ -651,7 +722,7 @@ static void load_buttons(GtkContainer *container)
+     int count = 0;
+     for (int i = 0; i < buttons_per_row; i++)
+     {
+-        for (int j = 0; j < num_col; j++)
++        for (int j = 0; j < num_col && count < num_buttons; j++)
+         {
+             if (buttons[count].text && show_bind)
+             {

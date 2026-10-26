@@ -1,0 +1,23 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* RofiBeats: listas de emisoras, canciones y gestión. Hereda el menú principal y solo cambia el tamaño */
+
+@import "~/.config/rofi/config-rofi-Beats-menu.rasi"
+
+window {
+  width: 620px;
+}
+
+entry {
+  placeholder: "Buscar";
+}
+
+listview {
+  lines:        10;
+  fixed-height: true;
+  scrollbar:    true;
+}
+
+scrollbar {
+  handle-color: @color13;
+  handle-width: 4px;
+}

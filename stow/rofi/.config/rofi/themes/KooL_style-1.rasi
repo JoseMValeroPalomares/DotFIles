@@ -1,0 +1,221 @@
+/* ---- 🧊 ROFI ELEGANT GLASS EDITION 🧊 ---- */
+/* Inspirado en la estética translúcida de Hyprland */
+
+configuration {
+    modi:                       "drun,run,filebrowser";
+    show-icons:                 true;
+    display-drun:               "  Apps";
+    display-run:                "  Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Windows";
+    drun-display-format:        "{name}";
+    hover-select:               true;
+    me-select-entry:            "MouseSecondary";
+    me-accept-entry:            "MousePrimary";
+    window-format:              "{w} · {c} · {t}";
+    
+    /* Configuración de iconos para un look más limpio */
+    icon-theme:                 "Papirus-Dark"; /* Cambia a tu tema de iconos */
+}
+
+/* ---- Importar colores (Ajusta la ruta si es necesario) ---- */
+@theme "~/.config/rofi/wallust/colors-rofi.rasi"
+
+/* ---- Global Properties ---- */
+* {
+    /* Mapeo base de Wallust */
+    selected:               @color12; /* Normalmente un azul/cian vibrante */
+    active:                 @color11; /* Normalmente un amarillo/verde */
+    urgent:                 @color13; /* Normalmente un rojo/magenta */
+    
+    /* Variables de Transparencia (El secreto del cristal) */
+    /* Usamos un negro casi transparente para que el blur resalte */
+    glass-bg:               #00000066; /* 40% de opacidad negra */
+    glass-bg-alt:           #ffffff11; /* Un toque blanco apenas visible para alternancia */
+    glass-border:           #ffffff33; /* Borde sutil brillante */
+    
+    text-main:              #e0e0e0;
+    text-selected:          #000000;
+}
+
+/* ---- Main Window ---- */
+window {
+    transparency:           "real";
+    location:               center;
+    anchor:                 center;
+    fullscreen:             false;
+    width:                  650px;
+    x-offset:               0px;
+    y-offset:               0px;
+
+    enabled:                true;
+    margin:                 0px;
+    padding:                0px;
+    border:                 1px solid;
+    border-radius:          15px; /* Redondeo al estilo Hyprland */
+    border-color:           @glass-border;
+    cursor:                 "default";
+    
+    /* Fondo principal transparente */
+    background-color:       @glass-bg;
+}
+
+/* ---- Main Box ---- */
+mainbox {
+    enabled:                true;
+    spacing:                15px;
+    margin:                 0px;
+    padding:                30px;
+    background-color:       transparent;
+    children:               [ "inputbar", "listview", "mode-switcher" ];
+}
+
+/* ---- Inputbar (Caja de búsqueda) ---- */
+inputbar {
+    enabled:                true;
+    spacing:                10px;
+    margin:                 0px;
+    padding:                12px 15px;
+    border:                 1px solid;
+    border-radius:          10px;
+    border-color:           @glass-border;
+    background-color:       @glass-bg-alt;
+    text-color:             @text-main;
+    children:               [ "textbox-prompt-colon", "entry" ];
+}
+
+textbox-prompt-colon {
+    enabled:                true;
+    expand:                 false;
+    str:                    " ";
+    padding:                0px 5px 0px 0px;
+    background-color:       transparent;
+    text-color:             inherit;
+}
+
+entry {
+    enabled:                true;
+    background-color:       transparent;
+    text-color:             inherit;
+    cursor:                 text;
+    placeholder:            "Busca una aplicación...";
+    placeholder-color:      #a0a0a0;
+}
+
+/* ---- Listview (La lista de apps) ---- */
+listview {
+    enabled:                true;
+    columns:                2; /* 2 columnas para aprovechar el ancho */
+    lines:                  6;
+    cycle:                  true;
+    dynamic:                true;
+    scrollbar:              false;
+    layout:                 vertical;
+    reverse:                false;
+    fixed-height:           true;
+    fixed-columns:          true;
+    
+    spacing:                5px;
+    margin:                 0px;
+    padding:                0px;
+    border:                 0px;
+    background-color:       transparent;
+}
+
+/* ---- Elements (Cada app en la lista) ---- */
+element {
+    enabled:                true;
+    spacing:                15px;
+    margin:                 0px;
+    padding:                8px 15px;
+    border:                 0px solid;
+    border-radius:          10px;
+    background-color:       transparent;
+    text-color:             @text-main;
+    cursor:                 pointer;
+}
+
+element normal.normal, element alternate.normal {
+    background-color:       transparent;
+    text-color:             @text-main;
+}
+
+element normal.urgent, element alternate.urgent {
+    background-color:       @urgent;
+    text-color:             @text-selected;
+}
+
+element normal.active, element alternate.active {
+    background-color:       @active;
+    text-color:             @text-selected;
+}
+
+/* El elemento seleccionado brilla con tu color de énfasis */
+element selected.normal {
+    background-color:       @selected;
+    text-color:             @text-selected;
+}
+
+element selected.urgent {
+    background-color:       @urgent;
+    text-color:             @text-selected;
+}
+
+element selected.active {
+    background-color:       @active;
+    text-color:             @text-selected;
+}
+
+element-icon {
+    background-color:       transparent;
+    text-color:             inherit;
+    size:                   32px;
+    cursor:                 inherit;
+}
+
+element-text {
+    background-color:       transparent;
+    text-color:             inherit;
+    cursor:                 inherit;
+    vertical-align:         0.5;
+    horizontal-align:       0.0;
+}
+
+/* ---- Mode Switcher (Botones Drun, Run, etc) ---- */
+mode-switcher{
+    enabled:                true;
+    spacing:                15px;
+    margin:                 10px 0px 0px 0px;
+    background-color:       transparent;
+}
+
+button {
+    padding:                10px;
+    border-radius:          10px;
+    background-color:       @glass-bg-alt;
+    text-color:             @text-main;
+    cursor:                 pointer;
+    border:                 1px solid;
+    border-color:           transparent;
+}
+
+button selected {
+    background-color:       @selected;
+    text-color:             @text-selected;
+    border-color:           @selected;
+}
+
+/* ---- Message / Errores ---- */
+message {
+    background-color:       transparent;
+    border:                 0px;
+}
+
+textbox {
+    padding:                12px;
+    border-radius:          10px;
+    background-color:       @glass-bg-alt;
+    text-color:             @text-main;
+    vertical-align:         0.5;
+    horizontal-align:       0.5;
+}

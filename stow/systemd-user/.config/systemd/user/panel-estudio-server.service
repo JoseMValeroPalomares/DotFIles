@@ -1,0 +1,16 @@
+[Unit]
+Description=Panel de Estudio - servidor web (server.py)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/jose/Documents/electro/esp32_deskclock/panel_estudio_server
+ExecStart=/home/jose/Documents/electro/esp32_deskclock/panel_estudio_server/venv/bin/python3 /home/jose/Documents/electro/esp32_deskclock/panel_estudio_server/server.py
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=default.target

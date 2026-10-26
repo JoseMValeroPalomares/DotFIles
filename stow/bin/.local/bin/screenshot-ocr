@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# screenshot-ocr (SUPER+S)
+# Captura un área de la pantalla y copia el texto (OCR) al portapapeles
+# Dependencias: grim, slurp, tesseract (+ tesseract-data-spa/eng), imagemagick, wl-clipboard, libnotify
+
+# --- Configuración ---
+LANG_OCR="spa+eng"   # idiomas para el OCR (spa = español, eng = inglés)
+SCALE="200%"         # ampliar antes de leer: el texto de pantalla es pequeño y así se reconoce mucho más
+
+notify() { notify-send -e -u "$1" -h string:x-canonical-private-synchronous:ocr "$2" "$3"; }
+
+# swaync interpreta marcado: escapar & < > de la vista previa (\& porque en bash 5.2 & = texto encontrado)
+escape() { local s=${1//&/\&amp;}; s=${s//</\&lt;}; printf '%s' "${s//>/\&gt;}"; }
+
+# --- Verificar dependencias ---
+for cmd in grim slurp tesseract magick wl-copy; do
+    if ! command -v "$cmd" &>/dev/null; then
+        echo "ERROR: '$cmd' no está instalado." >&2
+        notify critical "OCR" "Falta la dependencia: $cmd"
+        exit 1
+    fi
+done
+
+# --- Seleccionar área (Esc = cancelar sin aviso) ---
+selection=$(slurp 2>/dev/null) || exit 0
+
+# --- Capturar, ampliar y leer, todo en memoria (sin archivos temporales) ---
+if ! text=$(grim -g "$selection" - | magick png:- -resize "$SCALE" png:- 2>/dev/null |
+    tesseract stdin stdout -l "$LANG_OCR" --psm 3 2>/dev/null; exit "${PIPESTATUS[0]}"); then
+    notify critical "OCR" "Error al capturar la pantalla"
+    exit 1
+fi
+
+# --- Limpiar: sin espacios al final de cada línea ni líneas vacías al principio ($( ) quita las del final) ---
+text=$(sed -e 's/[[:space:]]*$//' -e '/./,$!d' <<< "$text")
+
+if [[ -z "$text" ]]; then
+    notify low "OCR" "No se ha detectado texto en la selección"
+    exit 0
+fi
+
+# --- Copiar al portapapeles de Wayland ---
+printf '%s' "$text" | wl-copy
+
+# --- Aviso con vista previa (por caracteres, no por bytes: no corta letras con tilde) ---
+preview="${text:0:60}"
+(( ${#text} > 60 )) && preview+="…"
+notify low "OCR ✓ ${#text} caracteres copiados" "$(escape "$preview")"

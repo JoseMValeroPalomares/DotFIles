@@ -1,0 +1,104 @@
+// Tareas globales (todos los perfiles). Se lanzan con Ctrl+Alt+T.
+// Sustituyen poco a poco a code-runner; las de Python y Arduino CLI se añaden en sus perfiles.
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // Programas Java de un solo archivo y sin paquete (modo source-file de Java 11+).
+            // Para proyectos con paquetes, usa Run/Debug de la extensión de Java.
+            "label": "Java: ejecutar archivo actual",
+            "type": "shell",
+            "command": "java",
+            "args": ["${file}"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+        },
+        {
+            // Usa el intérprete seleccionado en la barra de estado (el .venv del proyecto si existe)
+            "label": "Python: ejecutar archivo actual",
+            "type": "shell",
+            "command": "${command:python.interpreterPath}",
+            "args": ["${file}"],
+            "options": { "cwd": "${workspaceFolder}" },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+        },
+        {
+            // C o C++ de un solo archivo; el binario va a /tmp para no ensuciar el proyecto
+            "label": "C/C++: compilar y ejecutar archivo actual",
+            "type": "shell",
+            "command": "mkdir -p /tmp/code-run && case '${fileExtname}' in .c) cc -std=c17 -g -Wall -Wextra '${file}' -o '/tmp/code-run/${fileBasenameNoExtension}' -lm ;; *) c++ -std=c++20 -g -Wall -Wextra '${file}' -o '/tmp/code-run/${fileBasenameNoExtension}' ;; esac && '/tmp/code-run/${fileBasenameNoExtension}'",
+            "options": { "cwd": "${workspaceFolder}", "shell": { "executable": "/bin/bash", "args": ["-c"] } },
+            // "$gcc" lo aporta la extensión C/C++ de Microsoft (no está en Code - OSS): matcher propio
+            "problemMatcher": {
+                "owner": "gcc",
+                "source": "gcc",
+                "fileLocation": ["autoDetect", "${fileDirname}"],
+                "pattern": {
+                    "regexp": "^(.*?):(\\d+):(\\d+):\\s+(?:fatal\\s+)?(error|warning):\\s+(.*)$",
+                    "file": 1, "line": 2, "column": 3, "severity": 4, "message": 5
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+        },
+
+        // ── ESP32 con Arduino CLI ──────────────────────────────────────────────
+        // Se lanzan con un archivo del sketch abierto (la carpeta del .ino).
+        // Placa: la de sketch.yaml si existe; si no, ESP32 clásica (esp32:esp32:esp32).
+        // Puerto: el primer /dev/ttyUSB* o /dev/ttyACM* conectado.
+        // build/ dentro del sketch → clangd encuentra build/compile_commands.json solo.
+        {
+            "label": "ESP32: compilar",
+            "type": "shell",
+            "command": "arduino-cli compile $([ -f sketch.yaml ] || echo --fqbn esp32:esp32:esp32) --build-path build .",
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "/bin/bash", "args": ["-c"] } },
+            // "$gcc" lo aporta la extensión C/C++ de Microsoft (no está en Code - OSS): matcher propio
+            "problemMatcher": {
+                "owner": "gcc",
+                "source": "gcc",
+                "fileLocation": ["autoDetect", "${fileDirname}"],
+                "pattern": {
+                    "regexp": "^(.*?):(\\d+):(\\d+):\\s+(?:fatal\\s+)?(error|warning):\\s+(.*)$",
+                    "file": 1, "line": 2, "column": 3, "severity": 4, "message": 5
+                }
+            },
+            "group": "build",
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+        },
+        {
+            "label": "ESP32: compilar y subir",
+            "type": "shell",
+            "command": "PORT=$(ls /dev/ttyUSB* /dev/ttyACM* 2>/dev/null | head -1); [ -n \"$PORT\" ] || { echo 'No hay ninguna placa conectada'; exit 1; }; echo \"Puerto: $PORT\"; arduino-cli compile $([ -f sketch.yaml ] || echo --fqbn esp32:esp32:esp32) --build-path build -u -p \"$PORT\" .",
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "/bin/bash", "args": ["-c"] } },
+            // "$gcc" lo aporta la extensión C/C++ de Microsoft (no está en Code - OSS): matcher propio
+            "problemMatcher": {
+                "owner": "gcc",
+                "source": "gcc",
+                "fileLocation": ["autoDetect", "${fileDirname}"],
+                "pattern": {
+                    "regexp": "^(.*?):(\\d+):(\\d+):\\s+(?:fatal\\s+)?(error|warning):\\s+(.*)$",
+                    "file": 1, "line": 2, "column": 3, "severity": 4, "message": 5
+                }
+            },
+            "presentation": { "reveal": "always", "panel": "shared", "clear": true }
+        },
+        {
+            "label": "ESP32: monitor serie (115200)",
+            "type": "shell",
+            "command": "PORT=$(ls /dev/ttyUSB* /dev/ttyACM* 2>/dev/null | head -1); [ -n \"$PORT\" ] || { echo 'No hay ninguna placa conectada'; exit 1; }; arduino-cli monitor -p \"$PORT\" -c baudrate=115200",
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "/bin/bash", "args": ["-c"] } },
+            "problemMatcher": [],
+            "presentation": { "reveal": "always", "panel": "dedicated", "focus": true }
+        },
+        {
+            // Sin compilar: solo genera build/compile_commands.json para que clangd entienda el sketch
+            "label": "ESP32: preparar autocompletado (clangd)",
+            "type": "shell",
+            "command": "arduino-cli compile $([ -f sketch.yaml ] || echo --fqbn esp32:esp32:esp32) --build-path build --only-compilation-database .",
+            "options": { "cwd": "${fileDirname}", "shell": { "executable": "/bin/bash", "args": ["-c"] } },
+            "problemMatcher": [],
+            "presentation": { "reveal": "silent", "panel": "shared", "clear": true }
+        }
+    ]
+}

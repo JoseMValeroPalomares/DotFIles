@@ -1,0 +1,65 @@
+/* Menú de atajos (SUPER+SHIFT+K): hereda tu tema de rofi y sus colores de wallust,
+   y solo cambia la disposición: una columna ancha, filas compactas y cabecera más baja. */
+
+@import "~/.config/rofi/config.rasi"
+
+configuration {
+    show-icons: false;
+    hover-select: true;
+}
+
+window {
+    width: 64%;
+}
+
+mainbox {
+    children: [ "inputbar", "message", "listbox" ];
+}
+
+inputbar {
+    padding: 1.6em 2em;
+}
+
+entry {
+    placeholder: "Buscar atajo: tecla, acción o categoría…";
+}
+
+/* Lista y mensaje opacos: lo que haya detrás no compite con el texto */
+message {
+    padding: 0.6em 1.4em 0em 1.4em;
+    background-color: @normal-background;
+}
+
+listbox {
+    background-color: @normal-background;
+}
+
+textbox {
+    text-color: @foreground;
+    background-color: transparent;
+    markup: true;
+}
+
+listview {
+    columns: 1;
+    lines: 14;
+    fixed-height: true;
+    scrollbar: true;
+    spacing: 0.15em;
+    padding: 0.6em 1em 1em 1em;
+}
+
+element {
+    padding: 0.45em 0.9em;
+    border-radius: 0.8em;
+}
+
+element-text {
+    markup: true;
+    vertical-align: 0.5;
+}
+
+element-text selected,
+element selected.normal {
+    border-radius: 0.8em;
+}

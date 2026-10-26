@@ -1,0 +1,28 @@
+{
+	"name": "wallust-theme",
+	"displayName": "Wallust (Catppuccin Alt Mocha)",
+	"description": "Catppuccin Alt Mocha con los acentos del fondo de pantalla (generado por Wallust). Local.",
+	"publisher": "local",
+	"version": "1.0.0",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.70.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"contributes": {
+		"themes": [
+			{
+				"label": "Wallust (Catppuccin Alt Mocha)",
+				"uiTheme": "vs-dark",
+				"path": "./themes/wallust-color-theme.json"
+			}
+		]
+	},
+	"__metadata": {
+		"installedTimestamp": 1792684135581,
+		"targetPlatform": "undefined",
+		"size": 32830
+	}
+}

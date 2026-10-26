@@ -1,0 +1,58 @@
+# --- Secretos y datos de sesión: nunca al repo ---
+.ssh/
+.gnupg/
+*.pem
+*.key
+*_rsa
+*_ed25519
+id_rsa*
+id_ed25519*
+id_ecdsa*
+token
+*.token
+.env
+local.env
+**/spotify/prefs*
+**/spotify/Users/
+**/panel-maestro/token
+**/stellar/identity
+**/pulse/cookie
+*_history
+.*_history*
+*history.json
+.zsh_history
+.bash_history
+.python_history
+
+# --- Code - OSS: estado y cachés ---
+**/Code - OSS/User/globalStorage/
+**/Code - OSS/User/workspaceStorage/
+**/Code - OSS/User/History/
+**/Code - OSS/logs/
+**/Code - OSS/Cache*/
+
+# --- Generado en ejecución ---
+__pycache__/
+*.zwc
+*.pyc
+**/zsh/custom/plugins/
+**/wlogout/bin/
+**/wlogout/src/wlogout-1.2.2/
+**/hypr/wallpaper_effects/
+**/ags/@girs/
+**/ags/node_modules/
+**/spicetify/Themes/
+**/spicetify/CustomApps/
+
+# --- Copias de seguridad y temporales ---
+*.bak
+*.bak-*
+*.bak.*
+*.save
+*.swp
+*~
+.dotfiles-backup/
+
+# --- Wallpapers: van a un drive aparte ---
+/Pictures/
+/wallpapers/

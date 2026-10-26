@@ -1,0 +1,10 @@
+# Configuración mínima y elegante para Peaclock
+mode clock
+view digital
+width 2
+height 3
+padding-x 2
+padding-y 1
+date-format %d-%m-%Y
+# Esto quita los segundos para que sea más minimalista
+show-seconds false

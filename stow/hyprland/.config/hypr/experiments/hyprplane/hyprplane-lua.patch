@@ -1,0 +1,274 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 46c212e..e3bf103 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -14,6 +14,7 @@ pkg_check_modules(DEPS REQUIRED IMPORTED_TARGET
+     libdrm
+     pangocairo
+     cairo
++    lua>=5.5  # [exp] Lua de la VM de Hyprland 0.56 (liblua.so.5.5), para addLuaFunction
+ )
+ 
+ add_library(hyprplane SHARED
+@@ -22,7 +23,7 @@ add_library(hyprplane SHARED
+     src/Minimap.cpp
+ )
+ 
+-target_compile_options(hyprplane PRIVATE -fPIC -Wall -Wextra -Wno-unused-parameter)
++target_compile_options(hyprplane PRIVATE -fPIC -Wall -Wextra -Wno-unused-parameter -fno-gnu-unique)  # [exp] permite descargarlo de verdad
+ target_link_libraries(hyprplane PRIVATE PkgConfig::DEPS)
+ set_target_properties(hyprplane PROPERTIES PREFIX "")  # -> hyprplane.so
+ 
+diff --git a/src/CanvasMode.cpp b/src/CanvasMode.cpp
+index 9b8d6af..8d59fd6 100644
+--- a/src/CanvasMode.cpp
++++ b/src/CanvasMode.cpp
+@@ -10,6 +10,7 @@
+ #include <hyprland/src/managers/input/InputManager.hpp>
+ #include <hyprland/src/managers/fullscreen/FullscreenController.hpp>
+ #include <hyprland/src/state/MonitorState.hpp>
++#include <hyprland/src/state/WorkspaceState.hpp>
+ #include <hyprland/src/desktop/state/WindowState.hpp>
+ #include <hyprland/src/pointer/PointerManager.hpp>
+ 
+@@ -123,6 +124,8 @@ void CCanvasMode::onWindowOpened(const PHLWINDOW& w) {
+     const auto t = w->layoutTarget();
+     if (!t)
+         return;
++    // [exp] record it like enter() does, so leave()/unload re-tile it instead of leaving it floating
++    m_saved[w->m_workspace->m_id].push_back({w, false, w->positionAnimation()->goal(), w->sizeAnimation()->goal()});
+     g_layoutManager->changeFloatingMode(t);
+ 
+     // Drop it in the centre of the current view (the monitor's middle in canvas coords)
+@@ -134,6 +137,42 @@ void CCanvasMode::onWindowOpened(const PHLWINDOW& w) {
+         }
+ }
+ 
++void CCanvasMode::leaveAll() {
++    // [exp] Copy the ids first: leave() erases from m_canvasWorkspaces
++    const std::vector<WORKSPACEID> ids(m_canvasWorkspaces.begin(), m_canvasWorkspaces.end());
++    for (const auto id : ids) {
++        if (const auto ws = State::workspaceState()->query().id(id).run())
++            leave(ws);
++        else
++            m_canvasWorkspaces.erase(id); // workspace gone (empty and destroyed): nothing to re-tile
++    }
++}
++
++void CCanvasMode::adoptTiled(const PHLWORKSPACE& ws) {
++    // [exp] Windows moved onto a canvas workspace arrive tiled: float them in place and record
++    // them like enter() does, so leave()/unload re-tile them.
++    if (!isCanvas(ws))
++        return;
++    std::vector<PHLWINDOW> tiled;
++    for (const auto& w : Desktop::windowState()->windows())
++        if (onWorkspace(w, ws) && !w->m_isFloating && !Fullscreen::controller()->isFullscreen(w))
++            tiled.push_back(w);
++
++    // Snapshot first (floating one re-tiles the rest), then float — same two passes as enter()
++    std::vector<std::pair<PHLWINDOW, CBox>> boxes;
++    for (const auto& w : tiled) {
++        boxes.emplace_back(w, CBox{w->positionAnimation()->goal(), w->sizeAnimation()->goal()});
++        m_saved[ws->m_id].push_back({w, false, w->positionAnimation()->goal(), w->sizeAnimation()->goal()});
++    }
++    for (const auto& [w, box] : boxes) {
++        const auto t = w->layoutTarget();
++        if (!t)
++            continue;
++        g_layoutManager->changeFloatingMode(t);
++        g_layoutManager->setTargetGeom(box, t);
++    }
++}
++
+ void CCanvasMode::panAllActive(const Vector2D& delta) {
+     // Hot path (fires on every pointer motion during a grab-drag): one pass over the
+     // window list, moving every window that lives on a canvas workspace. Avoids the
+diff --git a/src/CanvasMode.hpp b/src/CanvasMode.hpp
+index df0f788..23b3426 100644
+--- a/src/CanvasMode.hpp
++++ b/src/CanvasMode.hpp
+@@ -37,8 +37,14 @@ class CCanvasMode {
+     // the canvas (pannable) instead of disrupting the layout as a lone tiled window.
+     void onWindowOpened(const PHLWINDOW& w);
+ 
++    // [exp] Float (in place) and record the tiled windows on a canvas workspace — for windows
++    // moved there from another workspace. Driven by hl.plugin.hyprplane.adopt(ws_id).
++    void adoptTiled(const PHLWORKSPACE& ws);
++
+     // Enter/leave canvas on the active workspace of EVERY monitor at once.
+     void toggleAllMonitors();
++    // [exp] Leave canvas on every canvas workspace, visible or not (used on unload).
++    void leaveAll();
+     // Pan every monitor's active canvas workspace by the same delta (both monitors move together).
+     void panAllActive(const Vector2D& delta);
+ 
+diff --git a/src/globals.hpp b/src/globals.hpp
+index 8060963..f49742c 100644
+--- a/src/globals.hpp
++++ b/src/globals.hpp
+@@ -31,7 +31,7 @@ namespace cfg {
+     inline float minimapSize() { return (float)cfgFloat("plugin:hyprplane:minimap_size", 0.28F); }
+     inline int   minimapPos()  { return (int)cfgInt("plugin:hyprplane:minimap_position", 0); } // 0 BR,1 BL,2 TR,3 TL
+     inline float fadeSpeed()   { return (float)cfgFloat("plugin:hyprplane:fade_speed", 0.18F); }
+-    inline int   grabButton()   { return (int)cfgInt("plugin:hyprplane:grab_button", 2); }       // 0 mid,1 ctrl-left,2 both
++    inline int   grabButton()   { return (int)cfgInt("plugin:hyprplane:grab_button", 0); }       // 0 mid,1 ctrl-left,2 both
+     inline int   jumpOrder()    { return (int)cfgInt("plugin:hyprplane:jump_order", 0); }         // 0 size,1 spatial,2 age
+     inline bool  spawnCenter()  { return cfgInt("plugin:hyprplane:spawn_center", 1) != 0; }       // new windows at view centre
+ }
+diff --git a/src/main.cpp b/src/main.cpp
+index 32fd4d0..fcb8cbb 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -16,6 +16,10 @@
+ #include <hyprland/src/plugins/HookSystem.hpp>
+ #include <hyprland/src/protocols/FractionalScale.hpp>
+ #include <hyprland/src/render/Renderer.hpp>
++#include <hyprland/src/state/MonitorState.hpp>
++#include <hyprland/src/state/WorkspaceState.hpp>
++
++#include <lua.hpp> // [exp] hl.plugin.hyprplane.* para config Lua
+ 
+ #include <fstream>
+ #include <cstdio>
+@@ -40,7 +44,7 @@ static void registerConfig() {
+     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:minimap_size", Hyprlang::FLOAT{0.28F});
+     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:minimap_position", Hyprlang::INT{0});
+     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:fade_speed", Hyprlang::FLOAT{0.18F});
+-    HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:grab_button", Hyprlang::INT{2});
++    HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:grab_button", Hyprlang::INT{0}); // [exp] middle only: keep Ctrl+click for apps
+     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:jump_order", Hyprlang::INT{0});
+     HyprlandAPI::addConfigValue(PHANDLE, "plugin:hyprplane:spawn_center", Hyprlang::INT{1});
+ }
+@@ -119,6 +123,82 @@ static bool ctrlHeld() {
+     return modHeld(4u); // CTRL bit (same convention as binds)
+ }
+ 
++// [exp] The monitor under the cursor shows a canvas workspace. Grab-pan and the minimap gate on
++// this instead of anyActive(), so with one canvas workspace the others keep middle-click/Ctrl-click.
++static bool cursorOnCanvas() {
++    const auto mon = State::monitorState()->query().vec(g_pInputManager->getMouseCoordsInternal()).run();
++    return mon && g_canvas && g_canvas->isCanvas(mon->m_activeWorkspace);
++}
++
++// [exp] Lua API: hl.plugin.hyprplane.<fn>. Never raise Lua errors here (longjmp would skip C++
++// destructors): read args with the non-throwing lua_to*x and ignore bad input.
++static PHLWORKSPACE luaWorkspaceArg(lua_State* L) {
++    int        isnum = 0;
++    const auto id    = lua_tointegerx(L, 1, &isnum);
++    return isnum ? State::workspaceState()->query().id((WORKSPACEID)id).run() : nullptr;
++}
++
++static int luaEnter(lua_State* L) {
++    if (const auto ws = luaWorkspaceArg(L)) {
++        g_canvas->enter(ws);
++        syncCanvasMarker();
++    }
++    return 0;
++}
++
++static int luaLeave(lua_State* L) {
++    if (const auto ws = luaWorkspaceArg(L)) {
++        g_canvas->leave(ws);
++        syncCanvasMarker();
++    }
++    return 0;
++}
++
++static int luaToggle(lua_State* L) {
++    const auto ws = luaWorkspaceArg(L);
++    if (!ws)
++        return 0;
++    g_canvas->toggle(ws);
++    syncCanvasMarker();
++    HyprlandAPI::addNotification(PHANDLE, g_canvas->isCanvas(ws) ? "[hyprplane] ON" : "[hyprplane] OFF",
++                                  CHyprColor{0.2F, 0.8F, 1.0F, 1.0F}, 1500);
++    return 0;
++}
++
++static int luaIsCanvas(lua_State* L) {
++    const auto ws = luaWorkspaceArg(L);
++    lua_pushboolean(L, ws && g_canvas->isCanvas(ws));
++    return 1;
++}
++
++static int luaPan(lua_State* L) {
++    int        okx = 0, oky = 0;
++    const auto dx = lua_tonumberx(L, 1, &okx), dy = lua_tonumberx(L, 2, &oky);
++    if (okx && oky && g_canvas->anyActive())
++        g_canvas->panAllActive(Vector2D{dx, dy});
++    return 0;
++}
++
++static int luaJump(lua_State* L) {
++    int        isnum = 0;
++    const auto n     = lua_tointegerx(L, 1, &isnum);
++    if (isnum && g_canvas->anyActive())
++        g_canvas->jumpToWindow((int)n);
++    return 0;
++}
++
++static int luaAdopt(lua_State* L) {
++    if (const auto ws = luaWorkspaceArg(L))
++        g_canvas->adoptTiled(ws);
++    return 0;
++}
++
++static int luaGather(lua_State* L) {
++    if (g_canvas->anyActive())
++        g_canvas->gather();
++    return 0;
++}
++
+ APICALL EXPORT std::string PLUGIN_API_VERSION() {
+     return HYPRLAND_API_VERSION;
+ }
+@@ -216,7 +296,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO pluginInit(HANDLE handle) {
+             const bool panBtn = ((gb == 0 || gb == 2) && e.button == BTN_MIDDLE_ID) ||
+                                 ((gb == 1 || gb == 2) && e.button == BTN_LEFT_ID && ctrlHeld());
+             if (e.state == WL_POINTER_BUTTON_STATE_PRESSED) {
+-                if (!panBtn)
++                if (!panBtn || !cursorOnCanvas()) // [exp] only over a canvas workspace
+                     return;
+                 g_grabbing     = true;
+                 g_grabLast     = g_pInputManager->getMouseCoordsInternal();
+@@ -257,7 +337,7 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO pluginInit(HANDLE handle) {
+             return;
+         }
+         const auto mon = g_pHyprRenderer->m_renderData.pMonitor.lock();
+-        if (!mon)
++        if (!mon || !g_canvas->isCanvas(mon->m_activeWorkspace)) // [exp] not on non-canvas monitors
+             return;
+         g_canvas->renderMinimap(mon, g_minimapAlpha, themeAccent());
+         g_pHyprRenderer->damageMonitor(mon); // keep frames coming so the fade animates / updates
+@@ -279,17 +359,29 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO pluginInit(HANDLE handle) {
+     if (g_sendScaleHook)
+         g_sendScaleHook->hook();
+ 
++    // [exp] Lua config (Hyprland 0.56) can't call the dispatchers above; expose them as hl.plugin.hyprplane.*
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "enter", luaEnter);         // enter(ws_id)
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "leave", luaLeave);         // leave(ws_id)
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "toggle", luaToggle);       // toggle(ws_id)
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "is_canvas", luaIsCanvas); // is_canvas(ws_id) -> bool
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "pan", luaPan);             // pan(dx, dy)
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "jump", luaJump);           // jump(n)
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "gather", luaGather);       // gather()
++    HyprlandAPI::addLuaFunction(PHANDLE, "hyprplane", "adopt", luaAdopt);         // adopt(ws_id)
++
+     HyprlandAPI::reloadConfig(); // apply the user's plugin { hyprplane { … } } values
+ 
+-    HyprlandAPI::addNotification(PHANDLE, "[hyprplane] loaded — toggle: SUPER+grave, middle/Ctrl-drag to pan",
++    HyprlandAPI::addNotification(PHANDLE, "[hyprplane] loaded — middle-drag to pan (canvas workspace only)",
+                                   CHyprColor{0.2F, 1.0F, 0.4F, 1.0F}, 4000);
+ 
+     return {"hyprplane", "Infinite pannable canvas for Hyprland", "hcopeland", "0.1.0"};
+ }
+ 
+ APICALL EXPORT void PLUGIN_EXIT() {
++    // [exp] leave every canvas workspace. toggleAllMonitors() looked only at the VISIBLE workspaces: with the
++    // canvas on a hidden one it ENTERED canvas on the visible ones instead, leaving their windows floating.
+     if (g_canvas && g_canvas->anyActive())
+-        g_canvas->toggleAllMonitors(); // un-float / re-tile windows so unload leaves a clean layout
++        g_canvas->leaveAll(); // un-float / re-tile windows so unload leaves a clean layout
+     std::remove(markerPath().c_str()); // canvas is off now
+     if (g_sendScaleHook)
+         g_sendScaleHook->unhook();

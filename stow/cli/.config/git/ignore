@@ -1,0 +1,3 @@
+# Ignorados en todos los repos (git lee este archivo por defecto)
+# Índice de clangd (--background-index)
+.cache/clangd/

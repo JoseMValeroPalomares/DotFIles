@@ -1,0 +1,77 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* RofiBeats: menú principal (SUPER+H). Compacto, opaco, con iconos y lo que está sonando arriba */
+
+@import "~/.config/rofi/config.rasi"
+
+* {
+  /* Selección clara de Wallust con texto negro (como portapapeles, emojis y efectos) */
+  selected:      @color15;
+  text-selected: #000000;
+}
+
+/* ---- Window: opaca (con el tema semitransparente se leía lo de detrás) ---- */
+window {
+  width:            460px;
+  border-color:     @color13;
+  background-color: #0A0A0C;
+}
+
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+/* ---- Inputbar: franja fina con el fondo de pantalla ---- */
+inputbar {
+  padding: 1.1em 1.4em;
+}
+
+entry {
+  padding:     0.55em 0.9em;
+  placeholder: "RofiBeats";
+}
+
+/* ---- Mensaje: qué está sonando ---- */
+message {
+  background-color: transparent;
+}
+
+textbox {
+  margin:           0.9em 1.3em 0em 1.3em;
+  padding:          0em;
+  background-color: transparent;
+  text-color:       @foreground;
+  horizontal-align: 0.0;
+}
+
+/* ---- Lista ---- */
+listview {
+  columns:          1;
+  lines:            5;
+  fixed-height:     false;
+  spacing:          2px;
+  padding:          0.6em 0.7em 0.8em 0.7em;
+  scrollbar:        false;
+  cycle:            true;
+  background-color: transparent;
+}
+
+element {
+  orientation:   horizontal;
+  padding:       0.6em 0.9em;
+  border-radius: 0.6em;
+}
+
+element-icon {
+  size: 0;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  vertical-align:   0.5;
+}
+
+element selected.normal,
+element-text selected {
+  background-color: @selected;
+  text-color:       @text-selected;
+}

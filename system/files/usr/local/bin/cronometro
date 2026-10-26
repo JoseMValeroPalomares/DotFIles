@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+exec /home/jose/cronometro/.venv/bin/python /home/jose/cronometro/main.py "$@"

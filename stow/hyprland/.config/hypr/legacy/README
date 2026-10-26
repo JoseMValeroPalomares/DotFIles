@@ -1,0 +1,11 @@
+# Archivos sin uso desde la migración a Lua (Hyprland 0.56). No se cargan; se guardan por si hacen falta.
+# Estructura igual que en ~/.config/hypr. Recuperar uno: git mv legacy/<ruta> <ruta>
+
+# 2026-10-21 · Auditoría de scripts (ver INVENTARIO.md)
+# Sin uso o descartados por el usuario (sddm_wallpaper BORRADO el 2026-10-21 a petición del usuario; está en el historial de git), ZshChangeTheme, WallpaperAutoChange
+# (+ RefreshNoWaybar, que solo usaba él), Polkit-NixOS, UptimeNixOS, PortalHyprland, UserConfigsSwitcher, Battery,
+# Tak0-Per-Window-Switch (solo hay distribución "us"), scripts/Tak0-Autodispatch (copia distinta de la de UserScripts).
+# WaybarCava (el usuario no lo usa; módulo custom/cava_mviz quitado de waybar).
+# BrightnessKbd (luz del teclado; el usuario no la usa, teclas xf86KbdBrightness quitadas de configs/Laptops.lua).
+# RofiThemeSelector-modified (duplicado de RofiThemeSelector.sh; SUPER+CTRL+SHIFT+R queda libre).
+# RofiThemeSelector (el usuario lo quita: atajo SUPER+CTRL+R y entrada de Ajustes rápidos). Tema activo fijo: KooL_style-8.

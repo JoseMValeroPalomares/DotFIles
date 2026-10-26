@@ -1,0 +1,97 @@
+/* Historial del portapapeles (SUPER+V, scripts/ClipManager.sh) */
+/* Hereda el tema global (KooL_style-8 + colores de Wallust) y solo lo compacta: */
+/* ventana más estrecha, banner fino, letra un punto menor, fondo casi opaco     */
+/* (sin blur global, el texto de detrás se mezclaba con la lista) y contraste AA. */
+
+@import "~/.config/rofi/config.rasi"
+
+configuration {
+  font: "JetBrains Mono Medium 11";
+}
+
+* {
+  /* Acento claro de Wallust: texto negro encima = 10.7:1 */
+  selected:      @color15;
+  text-selected: #000000;
+}
+
+/* ---- Window ---- */
+window {
+  width:            720px;
+  border-color:     @color13;
+  background-color: rgba(10, 10, 12, 0.98);
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+/* ---- Inputbar: el fondo de pantalla queda como una franja fina ---- */
+inputbar {
+  padding: 1.1em 1.4em;
+}
+
+textbox-prompt-colon {
+  str:     "📋";
+  padding: 0.55em 0.3em 0em 0.9em;
+}
+
+entry {
+  padding:     0.55em 0.9em;
+  placeholder: "Buscar en el portapapeles";
+}
+
+/* ---- Ayuda: texto pequeño y tenue, sin caja ---- */
+textbox {
+  margin:           0.6em 1.2em 0em 1.2em;
+  padding:          0em;
+  font:             "JetBrains Mono 9";
+  background-color: transparent;
+  text-color:       @color8;
+  horizontal-align: 0.0;
+}
+
+/* ---- Listview ---- */
+message,
+listview {
+  background-color: transparent;
+}
+
+listview {
+  columns:      1;
+  lines:        10;
+  fixed-height: true;
+  spacing:      2px;
+  padding:      0.5em 0.7em 0.7em 0.7em;
+  cycle:        true;
+  scrollbar:    true;
+}
+
+scrollbar {
+  handle-color: @color13;
+}
+
+/* ---- Elements ---- */
+element {
+  orientation: horizontal;
+  padding:     0.4em 0.8em;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  horizontal-align: 0.0;
+  vertical-align:   0.5;
+  margin:           0px;
+  padding:          0px;
+}
+
+element selected.normal,
+element-text selected {
+  background-color: @selected;
+  text-color:       @text-selected;
+  border-radius:    0.6em;
+}

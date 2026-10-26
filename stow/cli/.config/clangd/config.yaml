@@ -1,0 +1,10 @@
+# Configuración global de clangd (todos los proyectos).
+# Sketches de Arduino: arduino-cli añade "#include <Arduino.h>" al compilar; aquí se hace lo mismo para el análisis.
+If:
+  PathMatch: .*\.ino
+CompileFlags:
+  Add: [-include, Arduino.h]
+---
+# GCC de Espressif: su limits.h usa "__GLIBC_USE(...)" en un #if que GCC no evalúa y clang sí (error falso en la línea 1).
+Diagnostics:
+  Suppress: [pp_expr_bad_token_lparen]

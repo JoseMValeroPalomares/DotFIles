@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
+# Estilo de Waybar (style/*.css): enlaza el elegido como ~/.config/waybar/style.css y recarga
+
+IFS=$'\n\t'
+
+# Define directories
+waybar_styles="$HOME/.config/waybar/style"
+waybar_style="$HOME/.config/waybar/style.css"
+SCRIPTSDIR="$HOME/.config/hypr/scripts"
+rofi_config="$HOME/.config/rofi/config-waybar-style.rasi"
+msg='Nota: algunos estilos no son del todo compatibles con algunos diseños'
+
+# Apply selected style
+apply_style() {
+    ln -sf "$waybar_styles/$1.css" "$waybar_style"
+    "${SCRIPTSDIR}/Refresh.sh" &
+}
+
+main() {
+    # resolve current symlink and strip .css
+    current_target=$(readlink -f "$waybar_style")
+    current_name=$(basename "$current_target" .css)
+
+    # gather all style names (without .css) into an array
+    # (sin un basename por archivo: el nombre se recorta en bash)
+    local f
+    options=()
+    for f in "$waybar_styles"/*.css; do
+        [[ -f "$f" ]] && { f="${f##*/}"; options+=("${f%.css}"); }
+    done
+    mapfile -t options < <(printf '%s\n' "${options[@]}" | sort)
+
+    # mark the active style and record its index
+    default_row=0
+    MARKER="👉"
+    for i in "${!options[@]}"; do
+        if [[ "${options[i]}" == "$current_name" ]]; then
+            options[i]="$MARKER ${options[i]}"
+            default_row=$i
+            break
+        fi
+    done
+
+    # launch rofi with the annotated list and pre‑selected row
+    choice=$(printf '%s\n' "${options[@]}" \
+        | rofi -i -dmenu \
+               -config "$rofi_config" \
+               -mesg "$msg" \
+               -selected-row "$default_row"
+    )
+
+    [[ -z "$choice" ]] && exit 0
+
+    # remove annotation and apply
+    choice=${choice#"$MARKER "}
+    apply_style "$choice"
+}
+
+# Kill Rofi if already running before execution
+if pgrep -x "rofi" >/dev/null; then
+    pkill -x rofi
+    #exit 0
+fi
+
+main

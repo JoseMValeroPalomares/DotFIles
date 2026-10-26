@@ -1,0 +1,175 @@
+{
+    "workbench.colorTheme": "Catppuccin Noctis Mocha",
+    "workbench.iconTheme": "catppuccin-mocha",
+    "chat.agent.enabled": false,
+    "chat.agent.thinking.generateTitles": false,
+    "chat.agent.thinking.terminalTools": false,
+    "chat.agentsControl.enabled": false,
+    "chat.checkpoints.enabled": false,
+    "chat.detectParticipant.enabled": false,
+    "chat.editing.confirmEditRequestRemoval": false,
+    "chat.editing.confirmEditRequestRetry": false,
+    // Apaga todo el chat/IA integrado (Copilot Chat, agent host, Copilot CLI): no se usa
+    "chat.disableAIFeatures": true,
+
+    // Privacidad y red: sin telemetría ni experimentos A/B
+    "telemetry.telemetryLevel": "off",
+    "workbench.enableExperiments": false,
+    // Avisar de actualizaciones de extensiones, pero no instalarlas solas
+    "extensions.autoUpdate": "off",
+    "extensions.autoCheckUpdates": true,
+    // No consultar npm al pasar el ratón por package.json
+    "npm.fetchOnlinePackageInfo": false,
+
+    // Exclusiones: no vigilar ni buscar en carpetas generadas (el disco NTFS es lento vigilando)
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.venv/**": true,
+        "**/venv/**": true,
+        "**/__pycache__/**": true,
+        "**/.pytest_cache/**": true,
+        "**/build/**": true,
+        "**/cmake-build-*/**": true,
+        "**/target/**": true,
+        "**/.gradle/**": true,
+        "**/.dart_tool/**": true,
+        "**/.cache/clangd/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.venv": true,
+        "**/venv": true,
+        "**/__pycache__": true,
+        "**/build": true,
+        "**/cmake-build-*": true,
+        "**/target": true,
+        "**/.gradle": true,
+        "**/.dart_tool": true,
+        "**/.cache/clangd": true
+    },
+    // Ocultar en el explorador solo cachés (los build siguen visibles)
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/.pytest_cache": true,
+        "**/.cache/clangd": true
+    },
+
+    "window.titleBarStyle": "custom",
+    "editor.fontFamily": "'FiraCode Nerd Font', 'JetBrainsMono Nerd Font', monospace",
+    "editor.fontLigatures": true,
+    // Más aire: interlineado 1,5 (valores < 8 son multiplicador del tamaño) y margen arriba
+    "editor.lineHeight": 1.5,
+    "editor.padding.top": 8,
+    "editor.minimap.enabled": false,
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "hidden",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        },
+        "fish": {
+            "path": "/usr/bin/fish"
+        }
+    },
+    "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font', 'FiraCode Nerd Font', monospace",
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.gpuAcceleration": "on",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+
+    // Java (perfil Java): servidor JDT con 1 GB máx. (por defecto 2 GB; sobra para proyectos de clase)
+    "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -Xlog:disable",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "[java]": {
+        "editor.defaultFormatter": "redhat.java",
+        "editor.formatOnSave": true,
+        // Formatear solo las líneas cambiadas (con git) para no reescribir archivos enteros
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+
+    // Python: basedpyright es el único servidor de lenguaje (sin esto, ms-python arrancaría Jedi en paralelo)
+    "python.languageServer": "None",
+    // "recommended" (por defecto) es casi estricto; "standard" avisa de errores reales sin agobiar
+    "basedpyright.analysis.typeCheckingMode": "standard",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+
+    // C/C++ y ESP32: clangd (del paquete clang de Arch). Lee compile_commands.json de build/,
+    // que generan CMake Tools y las tareas de Arduino CLI. Índice en segundo plano con 4 hilos.
+    "clangd.arguments": [
+        "--background-index",
+        "-j=4",
+        "--pch-storage=memory",
+        "--header-insertion=never",
+        "--query-driver=/usr/bin/*gcc*,/usr/bin/*g++*,/usr/bin/*c++*,/home/jose/.arduino15/packages/esp32/tools/**/bin/*-gcc,/home/jose/.arduino15/packages/esp32/tools/**/bin/*-g++"
+    ],
+    "[c]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+    "[cpp]": {
+        "editor.defaultFormatter": "llvm-vs-code-extensions.vscode-clangd",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+    // Web: Prettier (trae su motor; respeta .prettierrc si el proyecto lo tiene).
+    // JSON/JSONC y Markdown se quedan con el formateador integrado para no reescribir settings.json ni los .md
+    "[javascript][javascriptreact][typescript][typescriptreact][html][css][scss][less][vue]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.formatOnSaveMode": "modificationsIfAvailable"
+    },
+    // Errores de tipos también en .js sueltos (sin jsconfig.json)
+    "js/ts.implicitProjectConfig.checkJs": true,
+    // ...pero sin "strict" (activo por defecto): obligaría a tipar cada parámetro en JS (error 7006).
+    // strictNullChecks y strictFunctionTypes siguen activos por su cuenta
+    "js/ts.implicitProjectConfig.strict": false,
+    // Node viene de fnm, que solo entra en el PATH desde .zshrc; Code lanzado desde Hyprland no lo ve.
+    // Alias "default" de fnm: sigue a la versión que marques con 'fnm default'
+    "debug.javascript.defaultRuntimeExecutable": {
+        "pwa-node": "/home/jose/.local/share/fnm/aliases/default/bin/node"
+    },
+
+    // Los sketches de Arduino son C++
+    "files.associations": {
+        "*.ino": "cpp"
+    },
+
+    "workbench.layoutControl.enabled": false,
+    "explorer.compactFolders": true,
+    // Árbol del explorador más legible: más sangría y guías siempre visibles
+    "workbench.tree.indent": 14,
+    "workbench.tree.renderIndentGuides": "always",
+    
+    // Barras de scroll finas (6 px): discretas, pero se ve en qué parte del archivo estás
+    "editor.scrollbar.vertical": "auto",
+    "editor.scrollbar.horizontal": "auto",
+    "editor.scrollbar.verticalScrollbarSize": 6,
+    "editor.scrollbar.horizontalScrollbarSize": 6,
+
+    // Movimiento del cursor súper suave (como en las terminales modernas)
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorBlinking": "smooth",
+
+    // Scroll fluido en el código y en las listas (explorador)
+    "editor.smoothScrolling": true,
+    "workbench.list.smoothScrolling": true,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "workbench.secondarySideBar.defaultVisibility": "hidden"
+    
+
+    
+
+
+
+    
+
+}

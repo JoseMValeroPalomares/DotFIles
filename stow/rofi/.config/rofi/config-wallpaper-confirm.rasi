@@ -1,0 +1,21 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Fondos (SUPER+U) → Shift+Intro: «¿te quedas con este fondo?». Abajo y compacto para que se vea el fondo */
+/* de prueba. Mismo estilo que el menú de RofiBeats (opaco, selección clara).                               */
+
+@import "~/.config/rofi/config-rofi-Beats-menu.rasi"
+
+window {
+  width:    420px;
+  location: south;
+  anchor:   south;
+  y-offset: -90px;
+}
+
+/* Sin barra de búsqueda: solo el mensaje y las tres opciones */
+mainbox {
+  children: [ "message", "listview" ];
+}
+
+listview {
+  lines: 3;
+}

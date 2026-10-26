@@ -1,0 +1,1 @@
+SUBSYSTEM=="platform", DRIVER=="msi-ec", ACTION=="add", RUN+="/bin/chgrp -R wheel /sys%p", RUN+="/bin/chmod -R g+w /sys%p"

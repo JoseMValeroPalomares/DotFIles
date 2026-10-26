@@ -1,0 +1,72 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Efectos de fondo (SUPER+SHIFT+U): cuadrícula con la vista previa de cada efecto */
+
+@import "~/.config/rofi/config.rasi"
+
+* {
+  /* Selección clara de Wallust con texto negro (como el portapapeles): contraste AA */
+  selected:      @color15;
+  text-selected: #000000;
+}
+
+/* ---- Window: opaca (con el tema semitransparente se leía el texto de detrás) ---- */
+window {
+  width:            70%;
+  border-color:     @color13;
+  background-color: #0A0A0C;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+  children: [ "inputbar", "listview" ];
+}
+
+/* ---- Inputbar: franja fina con el efecto aplicado ahora ---- */
+inputbar {
+  padding:          1.6em 1.4em;
+  background-image: url("~/.config/hypr/wallpaper_effects/.wallpaper_modified", width);
+}
+
+entry {
+  expand: true;
+  placeholder: " 󰸉  Buscar / elegir efecto";
+  horizontal-align: 0.5;
+}
+
+/* ---- Listview: 5 × 3 ---- */
+listview {
+  columns: 5;
+  lines: 3;
+  spacing: 14px;
+  padding: 10px;
+  background-color: transparent;
+  flow: horizontal;
+  fixed-width: true;
+  fixed-height: true;
+  scrollbar: false;
+  cycle: true;
+}
+
+/* ---- Element: miniatura arriba, nombre debajo ---- */
+element {
+  orientation: vertical;
+  padding: 8px;
+  spacing: 6px;
+  border-radius: 10px;
+}
+
+element-icon {
+  size: 7.5em;
+  horizontal-align: 0.5;
+}
+
+element-text {
+  horizontal-align: 0.5;
+  vertical-align: 0.5;
+}
+
+element selected.normal,
+element-text selected {
+  background-color: @selected;
+  text-color:       @text-selected;
+}

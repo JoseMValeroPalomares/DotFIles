@@ -1,0 +1,452 @@
+/* swaync · glass sobrio con acento de wallust
+ * Colores: ~/.config/waybar/wallust/colors-waybar.css (cambian con el fondo)
+ * GTK4 no soporta backdrop-filter: el desenfoque lo pone Hyprland (layerrule en
+ * hypr/UserConfigs/WindowRules.lua), solo si decoration.blur está activo.
+ * Recargar: swaync-client -rs
+ */
+
+@import '../waybar/wallust/colors-waybar.css';
+
+/* ── Tokens ─────────────────────────────────────────────── */
+@define-color accent      @color12;
+@define-color text        @foreground;
+@define-color text-muted  alpha(@foreground, 0.72);
+@define-color text-faint  alpha(@foreground, 0.62);
+@define-color surface     alpha(@background, 0.80);   /* panel y popups; sin blur global en Hyprland */
+@define-color card        alpha(@foreground, 0.06);   /* tarjetas dentro del panel */
+@define-color card-hover  alpha(@foreground, 0.10);
+@define-color stroke      alpha(@foreground, 0.10);
+@define-color stroke-hi   alpha(@foreground, 0.18);
+@define-color danger      #ffa3a7;
+
+:root {
+  --radius-panel: 18px;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --notification-icon-size: 44px;
+  --notification-app-icon-size: 18px;
+  --notification-group-icon-size: 24px;
+  --mpris-album-art-icon-size: 64px;
+  --widget-volume-row-icon-size: 20px;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --t-fast: 150ms;
+}
+
+/* ── Base ───────────────────────────────────────────────── */
+* {
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  text-shadow: none;
+}
+
+notificationwindow, blankwindow, .blank-window, .floating-notifications {
+  background: transparent;
+}
+
+button {
+  background: @card;
+  color: @text;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  box-shadow: none;
+  transition: background-color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease),
+              color var(--t-fast) var(--ease);
+}
+button:hover  { background: @card-hover; }
+button:active { background: alpha(@accent, 0.25); }
+
+/* Foco visible para navegación con teclado */
+button:focus-visible,
+switch:focus-visible,
+scale:focus-visible,
+entry:focus-within,
+.notification-row:focus-visible > .notification-background > .notification,
+.notification-group:focus-visible {
+  outline: 2px solid @accent;
+  outline-offset: 1px;
+}
+
+/* Scrollbar fina, solo visible al usarla */
+scrollbar { background: transparent; border: none; }
+scrollbar slider {
+  min-width: 4px;
+  min-height: 24px;
+  border-radius: 99px;
+  background: alpha(@foreground, 0.25);
+}
+scrollbar.overlay-indicator:not(.hovering) slider { min-width: 3px; background: alpha(@foreground, 0.18); }
+scrollbar slider:hover { background: alpha(@foreground, 0.4); }
+
+/* ── Tarjeta de notificación (común) ────────────────────── */
+.notification-row { background: none; outline: none; }
+.notification-row:focus { background: none; }
+
+.notification-row .notification-background { padding: 4px 8px; }
+
+.notification {
+  background: @card;
+  border: 1px solid @stroke;
+  border-radius: var(--radius);
+  padding: 0;
+  box-shadow: none;
+  transition: background-color var(--t-fast) var(--ease),
+              border-color var(--t-fast) var(--ease);
+}
+
+.notification .notification-default-action {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  color: @text;
+}
+.notification .notification-default-action:hover { background: alpha(@foreground, 0.04); }
+.notification .notification-default-action:not(:only-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.notification .notification-content { background: transparent; padding: 0; }
+
+.notification .image {
+  -gtk-icon-size: var(--notification-icon-size);
+  border-radius: var(--radius-sm);
+  margin: 0 12px 0 0;
+}
+.notification .app-icon {
+  -gtk-icon-size: var(--notification-app-icon-size);
+  -gtk-icon-shadow: 0 1px 3px alpha(black, 0.6);
+  margin: 0;
+}
+
+.notification .text-box label { filter: none; }
+
+.notification .summary {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: @text;
+}
+.notification .time {
+  font-size: 11px;
+  color: @text-faint;
+  margin-right: 28px;           /* deja hueco al botón de cerrar */
+}
+.notification .body {
+  font-size: 12.5px;
+  color: @text-muted;
+  margin-top: 2px;
+}
+.notification .body-image {
+  margin-top: 8px;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+}
+
+/* Barra de progreso (OSD de volumen/brillo con int:value) */
+.notification progressbar { margin-top: 8px; }
+.notification progressbar trough {
+  min-height: 6px;
+  border-radius: 99px;
+  background: alpha(@foreground, 0.12);
+}
+.notification progressbar progress {
+  min-height: 6px;
+  border-radius: 99px;
+  background: @accent;
+}
+
+/* Botón de cerrar */
+.close-button {
+  min-width: 22px;
+  min-height: 22px;
+  padding: 0;
+  margin: 8px 8px 0 0;
+  border-radius: 99px;
+  background: alpha(@foreground, 0.08);
+  color: @text-muted;
+  border: none;
+}
+.close-button:hover { background: alpha(@danger, 0.85); color: @background; }
+
+/* Acciones alternativas */
+.notification .notification-alt-actions {
+  background: none;
+  padding: 0 8px 8px 8px;
+  border-top: 1px solid @stroke;
+}
+.notification .notification-action { margin: 8px 4px 0 4px; padding: 0; }
+.notification .notification-action > button {
+  min-height: 30px;
+  font-weight: 600;
+  background: alpha(@foreground, 0.07);
+  border-radius: var(--radius-sm);
+}
+.notification .notification-action > button:hover {
+  background: alpha(@accent, 0.22);
+  border-color: alpha(@accent, 0.5);
+}
+
+/* Respuesta en línea */
+.notification .inline-reply { margin-top: 8px; }
+.notification .inline-reply-entry {
+  background: alpha(@background, 0.5);
+  color: @text;
+  caret-color: @accent;
+  border: 1px solid @stroke;
+  border-radius: var(--radius-sm);
+  padding: 4px 8px;
+}
+.notification .inline-reply-button { margin-left: 6px; border-radius: var(--radius-sm); }
+.notification .inline-reply-button:disabled { background: transparent; color: @text-faint; }
+
+/* Urgencias */
+.notification.low { border-color: alpha(@foreground, 0.06); }
+.notification.low .summary { color: @text-muted; }
+.notification.critical {
+  border-color: alpha(@danger, 0.65);
+  background-image: linear-gradient(to right, alpha(@danger, 0.10), alpha(@danger, 0.03));
+}
+.notification.critical .summary { color: @danger; }
+
+/* ── Notificaciones flotantes ───────────────────────────── */
+/* Acento más claro que @color12 para que destaque sobre el fondo oscuro */
+@define-color accent-hi   mix(@accent, @foreground, 0.35);
+@define-color surface-hi  alpha(mix(@background, @foreground, 0.05), 0.80);
+
+/* Hueco con el borde derecho (49 px) y con la tarjeta de arriba */
+.floating-notifications .notification-row .notification-background { padding: 6px 49px 4px 10px; }
+/* Desplaza la pila: 30 px más abajo */
+.floating-notifications > * { margin-top: 30px; }
+
+.floating-notifications .notification {
+  background-color: @surface-hi;
+  background-image: linear-gradient(to bottom, alpha(@foreground, 0.05), alpha(@foreground, 0.0) 60%);
+  border: 1px solid alpha(@foreground, 0.14);
+  border-radius: var(--radius);
+  /* franja de acento a la izquierda + brillo superior + sombra */
+  box-shadow: inset 3px 0 0 @accent-hi,
+              inset 0 1px 0 alpha(@foreground, 0.08),
+              0 8px 22px alpha(black, 0.40);
+}
+.floating-notifications .notification:hover {
+  border-color: alpha(@accent-hi, 0.60);
+  background-color: alpha(mix(@background, @foreground, 0.08), 0.84);
+}
+.floating-notifications .notification .notification-default-action { padding: 12px 12px 12px 15px; }
+.floating-notifications .notification .notification-default-action:hover { background: transparent; }
+.floating-notifications .notification .image {
+  -gtk-icon-size: 46px;
+  border-radius: 12px;
+}
+.floating-notifications .notification .summary { font-size: 14px; font-weight: 700; color: @text; }
+.floating-notifications .notification .body { color: alpha(@foreground, 0.80); }
+.floating-notifications .notification progressbar progress { background: @accent-hi; }
+.floating-notifications .notification .notification-action > button:hover {
+  background: alpha(@accent-hi, 0.22);
+  border-color: alpha(@accent-hi, 0.55);
+}
+
+.floating-notifications .notification.low {
+  box-shadow: inset 3px 0 0 alpha(@foreground, 0.30),
+              inset 0 1px 0 alpha(@foreground, 0.06),
+              0 8px 22px alpha(black, 0.35);
+}
+.floating-notifications .notification.critical {
+  background-color: @surface-hi;
+  background-image: linear-gradient(to right, alpha(@danger, 0.14), alpha(@danger, 0.03));
+  border-color: alpha(@danger, 0.80);
+  box-shadow: inset 3px 0 0 @danger,
+              0 8px 22px alpha(black, 0.40),
+              0 0 14px alpha(@danger, 0.30);
+}
+
+/* ── Grupos ─────────────────────────────────────────────── */
+.notification-group { transition: opacity 200ms var(--ease); }
+.notification-group:focus { background: none; }
+.notification-group .notification-group-headers,
+.notification-group .notification-group-buttons { margin: 4px 12px; color: @text; }
+.notification-group .notification-group-header { font-weight: 600; color: @text-muted; }
+.notification-group .notification-group-icon { -gtk-icon-size: var(--notification-group-icon-size); color: @text-muted; }
+.notification-group .notification-group-close-button .close-button { margin: 8px 16px; }
+.notification-group.collapsed.not-expanded { opacity: 0.45; }
+.notification-group.collapsed .notification-row .notification { background-color: alpha(@foreground, 0.08); }
+.notification-group.collapsed:hover .notification-row:not(:only-child) .notification { background-color: @card-hover; }
+
+/* ── Centro de control ──────────────────────────────────── */
+.control-center {
+  background: @surface;
+  border: 1px solid @stroke-hi;
+  border-radius: var(--radius-panel);
+  color: @text;
+  padding: 6px;
+  box-shadow: 0 10px 30px alpha(black, 0.4);
+}
+
+.control-center .control-center-list { background: transparent; }
+.control-center .control-center-list .notification { box-shadow: none; }
+.control-center .control-center-list .notification-row .notification-background { padding: 4px 0; }
+.control-center .widget-notifications { margin: 4px 6px 0 6px; }
+.control-center .control-center-list .notification:hover { background: @card-hover; }
+
+.control-center .control-center-list-placeholder { opacity: 1; color: @text-faint; }
+.control-center .control-center-list-placeholder image { -gtk-icon-size: 48px; opacity: 0.5; }
+.control-center .control-center-list-placeholder label { font-size: 13px; margin-top: 8px; }
+
+/* ── Widgets ────────────────────────────────────────────── */
+.widget {
+  margin: 4px 6px;
+  padding: 0;
+  border-radius: var(--radius);
+}
+
+/* Título */
+.widget-title {
+  margin: 6px 6px 8px 6px;
+  padding: 4px 4px 10px 6px;
+  border-bottom: 1px solid @stroke;
+}
+.widget-title > label { font-size: 16px; font-weight: 700; color: @text; }
+.widget-title > button {
+  min-height: 30px;
+  padding: 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: @text-muted;
+}
+.widget-title > button:hover { background: alpha(@danger, 0.85); color: @background; }
+
+/* Botonera rápida */
+.widget-buttons-grid { padding: 0; background: transparent; }
+.widget-buttons-grid flowbox { padding: 0; }
+.widget-buttons-grid flowboxchild { padding: 0; margin: 0; }
+.widget-buttons-grid flowboxchild > button {
+  min-height: 48px;
+  min-width: 48px;
+  margin: 3px;
+  padding: 0;
+  font-size: 18px;
+  background: @card;
+  border: 1px solid @stroke;
+  border-radius: var(--radius);
+  color: @text;
+}
+.widget-buttons-grid flowboxchild > button:hover { background: @card-hover; border-color: @stroke-hi; }
+.widget-buttons-grid flowboxchild > button:checked,
+.widget-buttons-grid flowboxchild > button.active {
+  background: @accent;
+  border-color: @accent;
+  color: @background;
+}
+.widget-buttons-grid flowboxchild > button:checked:hover,
+.widget-buttons-grid flowboxchild > button.active:hover { background: shade(@accent, 1.08); }
+.widget-buttons-grid flowboxchild > button label { font-size: 22px; }
+
+/* Sliders (volumen y brillo) */
+.widget-volume,
+.widget-backlight {
+  background: @card;
+  border: 1px solid @stroke;
+  padding: 8px 12px 8px 14px;
+}
+.widget-volume > box > label,
+.widget-backlight > label,
+.widget-volume label,
+.widget-backlight label { font-size: 17px; color: @accent; min-width: 22px; }
+.widget-volume > box > button,
+.widget-volume button { min-width: 28px; min-height: 28px; padding: 0; background: transparent; color: @text-muted; }
+.widget-volume button:hover { background: @card-hover; color: @text; }
+
+scale { padding: 6px 4px; }
+scale trough {
+  min-height: 6px;
+  border-radius: 99px;
+  background: alpha(@foreground, 0.14);
+  border: none;
+}
+scale highlight {
+  border-radius: 99px;
+  background: @accent;
+}
+scale slider {
+  min-width: 16px;
+  min-height: 16px;
+  margin: -6px;
+  border-radius: 99px;
+  background: @foreground;
+  border: none;
+  box-shadow: 0 1px 4px alpha(black, 0.45);
+  transition: transform var(--t-fast) var(--ease);
+}
+scale:hover slider { transform: scale(1.12); }
+
+/* Volumen por aplicación */
+.per-app-volume {
+  background: transparent;
+  margin: 6px 0 0 0;
+  padding-top: 4px;
+  border-top: 1px solid @stroke;
+  border-radius: 0;
+}
+.per-app-volume row { background: transparent; padding: 2px 0; }
+.per-app-volume row label { font-size: 12px; color: @text-muted; }
+.widget-volume row image { -gtk-icon-size: var(--widget-volume-row-icon-size); }
+
+/* Reproductor */
+.widget-mpris { padding: 0; background: transparent; }
+.widget-mpris .widget-mpris-player {
+  margin: 0;
+  border-radius: var(--radius);
+  border: 1px solid @stroke;
+  box-shadow: none;
+}
+.widget-mpris .widget-mpris-player .mpris-background { filter: blur(16px) brightness(0.7); }
+.widget-mpris .widget-mpris-player .mpris-overlay {
+  padding: 12px;
+  background-color: alpha(@background, 0.55);
+}
+.widget-mpris .widget-mpris-album-art {
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px alpha(black, 0.5);
+  -gtk-icon-size: var(--mpris-album-art-icon-size);
+}
+.widget-mpris .widget-mpris-title { font-size: 14px; font-weight: 700; color: @text; }
+.widget-mpris .widget-mpris-subtitle { font-size: 12px; color: @text-muted; }
+.widget-mpris .mpris-overlay button {
+  min-width: 32px;
+  min-height: 32px;
+  padding: 0;
+  background: transparent;
+  border-radius: 99px;
+  color: @text;
+}
+.widget-mpris .mpris-overlay button:hover { background: alpha(@foreground, 0.14); }
+.widget-mpris > box > button { background: transparent; color: @text-muted; min-width: 24px; }
+.widget-mpris > box > button:disabled { color: alpha(@foreground, 0.2); }
+
+/* No molestar */
+.widget-dnd {
+  padding: 6px 8px 8px 10px;
+  margin-bottom: 2px;
+}
+.widget-dnd > label { font-size: 13px; font-weight: 600; color: @text; }
+.widget-dnd > switch {
+  min-width: 40px;
+  min-height: 22px;
+  border-radius: 99px;
+  background: alpha(@foreground, 0.16);
+  border: none;
+  box-shadow: none;
+}
+.widget-dnd > switch:checked { background: @accent; }
+.widget-dnd > switch slider {
+  min-width: 18px;
+  min-height: 18px;
+  margin: 2px;
+  border-radius: 99px;
+  background: @foreground;
+  border: none;
+  box-shadow: 0 1px 3px alpha(black, 0.4);
+}
+.widget-dnd > switch image { color: transparent; }

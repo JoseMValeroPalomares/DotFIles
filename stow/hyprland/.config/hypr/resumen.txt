@@ -1,0 +1,3 @@
+Con esto el plan de auditoría está terminado. Queda pendiente que confirmes:
+- En el próximo inicio de sesión: que salgan bien los portales (compartir pantalla, selector de archivos), la barra, las notificaciones y el fondo.
+- En el overview (SUPER+A): clic en un escritorio o en una ventana, arrastrar una ventana a otro escritorio, clic central para cerrar y las teclas 1–0.

@@ -1,0 +1,102 @@
+/* Catppuccin Mocha */
+@define-color crust #11111b;
+@define-color surface0 #313244;
+@define-color text #bac2de; /* subtext1: algo más apagado que text */
+@define-color card #303030; /* gris oscuro neutro (sin el tono azulado de Catppuccin) */
+@define-color mauve #cba6f7;
+
+* {
+    background-image: none;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 14pt;
+}
+
+/* Fondo plano: un degradado a pantalla completa bajaba la entrada a ~40 fps (GTK3 dibuja con la CPU) */
+window {
+    background-color: alpha(@crust, 0.76);
+}
+
+/* Cristal simulado (sin blur): relleno translúcido, borde claro arriba y reflejo diagonal */
+button {
+    color: @text;
+    background-color: alpha(@card, 0.88);
+    border: 1px solid alpha(white, 0.07);
+    border-top-color: alpha(white, 0.14);
+    border-radius: 20px;
+    box-shadow: inset 0 1px 0 alpha(white, 0.06), 0 6px 14px alpha(black, 0.35);
+    outline: none;
+
+    /* Esta es la clave para que parezcan cajas */
+    margin: 50px 35px;
+
+    /* Capa 1: icono (en cada #id); capa 2: reflejo */
+    background-repeat: no-repeat, no-repeat;
+    background-position: center 40%, center;
+    background-size: 20%, 100% 100%;
+
+    transition: background-color 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                border-color 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                background-size 150ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                color 150ms ease-out;
+
+    /* Entrada: fundido escalonado (retardos abajo). Sin desplazamiento: mover margin recoloca
+       la rejilla en cada fotograma y no llega a 144 fps */
+    animation: rise 260ms cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+button:focus,
+button:hover {
+    color: @crust;
+    background-color: alpha(@mauve, 0.88);
+    border-color: alpha(@mauve, 0.9);
+    border-top-color: alpha(white, 0.55);
+    box-shadow: inset 0 1px 0 alpha(white, 0.35), 0 8px 28px alpha(@mauve, 0.45);
+    background-size: 22%, 100% 100%;
+}
+
+/* Con teclado, la tarjeta activa «respira» con un brillo suave */
+button:focus {
+    animation: rise 260ms cubic-bezier(0.22, 1, 0.36, 1) backwards,
+               glow 1.6s ease-in-out 280ms infinite alternate;
+}
+
+@keyframes rise {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes glow {
+    from { box-shadow: inset 0 1px 0 alpha(white, 0.35), 0 8px 22px alpha(@mauve, 0.30); }
+    to { box-shadow: inset 0 1px 0 alpha(white, 0.35), 0 8px 40px alpha(@mauve, 0.70); }
+}
+
+/* Orden de lectura: Shutdown · Reboot · Suspend / Lock · Logout */
+#shutdown { animation-delay: 0ms; }
+#reboot { animation-delay: 30ms; }
+#suspend { animation-delay: 60ms; }
+#lock { animation-delay: 90ms; }
+#logout { animation-delay: 120ms; }
+#shutdown:focus, #reboot:focus, #suspend:focus, #lock:focus, #logout:focus { animation-delay: 0ms, 280ms; }
+
+/* Iconos + reflejo; en hover/foco el reflejo es más intenso */
+#lock { background-image: image(url("/home/jose/.config/wlogout/icons/lock.png")), linear-gradient(135deg, alpha(white, 0.07), alpha(white, 0.01) 45%, alpha(white, 0)); }
+#lock:focus, #lock:hover { background-image: image(url("/home/jose/.config/wlogout/icons/lock-hover.png")), linear-gradient(135deg, alpha(white, 0.30), alpha(white, 0.05) 50%, alpha(white, 0)); }
+
+#logout { background-image: image(url("/home/jose/.config/wlogout/icons/logout.png")), linear-gradient(135deg, alpha(white, 0.07), alpha(white, 0.01) 45%, alpha(white, 0)); }
+#logout:focus, #logout:hover { background-image: image(url("/home/jose/.config/wlogout/icons/logout-hover.png")), linear-gradient(135deg, alpha(white, 0.30), alpha(white, 0.05) 50%, alpha(white, 0)); }
+
+#suspend { background-image: image(url("/home/jose/.config/wlogout/icons/sleep.png")), linear-gradient(135deg, alpha(white, 0.07), alpha(white, 0.01) 45%, alpha(white, 0)); }
+#suspend:focus, #suspend:hover { background-image: image(url("/home/jose/.config/wlogout/icons/sleep-hover.png")), linear-gradient(135deg, alpha(white, 0.30), alpha(white, 0.05) 50%, alpha(white, 0)); }
+
+#shutdown { background-image: image(url("/home/jose/.config/wlogout/icons/power.png")), linear-gradient(135deg, alpha(white, 0.07), alpha(white, 0.01) 45%, alpha(white, 0)); }
+#shutdown:focus, #shutdown:hover { background-image: image(url("/home/jose/.config/wlogout/icons/power-hover.png")), linear-gradient(135deg, alpha(white, 0.30), alpha(white, 0.05) 50%, alpha(white, 0)); }
+
+#reboot { background-image: image(url("/home/jose/.config/wlogout/icons/restart.png")), linear-gradient(135deg, alpha(white, 0.07), alpha(white, 0.01) 45%, alpha(white, 0)); }
+#reboot:focus, #reboot:hover { background-image: image(url("/home/jose/.config/wlogout/icons/restart-hover.png")), linear-gradient(135deg, alpha(white, 0.30), alpha(white, 0.05) 50%, alpha(white, 0)); }
+
+/* Solo con el wlogout del sistema: crea una sexta celda fantasma (el parcheado de bin/ no la crea) */
+button:not(#shutdown):not(#reboot):not(#suspend):not(#lock):not(#logout) {
+    opacity: 0;
+    animation: none;
+}

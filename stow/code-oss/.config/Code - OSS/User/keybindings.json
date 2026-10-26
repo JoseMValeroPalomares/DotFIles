@@ -1,0 +1,20 @@
+// Atajos propios (compartidos por todos los perfiles).
+// Evitan los de Hyprland (Ctrl+Alt+W/L/Supr) y los de code-runner (Ctrl+Alt+N/M/K).
+[
+    // Wayland no deja arrastrar una pestaña "al vacío": moverla a una ventana nueva con teclado
+    {
+        "key": "ctrl+alt+o",
+        "command": "workbench.action.moveEditorToNewWindow",
+        "when": "activeEditor"
+    },
+    // Elegir y lanzar una tarea de tasks.json (Ctrl+Shift+B sigue siendo la tarea de compilación)
+    {
+        "key": "ctrl+alt+t",
+        "command": "workbench.action.tasks.runTask"
+    },
+    // Repetir la última tarea
+    {
+        "key": "ctrl+alt+shift+t",
+        "command": "workbench.action.tasks.reRunTask"
+    }
+]

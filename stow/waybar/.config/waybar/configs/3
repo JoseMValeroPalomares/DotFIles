@@ -1,0 +1,94 @@
+/* ---- 💫 Fusión Personalizada - Bottom Bar 💫 ---- */
+
+{
+"include": [
+  "$HOME/.config/waybar/Modules",
+  "$HOME/.config/waybar/ModulesWorkspaces",
+  "$HOME/.config/waybar/ModulesCustom",
+  "$HOME/.config/waybar/ModulesGroups",
+  "$HOME/.config/waybar/UserModules"
+  ],
+"layer": "top", 
+"position": "bottom", 
+"exclusive": true,
+"passthrough": false,
+"gtk-layer-shell": true,
+"spacing": 5,
+"margin-left": 8,
+"margin-right": 8,
+"margin-bottom": 4, 
+"margin-top": 0,
+
+"modules-left": [
+    "hyprland/workspaces#circulos",
+    "wlr/taskbar",
+    "custom/separator#line",
+    "power-profiles-daemon",
+    "battery",
+    "custom/separator#dot-line",
+    "temperature",
+    "cpu",
+    "memory",
+    "disk"
+    ],
+    
+"modules-center": [
+    "group/notify",
+    "custom/weather",
+    "custom/separator#blank",
+    "clock",
+    "custom/separator#blank",
+    "mpris"
+    ],
+    
+"modules-right": [
+    "network#speed",
+    "tray",
+    "custom/separator#line",
+    "custom/cycle_wall",
+    "backlight",
+    "pulseaudio",
+    "custom/separator#line",
+    "custom/power"
+    ],
+
+// --- CONFIGURACIONES ESPECÍFICAS AÑADIDAS --- //
+
+// 1. Espacios de trabajo con círculos (rellenos y vacíos)
+"hyprland/workspaces#circulos": {
+    "active-only": false,
+    "all-outputs": true,
+    "format": "{icon}",
+    "show-special": false,
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+    },
+    "format-icons": {
+        "active": "",    // Círculo relleno para el actual
+        "default": "",   // Círculo vacío para inactivos
+        "empty": "",     // Círculo vacío para los que no tienen nada
+        "urgent": ""     // Icono de alerta
+    }
+},
+
+// 2. Ventanas abiertas (Solo iconos)
+"wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+        "Alacritty",
+        "kitty"
+    ]
+}
+
+}

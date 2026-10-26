@@ -1,0 +1,117 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Calculadora con teclado (SUPER+C, UserScripts/RofiCalc.sh en modo script de rofi):            */
+/* arriba la pantalla (operación y resultado en vivo, a la derecha) y debajo las teclas en 5 × 5.   */
+/* Fondo al 96 % (más opaco que el tema global; valor elegido por el usuario).                    */
+/* Submitted by: https://github.com/JosephArmas */
+
+@import "~/.config/rofi/config.rasi"
+
+* {
+  key-bg:    rgba(255, 255, 255, 0.07);
+  key-hover: @color15;
+}
+
+/* ---- Window ---- */
+window {
+  width:            400px;
+  /* Más opaca que el tema global (0,7): se intuye lo de detrás pero ya no se mezcla con el texto */
+  background-color: rgba(10, 10, 12, 0.96);
+}
+
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+/* ---- Inputbar: franja fina con el fondo de pantalla; se puede escribir ---- */
+inputbar {
+  padding: 0.9em 1.2em;
+}
+
+textbox-prompt-colon {
+  str: "🧮";
+}
+
+entry {
+  expand:      true;
+  padding:     0.5em 0.8em;
+  placeholder: "Escribe o pulsa las teclas";
+}
+
+/* ---- Pantalla ---- */
+message {
+  background-color: transparent;
+  padding:          0.9em 1.4em 0.5em 1.4em;
+}
+
+textbox {
+  padding:          0em;
+  background-color: transparent;
+  text-color:       @foreground;
+  horizontal-align: 1.0;
+}
+
+/* ---- Teclado 5 × 5 ---- */
+listview {
+  columns:          5;
+  lines:            5;
+  fixed-columns:    true;
+  fixed-height:     true;
+  flow:             horizontal;
+  spacing:          8px;
+  padding:          0.6em 1.1em 1.1em 1.1em;
+  scrollbar:        false;
+  cycle:            false;
+  background-color: transparent;
+}
+
+element {
+  padding:       0.8em 0em;
+  border-radius: 0.8em;
+}
+
+element-icon {
+  size: 0;
+}
+
+element-text {
+  font:             "JetBrains Mono Bold 15";
+  horizontal-align: 0.5;
+  vertical-align:   0.5;
+  background-color: transparent;
+  text-color:       inherit;
+}
+
+/* Números y teclas normales */
+element normal.normal,
+element alternate.normal {
+  background-color: @key-bg;
+  text-color:       @foreground;
+}
+
+/* Operadores y funciones: color de acento */
+element normal.active,
+element alternate.active {
+  background-color: @key-bg;
+  text-color:       @color13;
+}
+
+/* «=» */
+element normal.urgent,
+element alternate.urgent {
+  background-color: @color13;
+  text-color:       #000000;
+}
+
+/* Tecla seleccionada (teclado o ratón) */
+element selected.normal,
+element selected.active,
+element selected.urgent {
+  background-color: @key-hover;
+  text-color:       #000000;
+}
+
+/* El tema base también pinta el fondo del texto seleccionado: aquí solo la tecla */
+element-text selected {
+  background-color: transparent;
+  text-color:       inherit;
+}

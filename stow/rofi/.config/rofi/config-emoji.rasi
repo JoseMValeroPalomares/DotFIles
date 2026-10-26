@@ -1,0 +1,87 @@
+/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
+/* Emojis (SUPER+ALT+E, scripts/RofiEmoji.sh): cuadrícula solo con el emoji; */
+/* el nombre y las palabras clave se buscan igualmente (van como «meta» invisible) */
+
+@import "~/.config/rofi/config.rasi"
+
+* {
+  /* Selección clara de Wallust (como el portapapeles y los efectos) */
+  selected:      @color15;
+  text-selected: #000000;
+}
+
+/* ---- Window: opaca (con el tema semitransparente se leía lo de detrás) ---- */
+window {
+  width:            720px;
+  border-color:     @color13;
+  background-color: #0A0A0C;
+}
+
+/* ---- Mainbox ---- */
+mainbox {
+  children: [ "inputbar", "message", "listview" ];
+}
+
+/* ---- Inputbar: franja fina con el fondo de pantalla ---- */
+inputbar {
+  padding: 1.1em 1.4em;
+}
+
+entry {
+  expand:      true;
+  padding:     0.55em 0.9em;
+  placeholder: "Buscar emoji (en inglés: smile, heart, cat…)";
+}
+
+/* ---- Ayuda: texto pequeño y tenue ---- */
+message {
+  background-color: transparent;
+}
+
+textbox {
+  margin:           0.6em 1.2em 0em 1.2em;
+  padding:          0em;
+  font:             "JetBrains Mono 9";
+  background-color: transparent;
+  text-color:       @color8;
+  horizontal-align: 0.5;
+}
+
+/* ---- Listview: cuadrícula 10 × 6 ---- */
+listview {
+  columns:          10;
+  lines:            6;
+  fixed-height:     true;
+  flow:             horizontal;
+  spacing:          4px;
+  padding:          0.6em;
+  scrollbar:        false;
+  cycle:            true;
+  background-color: transparent;
+}
+
+/* ---- Elements: solo el emoji, grande y centrado ---- */
+element {
+  /* La fuente va en el elemento (no solo en el texto) para que el alto de la fila crezca con ella */
+  font:          "Noto Color Emoji 20";
+  /* rofi no suma el alto de la fuente de emoji: sin relleno se cortan; 8 px menos arriba y 8 más abajo
+     suben el emoji sin cambiar el tamaño de la celda */
+  padding:       calc( 0.9em - 8px ) 0em calc( 0.9em + 8px ) 0em;
+  border-radius: 0.6em;
+}
+
+element-icon {
+  size: 0%;
+}
+
+element-text {
+  font:             "Noto Color Emoji 20";
+  horizontal-align: 0.5;
+  vertical-align:   0.5;
+}
+
+element selected.normal,
+element-text selected {
+  background-color: @selected;
+  text-color:       @text-selected;
+}

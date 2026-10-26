@@ -1,0 +1,30 @@
+RESCATE DE HYPRLOCK  (léelo desde una TTY: cat ~/.config/hypr/hyprlock-rescate.txt)
+=====================================================================================
+Ir a una TTY: Ctrl+Alt+F3, inicia sesión.   Volver a Hyprland: Ctrl+Alt+F1 (tu sesión está en tty1).
+
+1. Hyprlock no responde / no acepta la contraseña
+     pkill -USR1 hyprlock
+   OJO: cuenta como 1 intento fallido en faillock (con 3 seguidos se bloquea la cuenta 10 min).
+
+2. Pantalla «Oopsie daisy… the lockscreen app died»
+     hyprctl --instance 0 eval 'hl.clear_crashed_lockscreen()'
+   Si no basta:  killall -9 hyprlock  y repite el comando.
+   Para volver a bloquear después:  hyprctl --instance 0 dispatch 'hl.dsp.exec_cmd("hyprlock")'
+
+3. «Cuenta bloqueada» (faillock, demasiados intentos)
+     faillock --user "$USER"            # ver intentos
+     faillock --user "$USER" --reset    # borrar (no necesita sudo)
+
+4. Tras actualizar hyprlock (pacman -Syu) — comprobar SIN bloquear:
+     ~/.config/hypr/scripts/HyprlockCheck.sh
+   Volver a una versión anterior de la config:
+     git -C ~/.config/hypr log --oneline -- hyprlock.conf
+     git -C ~/.config/hypr checkout <commit> -- hyprlock.conf
+
+5. Fondo o colores raros en el bloqueo
+     ~/.config/hypr/UserScripts/HyprlockBackground.sh --apply
+   Menú del fondo: SUPER+CTRL+U. Si falta la caché, hyprlock usa un color liso y colores de reserva.
+
+6. Pantalla negra tras suspender o desbloquear (el equipo responde pero no se ve nada)
+     hyprctl --instance 0 dispatch 'hl.dsp.dpms({ action = "on" })'
+   OJO: en Hyprland 0.56 «dpms on» o dpms("on") ALTERNAN (pueden apagar). Usa siempre la forma { action = ... }.

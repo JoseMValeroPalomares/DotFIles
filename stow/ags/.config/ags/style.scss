@@ -1,0 +1,127 @@
+/* --- Paleta de Colores --- */
+@define-color bg_color rgba(36, 39, 58, 0.85); /* Fondo translúcido */
+@define-color surface rgba(73, 77, 100, 0.4);
+@define-color accent #cba6f7; /* Lavanda */
+@define-color fg_color #cad3f5;
+@define-color border_color rgba(255, 255, 255, 0.1);
+
+* {
+    font-family: "Geist Sans", "Inter", "Ubuntu", sans-serif;
+    transition: 200ms all cubic-bezier(0, 1, 0, 1);
+}
+
+/* --- Estructura de Ventana --- */
+window {
+    background-color: transparent;
+}
+
+.panel-container, .calendar-container {
+    background-color: @bg_color;
+    border: 1px solid @border_color;
+    border-radius: 24px;
+    padding: 24px;
+    margin: 12px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* --- Quick Settings (Tiles de Windows 11) --- */
+.quick-toggles button {
+    background-color: @surface;
+    border-radius: 16px;
+    min-height: 80px;
+    min-width: 100px;
+    margin: 6px;
+    border: 1px solid transparent;
+}
+
+.quick-toggles button:hover {
+    background-color: @accent;
+    color: #181926;
+}
+
+.quick-toggles button image {
+    -gtk-icon-size: 28px;
+    margin-bottom: 8px;
+}
+
+/* --- Sliders (Estilo Pill) --- */
+slider trough {
+    min-height: 12px;
+    background-color: @surface;
+    border-radius: 100px;
+}
+
+slider highlight {
+    background-color: @accent;
+    border-radius: 100px;
+}
+
+slider slider {
+    background-color: white;
+    border-radius: 100px;
+    min-height: 20px;
+    min-width: 20px;
+    margin: -4px;
+}
+
+/* --- Calendario --- */
+.big-clock {
+    font-size: 3rem;
+    font-weight: 800;
+    color: @accent;
+    margin-bottom: -5px;
+}
+
+.date-label {
+    font-size: 1.1rem;
+    color: @fg_color;
+    opacity: 0.7;
+    margin-bottom: 20px;
+}
+
+calendar {
+    background-color: transparent;
+    border-radius: 12px;
+    padding: 10px;
+    color: @fg_color;
+}
+
+calendar:selected {
+    background-color: @accent;
+    color: #181926;
+    border-radius: 8px;
+}
+
+/* --- Media Player --- */
+.MediaPanel .panel-container {
+    min-width: 350px;
+}
+
+.song-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: @accent;
+}
+
+.song-artist {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+.play-pause-btn {
+    background-color: @accent;
+    color: #181926;
+    border-radius: 100px;
+    min-width: 56px;
+    min-height: 56px;
+}
+
+/* --- Animación --- */
+@keyframes reveal {
+    from { opacity: 0; margin-top: -30px; }
+    to { opacity: 1; margin-top: 10px; }
+}
+
+.QuickSettings, .CalendarPanel, .MediaPanel {
+    animation: reveal 350ms cubic-bezier(0, 1, 0, 1);
+}
