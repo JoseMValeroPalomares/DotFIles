@@ -1,0 +1,4 @@
+# hw-laptop.pacman.txt — una entrada por línea; '#' para comentarios
+power-profiles-daemon
+thermald
+brightnessctl

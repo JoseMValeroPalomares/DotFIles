@@ -1,0 +1,2 @@
+# dev.aur.txt — una entrada por línea; '#' para comentarios
+python-osmnx

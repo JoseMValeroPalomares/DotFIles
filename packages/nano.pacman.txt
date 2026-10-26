@@ -1,0 +1,3 @@
+# nano.pacman.txt — una entrada por línea; '#' para comentarios
+nano
+git

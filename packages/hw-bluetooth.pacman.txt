@@ -1,0 +1,4 @@
+# hw-bluetooth.pacman.txt — una entrada por línea; '#' para comentarios
+bluez
+bluez-utils
+blueman

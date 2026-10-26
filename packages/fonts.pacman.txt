@@ -1,0 +1,11 @@
+# fonts.pacman.txt — una entrada por línea; '#' para comentarios
+adobe-source-code-pro-fonts
+noto-fonts
+noto-fonts-emoji
+otf-font-awesome
+ttf-droid
+ttf-fantasque-nerd
+ttf-fira-code
+ttf-hack-nerd
+ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd

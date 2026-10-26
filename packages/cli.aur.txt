@@ -1,0 +1,3 @@
+# cli.aur.txt — una entrada por línea; '#' para comentarios
+cbonsai
+tty-clock

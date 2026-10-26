@@ -1,0 +1,2 @@
+# fonts.aur.txt — una entrada por línea; '#' para comentarios
+ttf-victor-mono

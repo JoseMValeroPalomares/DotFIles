@@ -1,0 +1,7 @@
+# theme.pacman.txt — una entrada por línea; '#' para comentarios
+kvantum
+qt5ct
+qt6ct
+qt5-graphicaleffects
+papirus-icon-theme
+breeze-icons

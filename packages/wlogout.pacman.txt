@@ -1,0 +1,5 @@
+# wlogout.pacman.txt — una entrada por línea; '#' para comentarios
+gtk3
+gtk-layer-shell
+pkgconf
+git

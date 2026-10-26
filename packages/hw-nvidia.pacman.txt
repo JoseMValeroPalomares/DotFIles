@@ -1,0 +1,11 @@
+# hw-nvidia.pacman.txt — una entrada por línea; '#' para comentarios
+nvidia-open-dkms
+nvidia-utils
+nvidia-settings
+nvidia-prime
+opencl-nvidia
+libva-nvidia-driver
+nvtop
+linux-headers
+linux-zen-headers
+cuda

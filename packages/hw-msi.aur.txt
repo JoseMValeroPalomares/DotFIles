@@ -1,0 +1,4 @@
+# hw-msi.aur.txt — una entrada por línea; '#' para comentarios
+msi-ec-dkms-git
+mcontrolcenter-bin
+dptfxtract-bin

@@ -1,0 +1,5 @@
+# cli.pacman.txt — una entrada por línea; '#' para comentarios
+btop
+fastfetch
+screen
+glmark2

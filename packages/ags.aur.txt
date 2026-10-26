@@ -1,0 +1,4 @@
+# ags.aur.txt — una entrada por línea; '#' para comentarios
+aylurs-gtk-shell-git
+libastal-mpris-git
+libastal-network-git

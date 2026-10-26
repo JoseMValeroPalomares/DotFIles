@@ -1,0 +1,2 @@
+# code-oss.pacman.txt — una entrada por línea; '#' para comentarios
+code

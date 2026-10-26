@@ -1,0 +1,5 @@
+# apps.pacman.txt — una entrada por línea; '#' para comentarios
+mousepad
+qalculate-gtk
+kicad
+wireshark-qt

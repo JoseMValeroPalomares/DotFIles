@@ -1,0 +1,2 @@
+# ags.pacman.txt — una entrada por línea; '#' para comentarios
+dart-sass

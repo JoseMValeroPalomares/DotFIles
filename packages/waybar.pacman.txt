@@ -1,0 +1,10 @@
+# waybar.pacman.txt — una entrada por línea; '#' para comentarios
+waybar
+python
+playerctl
+pamixer
+pavucontrol
+gnome-system-monitor
+pacman-contrib
+otf-font-awesome
+ttf-jetbrains-mono-nerd

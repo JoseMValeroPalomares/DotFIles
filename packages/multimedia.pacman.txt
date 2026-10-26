@@ -1,0 +1,12 @@
+# multimedia.pacman.txt — una entrada por línea; '#' para comentarios
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+gst-plugins-ugly
+mpv
+mpv-mpris
+loupe
+sox
+yt-dlp

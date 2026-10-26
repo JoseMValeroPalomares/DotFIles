@@ -1,0 +1,2 @@
+# quickshell.pacman.txt — una entrada por línea; '#' para comentarios
+quickshell

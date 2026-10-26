@@ -1,0 +1,4 @@
+# rofi.pacman.txt — una entrada por línea; '#' para comentarios
+rofi
+cliphist
+wtype

@@ -1,0 +1,4 @@
+# lock.pacman.txt — una entrada por línea; '#' para comentarios
+hyprlock
+hypridle
+ttf-jetbrains-mono-nerd

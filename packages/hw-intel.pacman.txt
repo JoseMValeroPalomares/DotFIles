@@ -1,0 +1,5 @@
+# hw-intel.pacman.txt — una entrada por línea; '#' para comentarios
+intel-ucode
+intel-media-driver
+libva-intel-driver
+libva-utils

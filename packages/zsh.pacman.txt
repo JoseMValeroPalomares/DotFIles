@@ -1,0 +1,12 @@
+# zsh.pacman.txt — una entrada por línea; '#' para comentarios
+zsh
+zsh-completions
+tmux
+git
+curl
+lsd
+bat
+fzf
+fd
+zoxide
+fnm

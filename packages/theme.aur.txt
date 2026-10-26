@@ -1,0 +1,6 @@
+# theme.aur.txt — una entrada por línea; '#' para comentarios
+catppuccin-gtk-theme-mocha
+catppuccin-cursors-mocha
+gtk-engine-murrine
+flat-remix
+bibata-cursor-theme-bin

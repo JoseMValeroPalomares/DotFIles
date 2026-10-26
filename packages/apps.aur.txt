@@ -1,0 +1,2 @@
+# apps.aur.txt — una entrada por línea; '#' para comentarios
+zen-browser-bin

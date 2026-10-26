@@ -1,0 +1,2 @@
+# wallust.pacman.txt — una entrada por línea; '#' para comentarios
+imagemagick

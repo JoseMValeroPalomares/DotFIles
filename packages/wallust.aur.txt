@@ -1,0 +1,2 @@
+# wallust.aur.txt — una entrada por línea; '#' para comentarios
+wallust

@@ -1,0 +1,5 @@
+# hw-amd.pacman.txt — una entrada por línea; '#' para comentarios
+amd-ucode
+mesa
+vulkan-radeon
+libva-utils

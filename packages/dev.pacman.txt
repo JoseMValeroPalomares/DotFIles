@@ -1,0 +1,27 @@
+# dev.pacman.txt — una entrada por línea; '#' para comentarios
+clang
+cmake
+ccache
+gperf
+mercurial
+rust
+bun
+fnm
+pyenv
+jdk-openjdk
+shellcheck
+umockdev
+arduino-cli
+dfu-util
+docker
+python-pip
+python-pipx
+python-flask
+python-matplotlib
+python-numpy
+python-pygame
+python-pyquery
+python-pyserial
+python-requests
+python-scapy
+python-termcolor

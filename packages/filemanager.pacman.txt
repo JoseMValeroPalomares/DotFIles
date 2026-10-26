@@ -1,0 +1,10 @@
+# filemanager.pacman.txt — una entrada por línea; '#' para comentarios
+thunar
+thunar-archive-plugin
+thunar-volman
+tumbler
+ffmpegthumbnailer
+libspng
+gvfs
+gvfs-mtp
+xarchiver

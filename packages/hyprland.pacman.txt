@@ -1,0 +1,23 @@
+# hyprland.pacman.txt — una entrada por línea; '#' para comentarios
+hyprland
+uwsm
+hyprpolkitagent
+hyprsunset
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+qt5-wayland
+awww
+cliphist
+wl-clipboard
+wtype
+grim
+slurp
+swappy
+yad
+libnotify
+brightnessctl
+pamixer
+playerctl
+imagemagick
+nwg-displays
+nwg-look

@@ -1,0 +1,10 @@
+# bin.pacman.txt — una entrada por línea; '#' para comentarios
+brightnessctl
+ddcutil
+grim
+slurp
+wl-clipboard
+libnotify
+tesseract
+tesseract-data-eng
+tesseract-data-spa

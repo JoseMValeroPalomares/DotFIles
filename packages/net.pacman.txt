@@ -1,0 +1,8 @@
+# net.pacman.txt — una entrada por línea; '#' para comentarios
+nmap
+arp-scan
+mtr
+bind
+openbsd-netcat
+lftp
+wol

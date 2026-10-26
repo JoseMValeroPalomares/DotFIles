@@ -1,0 +1,3 @@
+# swaync.pacman.txt — una entrada por línea; '#' para comentarios
+swaync
+libnotify

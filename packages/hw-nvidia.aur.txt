@@ -1,0 +1,2 @@
+# hw-nvidia.aur.txt — una entrada por línea; '#' para comentarios
+envycontrol
