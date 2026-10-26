@@ -41,7 +41,9 @@ fi
 echo "${B}==> Patrones de secretos${N}"
 hits=0
 for p in "${PATTERNS[@]}"; do
-    if out=$(printf '%s\0' "${files[@]}" | xargs -0 grep -IinE -- "$p" 2>/dev/null); then
+    # xargs reparte en tandas y falla si alguna no encuentra nada: se mira la salida, no el código
+    out=$(printf '%s\0' "${files[@]}" | xargs -0 grep -IinE -- "$p" 2>/dev/null || true)
+    if [[ -n $out ]]; then
         echo "$out" | cut -c1-200 | sed "s/^/  ${Y}!${N} /"
         hits=1
     fi

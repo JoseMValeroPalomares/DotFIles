@@ -12,3 +12,14 @@
   - Cada componente corre en un subshell con `set -e`: si falla se apunta y se sigue.
   - Probado en un `$HOME` falso: backup de lo que choca, enlaces, semillas y segunda
     ejecución sin cambios. `shellcheck` limpio. Quitado `swaync/backup/` que se había colado.
+- Fase 4: README (modos, flags, componentes, dependencias, añadir componente, restaurar backup,
+  Spicetify tras actualizar Spotify) y `check-secrets.sh`.
+  - Arreglado en check-secrets: con muchos archivos `xargs` parte en tandas y el código de salida
+    ocultaba coincidencias; ahora se mira la salida. Probado con un token falso: lo detecta.
+  - Validación: `bash -n` (34 scripts), `shellcheck` sin avisos, `stow -n -v` de los 18
+    paquetes, `./install.sh --first-time --dry-run` sin errores y sin tocar `~`.
+
+## Pendiente (Jose)
+- Subir los wallpapers a un drive y copiarlos a `~/Pictures/wallpapers` tras reinstalar.
+- Añadir el remote y hacer push (comandos en el README / conversación).
+- Opcional: `sudo pacman -S gitleaks` para un escaneo extra antes de subir.

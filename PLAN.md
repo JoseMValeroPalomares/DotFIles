@@ -22,7 +22,7 @@ personalizado (`--custom`) y mínimo (`--minimal`).
 - Sin `git push` ni remotos: lo sube Jose.
 
 ## Fases
-- [ ] 1. Auditoría (hecha en conversación)
-- [ ] 2. Estructura del repo y copia de configs
-- [ ] 3. `install.sh`, `lib/`, `scripts/`, `hardware/`
-- [ ] 4. README, `check-secrets.sh` y validación (bash -n, shellcheck, stow -n, --dry-run)
+- [x] 1. Auditoría (hecha en conversación)
+- [x] 2. Estructura del repo y copia de configs
+- [x] 3. `install.sh`, `lib/`, `scripts/`, `hardware/`
+- [x] 4. README, `check-secrets.sh` y validación (bash -n, shellcheck, stow -n, --dry-run)
