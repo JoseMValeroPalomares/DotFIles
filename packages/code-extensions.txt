@@ -1,0 +1,17 @@
+alexdauenhauer.catppuccin-noctis
+catppuccin.catppuccin-vsc
+catppuccin.catppuccin-vsc-icons
+charliermarsh.ruff
+dbaeumer.vscode-eslint
+detachhead.basedpyright
+esbenp.prettier-vscode
+llvm-vs-code-extensions.vscode-clangd
+local.wallust-theme
+mathematic.vscode-pdf
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-python-envs
+ms-vscode.cmake-tools
+redhat.java
+vscjava.vscode-java-debug
+vscjava.vscode-java-test

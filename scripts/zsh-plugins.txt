@@ -1,0 +1,6 @@
+# Plugins y temas externos de Oh My Zsh: <tipo> <nombre> <url>
+# Se clonan en $ZSH_CUSTOM (~/.config/zsh/custom), como en el sistema original.
+plugin fzf-tab                 https://github.com/Aloxaf/fzf-tab.git
+plugin zsh-autosuggestions     https://github.com/zsh-users/zsh-autosuggestions.git
+plugin zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting.git
+plugin you-should-use          https://github.com/MichaelAquilina/zsh-you-should-use.git
