@@ -11,7 +11,8 @@ post_zsh() {
         local tmp
         tmp=$(mktemp)
         run curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o "$tmp"
-        run env RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh "$tmp" --unattended
+        # ZSH explícito: si se lanza desde una zsh con OMZ cargado, $ZSH heredado apuntaría a otro sitio
+        run env ZSH="$omz" RUNZSH=no CHSH=no KEEP_ZSHRC=yes sh "$tmp" --unattended
         rm -f "$tmp"
     fi
 
@@ -27,7 +28,11 @@ post_zsh() {
     if [[ $current == "$zsh_bin" ]]; then
         log_ok "Tu shell ya es zsh"
     elif confirm "¿Cambiar tu shell de $current a $zsh_bin con chsh?" n; then
-        run chsh -s "$zsh_bin"
+        # Con sudo no pide la contraseña del usuario (sudo ya está activo durante la instalación)
+        run_sudo chsh -s "$zsh_bin" "$USER" || {
+            log_warn "chsh falló: cámbiala a mano con 'chsh -s $zsh_bin'"
+            mark err "zsh: no se pudo cambiar la shell"
+        }
     else
         mark skip "zsh: shell por defecto sin cambiar"
     fi

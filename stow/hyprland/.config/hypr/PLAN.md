@@ -59,13 +59,13 @@ Prioridad 1 completa salvo lo que el usuario decidió no tocar.
   `move = "monitor_w*0.72 monitor_h*0.07"`.
 - Reglas duplicadas/contradictorias en `configs/WindowRules.lua`: `idle_inhibit` ×2, float de Steam/Heroic ×2,
   `games` ×2, opacidad de `multimedia` definida 3 veces, opacidades sobrescritas por `UserSettings.lua`,
-  tag `KooL_Settings` vs `KooL-Settings`, regex `^(jetbrains-*)`, regex de notif con `|class`. (hecho, 2.2 + 2.11)
+  tag `settings` vs `settings`, regex `^(jetbrains-*)`, regex de notif con `|class`. (hecho, 2.2 + 2.11)
 - `configs/Laptops.lua`: binds xf86Launch1/3/4 llaman a `asusctl`/`rog-control-center` (no instalados).
   Preguntar si quiere quitarlos o reasignarlos (p. ej. a `mcontrolcenter`).
 - Variables rotas `local scriptsDir = "os.getenv(\"HOME\")/…"` en `configs/Startup_Apps.lua`,
   `configs/Laptops.lua`, `UserConfigs/UserKeybinds.lua` (código muerto engañoso).
 - Menús/scripts que leen o escriben `.conf` que ya no se cargan: ~~`Animations.sh`~~ (hecho, 2.7),
-  ~~`KeyBinds.sh`~~ (hecho, 2.8; `keybinds_parser.py` sin uso → legacy), ~~`Kool_Quick_Settings.sh`~~ (hecho, 2.9),
+  ~~`KeyBinds.sh`~~ (hecho, 2.8; `keybinds_parser.py` sin uso → legacy), ~~`Quick_Settings.sh`~~ (hecho, 2.9),
   ~~`MonitorProfiles.sh`, `nwg-displays`~~ (2.9: MonitorsConfig.sh; MonitorProfiles.sh y RainbowBorders → legacy). Revisar uno a uno.
 - `dbus-update-activation-environment` + `systemctl --user import-environment` al arrancar: redundantes.
 - `HYPRCURSOR_SIZE` definida dos veces; `cursor.warp_on_change_workspace = 2` anulado por `no_warps = true`.

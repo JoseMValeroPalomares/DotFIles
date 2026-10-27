@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Capturas de pantalla con grim (slurp para elegir zona, swappy para editar)
 # Uso: ScreenShot.sh --now | --in5 | --in10 | --area | --active | --win | --swappy
 

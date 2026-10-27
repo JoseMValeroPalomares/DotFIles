@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- Default settings
 -- Aqui pones tus propios ajustes, no se tocara durante update si se usa upgrade.sh
 

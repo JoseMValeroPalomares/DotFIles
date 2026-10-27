@@ -1,16 +1,15 @@
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
+UserConfigs: ajustes propios de Hyprland (config en Lua)
 
-KooL's Hyprland-Dots
+Aquí va todo lo personalizado; `configs/` tiene la base y hyprland.lua carga ambos,
+primero configs/ y después UserConfigs/, así que lo de aquí manda.
 
-1.) Suggest not to rename any files in this directory. As this is connected and being sourced from hyprland.conf in ~/.config/hypr
-
-2.) This directory, along with UserScripts directory will NOT be touch when running upgrade.sh
-
-3.) However, if hyprland has a big change in settings, i.e., blur section is moved into another group, you should managed the change yourself.
-
-4.) Guidance on the keybinds. Suggest NOT to assign a keybind which I set on the default Keybinds. Else will conflict. Once Hyprland decided to have a global keybinds, then I will adjust.
-
-5.) If you think that the default keybinds SHOULD be adjusted, open an issue on my github page and present me a valid argument. Like conflicting to GLOBAL keybinds, etc etc etc.
-
-
-I will update the Hyprland-Dots wiki for guidance. Make sure to check out changelogs as well
+- 01_UserDefaults.lua  editor, terminal, gestor de archivos y navegador por defecto
+- UserKeybinds.lua     atajos propios
+- UserSettings.lua     ajustes generales (entrada, gestos, misceláneos)
+- UserDecorations.lua  bordes, sombras, desenfoque y opacidad
+- UserAnimations.lua   animaciones (el menú de animaciones copia aquí el preset elegido)
+- WindowRules.lua      reglas de ventana propias
+- WorkSpaceRules.lua   reglas de escritorios
+- ENVariables.lua      variables de entorno propias
+- Startup_Apps.lua     programas al iniciar
+- Laptops.lua / LaptopDisplay.lua  atajos y pantalla del portátil

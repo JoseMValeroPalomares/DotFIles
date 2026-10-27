@@ -1,4 +1,3 @@
-/* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 /* RofiBeats: menú principal (SUPER+H). Compacto, opaco, con iconos y lo que está sonando arriba */
 
 @import "~/.config/rofi/config.rasi"

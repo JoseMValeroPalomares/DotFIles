@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Termina el proceso de la ventana activa (SUPER+SHIFT+W), para programas que no responden a cerrar.
 # Copied from Discord post. Thanks to @Zorg
 

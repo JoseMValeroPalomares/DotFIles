@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- Vendor defaults for window rules and layerrules
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/ for more
 
@@ -34,10 +33,10 @@ hl.window_rule({ match = { class = "^(zen-alpha|zen)$" }, tag = "+browser" })
 hl.window_rule({ match = { class = "^(swaync-control-center|swaync-notification-window|swaync-client)$" }, tag = "+notif" })
 
 
--- KooL settings tag
-hl.window_rule({ match = { title = "^(KooL Quick Cheat Sheet)$" }, tag = "+KooL_Cheat" })
-hl.window_rule({ match = { title = "^(KooL Hyprland Settings)$" }, tag = "+KooL-Settings" })
-hl.window_rule({ match = { class = "^(nwg-displays|nwg-look)$" }, tag = "+KooL-Settings" })
+-- Tag de ventanas de ajustes
+hl.window_rule({ match = { title = "^(Hyprland Cheat Sheet)$" }, tag = "+cheat_sheet" })
+hl.window_rule({ match = { title = "^(Hyprland Settings)$" }, tag = "+settings" })
+hl.window_rule({ match = { class = "^(nwg-displays|nwg-look)$" }, tag = "+settings" })
 
 
 -- terminal tags
@@ -128,7 +127,7 @@ hl.window_rule({ match = { tag = "multimedia" }, no_blur = true })
 
 
 -- POSITION
-hl.window_rule({ match = { tag = "KooL_Cheat" }, center = true })
+hl.window_rule({ match = { tag = "cheat_sheet" }, center = true })
 hl.window_rule({ match = { title = "^(ROG Control)$" }, center = true })
 hl.window_rule({ match = { title = "^(Keybindings)$" }, center = true })
 hl.window_rule({ match = { class = "^(pavucontrol|org.pulseaudio.pavucontrol|com.saivert.pwvucontrol)$" }, center = true })
@@ -142,11 +141,11 @@ hl.window_rule({ match = { fullscreen = true }, idle_inhibit = "fullscreen" })
 
 
 -- FLOAT
-hl.window_rule({ match = { tag = "KooL_Cheat" }, float = true })
+hl.window_rule({ match = { tag = "cheat_sheet" }, float = true })
 hl.window_rule({ match = { tag = "wallpaper" }, float = true, center = true })
 hl.window_rule({ match = { tag = "settings" }, float = true, center = true })
 hl.window_rule({ match = { tag = "viewer" }, float = true, center = true })
-hl.window_rule({ match = { tag = "KooL-Settings" }, float = true, center = true })
+hl.window_rule({ match = { tag = "settings" }, float = true, center = true })
 hl.window_rule({ match = { class = "([Zz]oom|onedriver|onedriver-launcher)" }, float = true })
 hl.window_rule({ match = { class = "(org.gnome.Calculator|[Qq]alculate-gtk)" }, float = true })
 hl.window_rule({ match = { class = "^(mpv|com.github.rafostar.Clapper)$" }, float = true })
@@ -180,7 +179,7 @@ hl.window_rule({ match = { class = "^(seahorse)$" }, opacity = "0.9 0.8" })
 
 
 -- SIZE
-hl.window_rule({ match = { tag = "KooL_Cheat" }, size = {"monitor_w*0.65", "monitor_h*0.9"} })
+hl.window_rule({ match = { tag = "cheat_sheet" }, size = {"monitor_w*0.65", "monitor_h*0.9"} })
 hl.window_rule({ match = { tag = "wallpaper" }, size = {"monitor_w*0.7", "monitor_h*0.7"} })
 hl.window_rule({ match = { tag = "settings" }, size = {"monitor_w*0.7", "monitor_h*0.7"} })
 hl.window_rule({ match = { class = "^([Ff]erdium)$" }, size = {"monitor_w*0.6", "monitor_h*0.7"} })

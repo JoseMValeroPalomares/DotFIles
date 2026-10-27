@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # wlogout (menú de energía). Abre o cierra el menú en el monitor con foco.
 # WLOGOUT_TEST=1 cambia cada acción por un notify-send, para probar sin apagar nada.
 

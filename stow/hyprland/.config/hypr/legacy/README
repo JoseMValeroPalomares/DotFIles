@@ -8,4 +8,4 @@
 # WaybarCava (el usuario no lo usa; módulo custom/cava_mviz quitado de waybar).
 # BrightnessKbd (luz del teclado; el usuario no la usa, teclas xf86KbdBrightness quitadas de configs/Laptops.lua).
 # RofiThemeSelector-modified (duplicado de RofiThemeSelector.sh; SUPER+CTRL+SHIFT+R queda libre).
-# RofiThemeSelector (el usuario lo quita: atajo SUPER+CTRL+R y entrada de Ajustes rápidos). Tema activo fijo: KooL_style-8.
+# RofiThemeSelector (el usuario lo quita: atajo SUPER+CTRL+R y entrada de Ajustes rápidos). Tema activo fijo: style-8.

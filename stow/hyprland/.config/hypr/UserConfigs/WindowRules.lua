@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- For window rules and layerrules
 -- See https://wiki.hypr.land/Configuring/Basics/Window-Rules/ for more
 

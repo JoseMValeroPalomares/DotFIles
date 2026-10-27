@@ -62,9 +62,9 @@
       Antes también apuntaba a power-profiles-daemon (PID 806). Probado: cierra rofi, el servicio sigue y el perfil también.
       Los `.conf` sin cargar no se tocan (irán a legacy/).
 
-- [x] 2.11 `configs/WindowRules.lua`: tag `KooL_Settings` → `KooL-Settings` (ahora flota y se centra como nwg-look), centrado
+- [x] 2.11 `configs/WindowRules.lua`: tag `settings` → `settings` (ahora flota y se centra como nwg-look), centrado
       duplicado fuera, `^(jetbrains-*)` → `^(jetbrains-.+)$`, `|class` fuera de la regla notif. Ninguna app actual afectada.
-      Probado con kitty de prueba: título KooL → flotante con tag KooL-Settings; clase "class" ya no recibe notif.
+      Probado con kitty de prueba: título de ajustes → flotante con tag settings; clase "class" ya no recibe notif.
 
 - [x] 3.1 `FixPortals.sh` fuera del autoarranque: el journal muestra que systemd ya arrancaba los portales bien y el script
       los mataba (KILL) para que systemd los relanzara. Probado: portal responde (Settings, ScreenCast). Pendiente: confirmar en el próximo login.
@@ -248,7 +248,7 @@
       sleep 0.2 tras siguiente/anterior (si no, avisaba de la pista vieja). KillActiveProcess (SUPER+SHIFT+W): hyprctl -j,
       aviso con la clase cerrada, protege PID ≤ 1. Polkit: solo rutas de Arch, sin código inalcanzable tras exec, aviso si no
       hay agente. Hyprsunset (SUPER+M): avisos y tooltip en español.
-      Corregido además escape() de Kool_Quick_Settings.sh (mismo fallo de bash 5.2: «<» salía como «<lt;»).
+      Corregido además escape() de Quick_Settings.sh (mismo fallo de bash 5.2: «<» salía como «<lt;»).
       Probado con rfkill/playerctl/hyprctl falsos, kill real sobre un sleep, agente falso; estado real de hyprsunset. shellcheck limpio.
 - [x] 3.13 Repaso del resto. RofiBeats (SUPER+H): «Detener» mataba con kill -9 CUALQUIER mpv (también vídeos); ahora su mpv lleva
       `--title=RofiBeats` y solo se para ese (probado con otro mpv vivo). Quitar emisora quitaba también las que contenían el nombre
@@ -274,7 +274,7 @@
       en el mensaje («2+2 = 4 · copiado») con escape, ejemplos de la ayuda comprobados con qalc («15% de 80» no lo entiende).
       Medido: abrir rofi con o sin imagen en la barra ≈ 25–30 ms → nada que optimizar.
 - [x] RofiThemeSelector.sh → legacy/ y config-rofi-theme.rasi → rofi/legacy/ (petición del usuario): fuera SUPER+CTRL+R (libre)
-      y la entrada «Tema de rofi» de Ajustes rápidos. El tema global queda fijo en KooL_style-8 (config.rasi). 162 atajos.
+      y la entrada «Tema de rofi» de Ajustes rápidos. El tema global queda fijo en style-8 (config.rasi). 162 atajos.
 - [x] Calculadora (SUPER+C) mejorada sin instalar nada (el usuario descartó rofi-calc): qalc con coma decimal («3,5 * 2»,
       resultados «0,333…»); español → qalc: «15% de 80», «10 km a mi», «90 min en h» (y «to -X» para no dar «6 mi + 376 yd…»);
       el mensaje muestra el resultado en negrita, «Entendido como: …» (lo que interpretó qalc: así se ve que «hola» =

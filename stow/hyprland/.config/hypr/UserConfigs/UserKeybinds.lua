@@ -4,7 +4,6 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- This is where you put your own keybinds. Be Mindful to check as well ~/.config/hypr/configs/Keybinds.conf to avoid conflict
 

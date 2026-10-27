@@ -15,9 +15,9 @@
       (sitio en `$XDG_RUNTIME_DIR/hypr-dropterm-home`, sobrevive a reload; se olvida al abrir una nueva).
       API 0.56: `window.move{ follow = false }` = silent; el sufijo " silent" NO vale (crea un especial con ese nombre).
       Probado: abre → oculta → muestra → mover a ws 2 → oculta → reaparece en 2 → oculta → reload → reaparece.
-- [x] Auditoría de actualizaciones JaKooLit: no queda ningún mecanismo activo (ver resumen en la sesión).
+- [x] Auditoría de actualizaciones de la base original: no queda ningún mecanismo activo (ver resumen en la sesión).
 - [x] Limpieza Waybar (commit 67c70d2 en ~/.config/waybar): fuera `custom/dot_update` (definición, grupo
-      `group/notify` y selectores en 55 estilos). `custom/updater` se queda: es del sistema, no de JaKooLit.
+      `group/notify` y selectores en 55 estilos). `custom/updater` se queda: es del sistema, no de la base original.
 - [x] F3 Colores híbridos: plantilla `~/.config/wallust/templates/colors-kitty-accents.conf` → `wallust-accents.conf`
       (cursor/pestaña activa = color15, estela/URL/borde split = color14; inactivos neutros). Registrada en
       wallust.toml (copia `wallust.toml.bak-2026-10-21-kitty`). Fondo, texto y paleta ANSI siguen fijos.

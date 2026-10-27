@@ -31,3 +31,17 @@
   y zona Europe/Madrid. Perfil intel: `i915` en MODULES. MSI: parámetro de GRUB por defecto «sí».
 - Tema: `gsettings` con `dbus-run-session` si no hay sesión (instalación desde TTY).
 - Spicetify: si Spotify nunca se abrió (sin `prefs`), lo deja preparado y avisa.
+- Prueba en un Arch vacío (contenedor Docker con usuario y sudo): `--minimal` real con paquetes y
+  yay, todas las configs con `--no-packages` (sin errores, 2ª ejecución sin backups) y
+  `--first-time --dry-run` (todos los paquetes existen). Arreglados por el camino:
+  - `theme`: `gsettings` en bus temporal dejaba procesos (gvfs) con la salida abierta y colgaba
+    las tuberías; ahora una sola sesión, sin gvfs y con la salida cerrada.
+  - `zsh`: `sudo chsh` (no pide contraseña) y `ZSH` explícito para el instalador de OMZ.
+  - `systemd-user`: sin gestor de usuario (chroot/contenedor) avisa en vez de fallar.
+- Sin rastro del autor original: quitadas las cabeceras en 246 archivos, referencias a su repo y
+  wiki, `v2.3.20` y su actualizador; marca «KooL» renombrada (21 archivos y sus referencias,
+  p. ej. `Quick_Settings.sh`, `themes/style-N.rasi`, tags `cheat_sheet`/`settings`).
+  Verificado: ninguna referencia rota, `bash -n` (74), `luac -p` (43), JSON y Python.
+- README por componente (`stow/<c>/README.md`, `seeds/filemanager/README.md`) con captura;
+  stow ignora el README de la raíz del paquete y el instalador también. `scripts/capturas.sh`
+  genera `docs/capturas/*.png` en un escritorio vacío.

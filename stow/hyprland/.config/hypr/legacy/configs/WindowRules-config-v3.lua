@@ -4,7 +4,6 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- Vendor defaults for window rules and layerrules
 
@@ -114,30 +113,30 @@ hl.window_rule({
     -- TODO: review rule: "tag +notif"
 })
 
--- KooL settings tag
+-- Tag de ventanas de ajustes
 
 hl.window_rule({
-    name  = "tag__kool_cheat_37",
+    name  = "tag__cheat_sheet_37",
     match = {
-        title = "^(KooL Quick Cheat Sheet)$",
+        title = "^(Hyprland Cheat Sheet)$",
     },
-    -- TODO: review rule: "tag +KooL_Cheat"
+    -- TODO: review rule: "tag +cheat_sheet"
 })
 
 hl.window_rule({
-    name  = "tag__kool_settings_38",
+    name  = "tag__settings_38",
     match = {
-        title = "^(KooL Hyprland Settings)$",
+        title = "^(Hyprland Settings)$",
     },
-    -- TODO: review rule: "tag +KooL_Settings"
+    -- TODO: review rule: "tag +settings"
 })
 
 hl.window_rule({
-    name  = "tag__kool-settings_39",
+    name  = "tag__settings-39",
     match = {
         class = "^(nwg-displays|nwg-look)$",
     },
-    -- TODO: review rule: "tag +KooL-Settings"
+    -- TODO: review rule: "tag +settings"
 })
 
 -- terminal tags
@@ -527,7 +526,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "center_on_115",
     match = {
-        tag = "KooL_Cheat",
+        tag = "cheat_sheet",
     },
     center = true,
 })
@@ -551,7 +550,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "center_on_118",
     match = {
-        tag = "KooL-Settings",
+        tag = "settings",
     },
     center = true,
 })
@@ -611,7 +610,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "float_on_129",
     match = {
-        tag = "KooL_Cheat",
+        tag = "cheat_sheet",
     },
     float = true,
 })
@@ -643,7 +642,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "float_on_133",
     match = {
-        tag = "KooL-Settings",
+        tag = "settings",
     },
     float = true,
 })
@@ -903,7 +902,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "size__monitor_w_0_65_180",
     match = {
-        tag = "KooL_Cheat",
+        tag = "cheat_sheet",
     },
     size = { "(monitor_w*0.65)", "(monitor_h*0.9)" },
 })

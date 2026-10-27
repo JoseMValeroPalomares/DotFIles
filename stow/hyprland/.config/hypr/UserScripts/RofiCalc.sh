@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 # /* Calculator (using qalculate) and rofi */
 # /* Submitted by: https://github.com/JosephArmas */
 # Calculadora con teclado (SUPER+C). rofi en «modo script»: al pulsar una tecla rofi vuelve a llamar a este

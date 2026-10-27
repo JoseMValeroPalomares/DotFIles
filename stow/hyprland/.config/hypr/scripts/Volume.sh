@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Volumen del altavoz y del micrófono con notificación (teclas multimedia y Waybar)
 # Uso: Volume.sh --inc | --dec | --inc-precise | --dec-precise | --toggle |
 #                --toggle-mic | --mic-inc | --mic-dec | --get | --get-icon | --get-mic-icon

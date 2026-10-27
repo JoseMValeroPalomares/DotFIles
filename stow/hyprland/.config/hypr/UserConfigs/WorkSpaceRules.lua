@@ -1,5 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
-
 -- NOTA: ESTO NO ES CARGADO por Hyprland
 -- Esta aqui solo como guia si quieres hacerlo manualmente
 -- El archivo que deberias editar es ~/.config/hypr/workspaces.lua

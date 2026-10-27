@@ -1,4 +1,4 @@
-# ~/.config/hypr — config Lua de Hyprland 0.56 (base JaKooLit)
+# ~/.config/hypr — config Lua de Hyprland 0.56
 
 Plan y estado general: `PLAN.md`, `PROGRESS.md`, `INVENTARIO.md`.
 

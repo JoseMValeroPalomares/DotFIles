@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 # Tema global de rofi (SUPER+CTRL+R y Ajustes rápidos) con vista previa en vivo:
 # Intro = probar el tema en el propio menú · Ctrl+S = aplicar y salir · Esc = cancelar (vuelve el anterior)
 

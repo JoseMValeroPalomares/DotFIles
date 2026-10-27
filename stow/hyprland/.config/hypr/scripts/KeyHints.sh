@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-
 # GDK BACKEND. Change to either wayland or x11 if having issues
 BACKEND=wayland
 
@@ -16,7 +14,7 @@ fi
 # Launch yad with calculated width and height
 GDK_BACKEND=$BACKEND yad \
     --center \
-    --title="KooL Quick Cheat Sheet" \
+    --title="Hyprland Cheat Sheet" \
     --no-buttons \
     --list \
     --column=Key: \
@@ -25,7 +23,7 @@ GDK_BACKEND=$BACKEND yad \
     --timeout-indicator=bottom \
 "ESC" "close this app" "" " = " "SUPER KEY (Windows Key Button)" "(SUPER KEY)" \
 " SHIFT K" "Searchable Keybinds" "(Search all Keybinds via rofi)" \
-" SHIFT E" "KooL Hyprland Settings Menu" "" \
+" SHIFT E" "Hyprland Settings Menu" "" \
 "" "" "" \
 " enter" "Terminal" "(kitty)" \
 " SHIFT enter" "DropDown Terminal" " Q to close" \
@@ -68,6 +66,4 @@ GDK_BACKEND=$BACKEND yad \
 " CTRL Shift R" "Rofi Themes Menu v2" "Choose Rofi Themes via Theme Selector (modified)" \
 " SHIFT G" "Gamemode! All animations OFF or ON" "toggle" \
 " ALT E" "Rofi Emoticons" "Emoticon" \
-" H" "Launch this Quick Cheat Sheet" "" \
-"" "" "" \
-"More tips:" "https://github.com/JaKooLit/Hyprland-Dots/wiki" ""\
+" H" "Launch this Quick Cheat Sheet" ""

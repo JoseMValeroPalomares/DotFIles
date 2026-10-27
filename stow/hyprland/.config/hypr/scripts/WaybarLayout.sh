@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Diseño de Waybar (configs/*): enlaza el elegido como ~/.config/waybar/config y recarga
 
 IFS=$'\n\t'

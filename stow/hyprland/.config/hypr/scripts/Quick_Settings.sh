@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Menú Quick Settings (SUPER+SHIFT+E): editar la config Lua real y abrir las utilidades.
 # Tema: scripts/QuickSettings.rasi. Terminal y editor: los de UserConfigs/01_UserDefaults.lua.
 

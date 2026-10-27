@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Menú de presets de animación (SUPER+SHIFT+A).
 # Los presets son ~/.config/hypr/animations/*.lua; el elegido se guarda en
 # UserConfigs/AnimationPreset y lo carga UserConfigs/UserAnimations.lua al recargar.

@@ -26,7 +26,7 @@ SC = avisos de shellcheck (`-S warning`), E = errores. Propuesta = clasificació
 | KeyHints.sh | 10-20 | 3,2 K | A | 0 | mantener |
 | KillActiveProcess.sh | 02-27 | 0,5 K | A | 0 | revisar |
 | Kitty_themes.sh | 02-27 | 5,1 K | QS | 0 | **archivar** (usuario) + quitar de QS |
-| Kool_Quick_Settings.sh | 10-20 | 5,6 K | A | 1 | mejorar (quitar kitty y sddm) |
+| Quick_Settings.sh | 10-20 | 5,6 K | A | 1 | mejorar (quitar kitty y sddm) |
 | LockScreen.sh | 10-21 | 0,3 K | A, H, wlogout, swaync | 0 | mantener |
 | MediaCtrl.sh | 02-27 | 1,2 K | A | 0 | revisar |
 | MonitorsConfig.sh | 10-20 | 3,0 K | QS | 0 | mantener |
@@ -82,7 +82,7 @@ SC = avisos de shellcheck (`-S warning`), E = errores. Propuesta = clasificació
 
 ## ~/.config/rofi (git desde f4c43ea)
 
-- Activo: `config.rasi` → `themes/KooL_style-8.rasi`. Los otros 19 temas solo se usan desde el selector de temas.
+- Activo: `config.rasi` → `themes/style-8.rasi`. Los otros 19 temas solo se usan desde el selector de temas.
   12 importan wallust; 8 tienen colores fijos.
 - `config-*.rasi`: uno por menú. Sin uso: `config-keybinds.rasi` (KeyBinds usa `hypr/scripts/KeyBinds.rasi`),
   `config-Monitors.rasi` y `0-shared-fonts.rasi`. Se archivan con su script: `config-kitty-theme.rasi` y `config-zsh-theme.rasi`.
@@ -104,7 +104,7 @@ Refresh (no mata swaync), Sounds, ScreenShot, AirplaneMode (wifi + Bluetooth), M
 RofiEmoji (cuadrícula, categorías, recientes), RofiBeats (solo su mpv, menú con estado), RofiCalc (teclado en modo script),
 ~/.local/bin/screenshot-ocr (en memoria, ×2).
 
-**Retocados**: WallustSwww y Startup_Apps (awww), KeyHints, Hyprsunset, Kool_Quick_Settings (escape, entradas),
+**Retocados**: WallustSwww y Startup_Apps (awww), KeyHints, Hyprsunset, Quick_Settings (escape, entradas),
 WaybarLayout/WaybarStyles, KeyBinds, RofiSearch (atajo SUPER+SHIFT+O), ThemeChanger, Kitty_themes (textos).
 
 **Sin cambios** (revisados, correctos): Animations, ChangeBlur, ClipManager, GameMode, HyprlockCheck/Monitor/Background/Stats,
@@ -115,7 +115,7 @@ spotify, Hypridle (solo barras alternativas), clima.py.
 que haya otra distribución), SUPER+CTRL+SHIFT+R y SUPER+CTRL+R (selectores de tema), teclas de luz del teclado. 162 atajos.
 
 **Validación**: shellcheck (nivel warning) limpio salvo KeyboardLayout.sh (desactivado) y un SC2155 inocuo en
-Kool_Quick_Settings; todos los scripts referenciados por atajos, Waybar, hypridle y hyprlock existen y son ejecutables;
+Quick_Settings; todos los scripts referenciados por atajos, Waybar, hypridle y hyprlock existen y son ejecutables;
 `hyprctl reload` sin errores; 15 menús y 12 temas de rofi sin errores.
 
 **Pendiente**: módulo `custom/updater` de 4 barras alternativas de Waybar (SummitSplit) apunta a Distro_update.sh

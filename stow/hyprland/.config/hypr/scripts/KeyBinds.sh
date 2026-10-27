@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Menú de atajos (SUPER+SHIFT+K): lee los atajos cargados de verdad con `hyprctl binds`
 # (scripts/keybinds_menu.py) y los muestra agrupados con el tema scripts/KeyBinds.rasi.
 

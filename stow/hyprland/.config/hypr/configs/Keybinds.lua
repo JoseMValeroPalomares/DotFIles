@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- Default Keybinds
 -- visit https://wiki.hypr.land/Configuring/Basics/Binds/ for more info
 
@@ -168,7 +167,7 @@ hl.bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd(scriptsDir .. "/KillActivePro
 hl.bind("CTRL + ALT + L", hl.dsp.exec_cmd(scriptsDir .. "/LockScreen.sh"), { description = "lock screen" })
 hl.bind(mainMod .. " + L", hl.dsp.exec_cmd(scriptsDir .. "/Wlogout.sh"), { description = "powermenu" })
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"), { description = "notification panel" })
-hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(scriptsDir .. "/Kool_Quick_Settings.sh"), { description = "Quick settings menu" })
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(scriptsDir .. "/Quick_Settings.sh"), { description = "Quick settings menu" })
 
 
 -- Master Layout
@@ -269,7 +268,7 @@ hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.move({ out_of_group = true }), {
 
 
 -- Intento de mover dinámicamente en ventana agrupada / desagrupada
--- No me funciona DW 11/26/25  PR: https://github.com/JaKooLit/Hyprland-Dots/pull/872
+-- No me funciona DW 11/26/25
 -- hl.bind(mainMod .. " + right", hl.dsp.exec_cmd([[bash -c 'if hyprctl activewindow -j | jq -e "((.grouped | type) == \"boolean\") or (.address == (.grouped[-1] // empty))" >/dev/null 2>&1; then hyprctl dispatch movefocus r; else hyprctl dispatch changegroupactive f; fi']]), { description = "focus right" })
 -- hl.bind(mainMod .. " + left", hl.dsp.exec_cmd([[bash -c 'if hyprctl activewindow -j | jq -e "((.grouped | type) == \"boolean\") or (.address == (.grouped[0] // empty))" >/dev/null 2>&1; then hyprctl dispatch movefocus l; else hyprctl dispatch changegroupactive b; fi']]), { description = "focus left" })
 

@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Recarga la barra y los menús tras cambiar fondo, tema o diseño de Waybar (también SUPER+ALT+R)
 
 # Menús abiertos: rofi y el overview de Quickshell (se vuelve a abrir solo con SUPER+A)

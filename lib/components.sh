@@ -71,7 +71,7 @@ is_component() {
 component_present() {
     local c=$1 first p
     if [[ -d $STOW_DIR/$c ]]; then
-        first=$(find "$STOW_DIR/$c" \( -type f -o -type l \) -print -quit)
+        first=$(find "$STOW_DIR/$c" \( -type f -o -type l \) ! -path "$STOW_DIR/$c/README.md" -print -quit)
         [[ -n $first && -e $HOME/${first#"$STOW_DIR/$c"/} ]] && return 0
         return 1
     fi

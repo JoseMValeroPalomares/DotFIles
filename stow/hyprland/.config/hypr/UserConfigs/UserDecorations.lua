@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- Decoration Settings
 
 -- Hyprland Wiki Links

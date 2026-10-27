@@ -11,7 +11,7 @@ Colores de iconos: Catppuccin Mocha fijos. Wallust aporta fondo y acentos.
 - Calendario: tooltip nativo de Waybar (es_ES, un mes, navegación con rueda y clics).
 
 ## Fases
-0. **Preparación**: git, estilo propio fuera de los estilos de JaKooLit, captura de referencia.
+0. **Preparación**: git, estilo propio fuera de los estilos originales, captura de referencia.
 1. **Contraste**: fondo continuo semiopaco (`color0` de Wallust) + blur de Hyprland
    (`layer_rule` del namespace `waybar` con `ignore_alpha`), borde de acento de Wallust,
    y un script que compruebe el contraste WCAG (≥ 4,5:1 en texto e iconos).

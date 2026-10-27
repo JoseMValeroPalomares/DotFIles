@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # For Searching via web browsers
 
 if ! command -v jq >/dev/null 2>&1; then

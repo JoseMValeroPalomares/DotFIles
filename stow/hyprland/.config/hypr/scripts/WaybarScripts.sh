@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 # Botones de waybar: terminal y gestor de archivos definidos en UserConfigs/01_UserDefaults.lua
 # (se preguntan a Hyprland, que tiene cargadas esas variables)
 

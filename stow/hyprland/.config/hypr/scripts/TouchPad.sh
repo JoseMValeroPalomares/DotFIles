@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Activa/desactiva el touchpad (tecla xf86TouchpadToggle)
 # El dispositivo se detecta solo con `hyprctl devices`; se puede forzar con TOUCHPAD_DEVICE=nombre
 # source https://github.com/hyprwm/Hyprland/discussions/4283?sort=new#discussioncomment-8648109

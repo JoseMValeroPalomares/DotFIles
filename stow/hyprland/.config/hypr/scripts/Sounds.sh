@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Sonidos del sistema (los usan Volume.sh y ScreenShot.sh)
 # Uso: Sounds.sh --volume | --screenshot | --error
 

@@ -21,7 +21,7 @@ stow_package() {
             is_our_link "$tgt" "$src" && continue
             conflicts+=("$tgt")
         fi
-    done < <(find "$dir" \( -type f -o -type l \) ! -name '.gitkeep' -print0)
+    done < <(find "$dir" \( -type f -o -type l \) ! -name '.gitkeep' ! -path "$dir/README.md" -print0)
 
     if ((DRY_RUN)); then
         if ((${#conflicts[@]})); then
@@ -47,7 +47,9 @@ stow_package() {
 apply_seeds() {
     local pkg=$1 dir="$SEEDS_DIR/$1" n
     [[ -d $dir ]] || return 0
-    n=$(rsync -a --ignore-existing --dry-run --out-format='%n' "$dir/" "$HOME/" | grep -cv '/$' || true)
+    # README.md de la raíz es la documentación del componente: no se copia a $HOME
+    local -a rs=(-a --ignore-existing --exclude=/README.md)
+    n=$(rsync "${rs[@]}" --dry-run --out-format='%n' "$dir/" "$HOME/" | grep -cv '/$' || true)
     if ((n == 0)); then
         log_ok "Semillas de $pkg ya presentes"
         return 0
@@ -56,7 +58,7 @@ apply_seeds() {
         log_info "Se copiarían $n archivo(s) nuevos de seeds/$pkg (los existentes no se tocan)"
         return 0
     fi
-    rsync -a --ignore-existing "$dir/" "$HOME/"
+    rsync "${rs[@]}" "$dir/" "$HOME/"
     log_ok "Copiados $n archivo(s) de seeds/$pkg"
 }
 

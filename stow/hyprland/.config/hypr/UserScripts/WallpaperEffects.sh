@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 # Efectos para el fondo de pantalla con ImageMagick (SUPER+SHIFT+U)
 # El menú muestra una vista previa de cada efecto sobre el fondo actual. Las imágenes se generan
 # una vez por fondo, a la resolución del monitor y en paralelo, y se guardan en caché:

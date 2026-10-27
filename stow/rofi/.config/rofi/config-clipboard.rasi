@@ -1,5 +1,5 @@
 /* Historial del portapapeles (SUPER+V, scripts/ClipManager.sh) */
-/* Hereda el tema global (KooL_style-8 + colores de Wallust) y solo lo compacta: */
+/* Hereda el tema global (style-8 + colores de Wallust) y solo lo compacta: */
 /* ventana más estrecha, banner fino, letra un punto menor, fondo casi opaco     */
 /* (sin blur global, el texto de detrás se mezclaba con la lista) y contraste AA. */
 

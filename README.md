@@ -1,18 +1,30 @@
 # Dotfiles · Arch Linux + Hyprland
 
-Mi configuración real de Arch Linux con Hyprland (config en Lua, basada en
-[JaKooLit/Hyprland-Dots](https://github.com/JaKooLit/Hyprland-Dots) y muy personalizada),
-con un instalador modular e idempotente: lo puedes ejecutar las veces que quieras sin romper nada.
+Mi configuración real de Arch Linux con Hyprland (config en Lua), con un instalador modular
+e idempotente: lo puedes ejecutar las veces que quieras sin romper nada.
 
 Equipo de referencia: **MSI Katana GF66 12UC** (i7-12700H, Intel Iris Xe + NVIDIA RTX 3050 Mobile),
 kernels `linux` y `linux-zen`, zsh + Oh My Zsh, kitty y tema Catppuccin Mocha con colores de wallust.
 
-## Capturas
+## Cómo se ve
 
-![Waybar](stow/waybar/.config/waybar/capturas/fase4-barra.png)
+![Escritorio](docs/capturas/hyprland.png)
 
-<!-- Pon aquí una captura del escritorio completo: docs/escritorio.png -->
-> _Placeholder: captura del escritorio (`docs/escritorio.png`)._
+Cada aplicación tiene su carpeta en `stow/` con su propio README y captura: entra en cualquiera
+(por ejemplo [`stow/swaync`](stow/swaync)) para ver cómo queda con esta configuración.
+
+| | |
+|:---:|:---:|
+| [**Waybar**](stow/waybar)<br>![Waybar](docs/capturas/waybar.png) | [**SwayNC**](stow/swaync)<br>![SwayNC](docs/capturas/swaync.png) |
+| [**Rofi**](stow/rofi)<br>![Rofi](docs/capturas/rofi.png) | [**wlogout**](stow/wlogout)<br>![wlogout](docs/capturas/wlogout.png) |
+| [**Hyprlock**](stow/lock)<br>![Hyprlock](docs/capturas/lock.png) | [**Quickshell (overview)**](stow/quickshell)<br>![Quickshell](docs/capturas/quickshell.png) |
+| [**Kitty**](stow/kitty)<br>![Kitty](docs/capturas/kitty.png) | [**Zsh**](stow/zsh)<br>![Zsh](docs/capturas/zsh.png) |
+| [**Thunar**](seeds/filemanager)<br>![Thunar](docs/capturas/filemanager.png) | [**Tema GTK/Qt**](stow/theme)<br>![Tema](docs/capturas/theme.png) |
+| [**Code - OSS**](stow/code-oss)<br>![Code - OSS](docs/capturas/code-oss.png) | [**Spotify + Spicetify**](stow/spicetify)<br>![Spicetify](docs/capturas/spicetify.png) |
+| [**Nano**](stow/nano)<br>![Nano](docs/capturas/nano.png) | [**btop y CLI**](stow/cli)<br>![btop](docs/capturas/cli.png) |
+
+> Las capturas se regeneran con `./scripts/capturas.sh` dentro de Hyprland
+> (o `./scripts/capturas.sh kitty rofi` para rehacer solo algunas).
 
 ## Requisitos
 

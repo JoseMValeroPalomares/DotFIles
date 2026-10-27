@@ -4,7 +4,6 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- See https://wiki.hyprland.org/Configuring/Keywords/ for more variable settings
 

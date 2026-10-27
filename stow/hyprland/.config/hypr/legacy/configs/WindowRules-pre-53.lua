@@ -4,7 +4,6 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- Vendor defaults for window rules and layerrules
 
@@ -92,30 +91,30 @@ hl.window_rule({
     -- TODO: review rule: "tag +notif"
 })
 
--- KooL settings tag
+-- Tag de ventanas de ajustes
 
 hl.window_rule({
-    name  = "tag__kool_cheat_22",
+    name  = "tag__cheat_sheet_22",
     match = {
-        title = "^(KooL Quick Cheat Sheet)$",
+        title = "^(Hyprland Cheat Sheet)$",
     },
-    -- TODO: review rule: "tag +KooL_Cheat"
+    -- TODO: review rule: "tag +cheat_sheet"
 })
 
 hl.window_rule({
-    name  = "tag__kool_settings_23",
+    name  = "tag__settings_23",
     match = {
-        title = "^(KooL Hyprland Settings)$",
+        title = "^(Hyprland Settings)$",
     },
-    -- TODO: review rule: "tag +KooL_Settings"
+    -- TODO: review rule: "tag +settings"
 })
 
 hl.window_rule({
-    name  = "tag__kool-settings_24",
+    name  = "tag__settings-24",
     match = {
         class = "^(nwg-displays|nwg-look)$",
     },
-    -- TODO: review rule: "tag +KooL-Settings"
+    -- TODO: review rule: "tag +settings"
 })
 
 -- terminal tags
@@ -497,7 +496,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "center_97",
     match = {
-        tag = "KooL_Cheat*",
+        tag = "cheat_sheet*",
     },
     center = true,
 })
@@ -522,7 +521,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "center_100",
     match = {
-        tag = "KooL-Settings*",
+        tag = "settings*",
     },
     center = true,
 })
@@ -616,7 +615,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "float_129",
     match = {
-        tag = "KooL_Cheat*",
+        tag = "cheat_sheet*",
     },
     float = true,
 })
@@ -648,7 +647,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "float_133",
     match = {
-        tag = "KooL-Settings*",
+        tag = "settings*",
     },
     float = true,
 })
@@ -850,7 +849,7 @@ hl.window_rule({
     float = true,
 })
 
---KooL's Dots YAD for setting SDDM background
+--YAD para el fondo de SDDM
 
 hl.window_rule({
     name  = "center_165",
@@ -860,7 +859,7 @@ hl.window_rule({
     center = true,
 })
 
---KooL's Dots YAD for setting SDDM background
+--YAD para el fondo de SDDM
 
 hl.window_rule({
     name  = "size_16__12__166",
@@ -870,7 +869,7 @@ hl.window_rule({
     size = { "16%", "12%" },
 })
 
---KooL's Dots YAD for setting SDDM background
+--YAD para el fondo de SDDM
 
 -- END of float popups and dialogue #######
 
@@ -995,7 +994,7 @@ hl.window_rule({
 hl.window_rule({
     name  = "size_65__90__190",
     match = {
-        tag = "KooL_Cheat*",
+        tag = "cheat_sheet*",
     },
     size = { "65%", "90%" },
 })

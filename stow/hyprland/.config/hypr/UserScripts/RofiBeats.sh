@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # RofiBeats (SUPER+H): música local o emisoras en línea con mpv, y gestión de la lista de emisoras
 
 mDIR="$HOME/Music/"

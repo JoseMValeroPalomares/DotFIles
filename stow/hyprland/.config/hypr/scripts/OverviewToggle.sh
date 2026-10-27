@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 # Overview (SUPER+A): Quickshell bajo demanda, AGS como respaldo
 
 ipc() { qs ipc -c overview call overview "$1" >/dev/null 2>&1; }

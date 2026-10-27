@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Modo avión (tecla XF86Rfkill): bloquea wifi y Bluetooth con rfkill.
 # Al desactivarlo, cada uno vuelve a como estaba (si el Bluetooth estaba apagado, sigue apagado).
 

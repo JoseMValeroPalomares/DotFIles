@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */ --
 -- Ver https://wiki.hypr.land/Configuring/Basics/Binds/ para mas ajustes de variables
 -- Estos configs son principalmente para portatiles. Es un anexo a Keybinds.lua
 

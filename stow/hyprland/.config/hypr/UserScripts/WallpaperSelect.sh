@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 # Selector de fondos de pantalla (SUPER+U): imágenes con awww y vídeos con mpvpaper
 
 # --- Configuración ---

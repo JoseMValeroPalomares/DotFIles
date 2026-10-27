@@ -4,17 +4,12 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- Environment variables. See https://wiki.hyprland.org/Configuring/Environment-variables/
 
 -- Set your defaults editor through ENV in ~/.config/hypr/UserConfigs/01_UserDefaults.lua
 
 -- environment-variables
-
--- Current Version of JakooLit Dotfiles:
-
-hl.env("DOTS_VERSION", "2.3.20")
 
 --## Toolkit Backend Variables ###
 

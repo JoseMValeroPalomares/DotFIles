@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Arranca el primer agente de Polkit instalado (ventana de contraseña para acciones de administrador)
 
 agents=(

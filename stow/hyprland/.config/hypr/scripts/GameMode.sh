@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Modo juego / ahorro de energía (SUPER+ALT+G o Quick Settings)
 # - Sin modo activo: menú para elegir modo y frecuencia (60/144 Hz)
 # - Con modo activo: lo desactiva y restaura tus ajustes y perfil de energía
@@ -34,7 +33,7 @@ if [[ -f "$state_file" ]]; then
     exit 0
 fi
 
-# Mismo comportamiento que los demás menús KooL: si rofi está abierto, se cierra
+# Mismo comportamiento que los demás menús: si rofi está abierto, se cierra
 if pidof rofi >/dev/null; then
     pkill -x rofi
     exit 0

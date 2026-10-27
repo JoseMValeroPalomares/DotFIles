@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Brillo de la pantalla del portátil con brightnessctl (teclas de brillo y rueda en Waybar)
 # Uso: Brightness.sh --inc | --dec | --get
 

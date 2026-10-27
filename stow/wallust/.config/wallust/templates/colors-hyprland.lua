@@ -1,4 +1,3 @@
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */
 -- /* wallust template - colors-hyprland (version Lua) */
 
 return {

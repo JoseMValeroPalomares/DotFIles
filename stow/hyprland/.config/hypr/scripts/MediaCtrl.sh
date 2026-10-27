@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Teclas multimedia con playerctl: --nxt | --prv | --pause | --stop
 
 music_icon="$HOME/.config/swaync/icons/music.png"

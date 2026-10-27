@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # Selector de emojis (SUPER+ALT+E): copia al portapapeles el emoji elegido.
 # Se ve solo el emoji; el nombre, las palabras clave y la categoría se buscan igual (van como «meta» invisible).
 # Intro = copiar · Shift+Intro = marcar varios (luego Intro los copia juntos)

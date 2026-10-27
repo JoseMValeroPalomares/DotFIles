@@ -4,7 +4,6 @@
 
 ---@module 'hl'
 
--- /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  #
 
 -- Environment variables. See https://wiki.hyprland.org/Configuring/Environment-variables/
 

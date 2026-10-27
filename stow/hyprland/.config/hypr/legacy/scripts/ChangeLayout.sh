@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
 # for changing Hyprland Layouts (Master or Dwindle) on the fly
 
 notif="$HOME/.config/swaync/images/ja.png"
