@@ -45,3 +45,5 @@
 - README por componente (`stow/<c>/README.md`, `seeds/filemanager/README.md`) con captura;
   stow ignora el README de la raíz del paquete y el instalador también. `scripts/capturas.sh`
   genera `docs/capturas/*.png` en un escritorio vacío.
+- Capturas en `docs/capturas/` (14): todas las apps salvo Spotify, que va sin captura a propósito.
+  Revisadas una a una; datos visibles aceptados por Jose (IP local, foto y ciudad en el bloqueo).

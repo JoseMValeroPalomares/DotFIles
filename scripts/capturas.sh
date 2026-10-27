@@ -167,7 +167,7 @@ cap_lock() {
     if [[ -s $OUT/lock.png ]]; then echo "    → docs/capturas/lock.png"; else echo "    ! no se pudo capturar el bloqueo" >&2; fi
 }
 
-ALL=(escritorio waybar swaync rofi wlogout quickshell kitty zsh nano cli filemanager theme code_oss spicetify lock)
+ALL=(escritorio waybar swaync rofi wlogout quickshell kitty zsh nano cli filemanager theme code_oss lock)
 LOCK_EXPLICIT=0
 (($#)) && ALL=("$@")
 [[ " $* " == *" lock "* ]] && LOCK_EXPLICIT=1

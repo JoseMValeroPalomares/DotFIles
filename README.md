@@ -20,8 +20,8 @@ Cada aplicación tiene su carpeta en `stow/` con su propio README y captura: ent
 | [**Hyprlock**](stow/lock)<br>![Hyprlock](docs/capturas/lock.png) | [**Quickshell (overview)**](stow/quickshell)<br>![Quickshell](docs/capturas/quickshell.png) |
 | [**Kitty**](stow/kitty)<br>![Kitty](docs/capturas/kitty.png) | [**Zsh**](stow/zsh)<br>![Zsh](docs/capturas/zsh.png) |
 | [**Thunar**](seeds/filemanager)<br>![Thunar](docs/capturas/filemanager.png) | [**Tema GTK/Qt**](stow/theme)<br>![Tema](docs/capturas/theme.png) |
-| [**Code - OSS**](stow/code-oss)<br>![Code - OSS](docs/capturas/code-oss.png) | [**Spotify + Spicetify**](stow/spicetify)<br>![Spicetify](docs/capturas/spicetify.png) |
-| [**Nano**](stow/nano)<br>![Nano](docs/capturas/nano.png) | [**btop y CLI**](stow/cli)<br>![btop](docs/capturas/cli.png) |
+| [**Code - OSS**](stow/code-oss)<br>![Code - OSS](docs/capturas/code-oss.png) | [**Nano**](stow/nano)<br>![Nano](docs/capturas/nano.png) |
+| [**btop y CLI**](stow/cli)<br>![btop](docs/capturas/cli.png) | |
 
 > Las capturas se regeneran con `./scripts/capturas.sh` dentro de Hyprland
 > (o `./scripts/capturas.sh kitty rofi` para rehacer solo algunas).

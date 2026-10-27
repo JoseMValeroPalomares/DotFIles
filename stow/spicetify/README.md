@@ -1,7 +1,5 @@
 # Spotify + Spicetify
 
-![Spotify + Spicetify](../../docs/capturas/spicetify.png)
-
 Spotify con el tema StarryNight y el marketplace; el `.desktop` lo lanza en Wayland nativo.
 
 ## Qué incluye
