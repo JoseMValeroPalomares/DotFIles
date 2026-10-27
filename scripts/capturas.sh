@@ -23,7 +23,7 @@ monitor_geom() { # geometría del monitor con foco: "x,y wxh"
 
 window_geom() { # window_geom <clase> -> "x,y wxh" de la primera ventana con esa clase
     hyprctl clients -j | jq -r --arg c "$1" \
-        'first(.[] | select(.class == $c or .initialClass == $c)) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
+        'first(.[] | select((.class | ascii_downcase) == ($c | ascii_downcase) or (.initialClass | ascii_downcase) == ($c | ascii_downcase))) | "\(.at[0]),\(.at[1]) \(.size[0])x\(.size[1])"'
 }
 
 wait_window() { # wait_window <clase> [segundos]
@@ -47,7 +47,7 @@ shot_window() { # shot_window <nombre> <clase>
 
 close_class() { # cierra las ventanas de una clase (por PID: vale para la config en Lua)
     local pid
-    for pid in $(hyprctl clients -j | jq -r --arg c "$1" '.[] | select(.class == $c) | .pid'); do
+    for pid in $(hyprctl clients -j | jq -r --arg c "$1" '.[] | select((.class | ascii_downcase) == ($c | ascii_downcase)) | .pid'); do
         kill "$pid" 2>/dev/null || true
     done
     sleep 0.5
@@ -113,8 +113,8 @@ cap_quickshell() {
 
 cap_kitty() { say "Kitty + Zsh"; kitty_shot kitty zsh -ic 'fastfetch; print; ls --tree --depth 1 ~/dotfiles | head -20; exec zsh -i'; }
 cap_zsh() { say "Zsh (prompt y plugins)"; kitty_shot zsh zsh -ic 'cd ~/dotfiles; git log --oneline | head -5; print; exec zsh -i'; }
-cap_nano() { say "Nano"; kitty_shot nano nano "$HYPR/hyprland.lua"; }
-cap_cli() { say "btop"; kitty_shot cli btop; }
+cap_nano() { say "Nano"; kitty_shot nano nano "$REPO/stow/hyprland/.config/hypr/hyprland.lua"; }
+cap_cli() { say "btop (sin lista de procesos)"; kitty_shot cli btop -p 2; }
 
 cap_filemanager() {
     say "Thunar"
@@ -148,17 +148,29 @@ cap_spicetify() {
 
 cap_lock() {
     say "Hyprlock: se bloqueará la pantalla; la captura se hace sola y luego desbloqueas tú"
-    [[ -t 0 ]] || { echo "    (se salta: necesita una terminal para confirmar; usa ./scripts/capturas.sh lock)"; return 0; }
-    read -r -p "    Enter para bloquear (o escribe n para saltar): " a
-    [[ $a == n ]] && return 0
+    if [[ -t 0 ]]; then
+        read -r -p "    Enter para bloquear (o escribe n para saltar): " a
+        [[ $a == n ]] && return 0
+    elif ((LOCK_EXPLICIT)); then
+        # Sin terminal (p. ej. «! comando» en Claude Code): pedido a propósito, aviso y cuenta atrás
+        notify-send -a dotfiles "Captura del bloqueo" "La pantalla se bloquea en 5 s; desbloquea con tu contraseña" || true
+        local i
+        for i in 5 4 3 2 1; do printf '    bloqueo en %s…\r' "$i"; sleep 1; done; echo
+    else
+        echo "    (se salta en la tanda completa sin terminal; hazla aparte: ./scripts/capturas.sh lock)"
+        return 0
+    fi
+    pidof hyprlock >/dev/null && { echo "    ! hyprlock ya está en marcha" >&2; return 1; }
     ( sleep 3; grim -o "$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')" "$OUT/lock.png" ) &
     hyprlock
     wait
-    echo "    → docs/capturas/lock.png"
+    if [[ -s $OUT/lock.png ]]; then echo "    → docs/capturas/lock.png"; else echo "    ! no se pudo capturar el bloqueo" >&2; fi
 }
 
 ALL=(escritorio waybar swaync rofi wlogout quickshell kitty zsh nano cli filemanager theme code_oss spicetify lock)
+LOCK_EXPLICIT=0
 (($#)) && ALL=("$@")
+[[ " $* " == *" lock "* ]] && LOCK_EXPLICIT=1
 for c in "${ALL[@]}"; do
     c=${c//-/_}
     if declare -F "cap_$c" >/dev/null; then
