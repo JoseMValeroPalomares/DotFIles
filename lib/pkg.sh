@@ -51,6 +51,8 @@ bootstrap() {
     local p
     for p in base-devel git stow; do pkg_installed "$p" || missing+=("$p"); done
     mapfile -t flags < <(pacman_flags)
+    log_info "Actualizando el sistema antes de instalar (evita paquetes a medio actualizar)"
+    run_sudo pacman -Syu "${flags[@]}" || die "Falló pacman -Syu"
     if ((${#missing[@]})); then
         run_sudo pacman -S "${flags[@]}" "${missing[@]}" || die "No se pudieron instalar: ${missing[*]}"
     else

@@ -6,10 +6,14 @@ post_theme() {
         log_warn "gsettings no disponible: el tema se aplicará al iniciar sesión vía settings.ini"
         return 0
     fi
+    # Desde una TTY (sistema recién instalado) no hay bus de sesión: dbus-run-session crea uno
+    # temporal y dconf guarda los valores en ~/.config/dconf/user igualmente
+    local -a wrap=()
+    [[ -z ${DBUS_SESSION_BUS_ADDRESS:-} ]] && has dbus-run-session && wrap=(dbus-run-session --)
     local k v
     while read -r k v; do
-        run gsettings set org.gnome.desktop.interface "$k" "$v" 2>/dev/null ||
-            log_warn "gsettings $k falló (¿sin sesión gráfica/D-Bus?)"
+        run "${wrap[@]}" gsettings set org.gnome.desktop.interface "$k" "$v" 2>/dev/null ||
+            log_warn "gsettings $k falló"
     done <<'LIST'
 gtk-theme catppuccin-mocha-mauve-standard+default
 icon-theme bessurf-dark-purple

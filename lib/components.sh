@@ -7,10 +7,10 @@
 
 # Orden de instalación
 COMPONENTS=(
-    base fonts theme multimedia
+    base system fonts theme multimedia
     hyprland lock waybar swaync rofi wlogout wallust quickshell ags
     filemanager kitty zsh nano code-oss spicetify
-    bin cli apps dev net xdg git wallpapers systemd-user system
+    bin cli apps dev net xdg git wallpapers systemd-user
 )
 
 declare -A COMP_DESC=(
@@ -42,7 +42,7 @@ declare -A COMP_DESC=(
     [git]="Configuración de git (.gitconfig)"
     [wallpapers]="Crea ~/Pictures/wallpapers (los fondos van aparte)"
     [systemd-user]="Servicios de usuario (panel-maestro...) si existe su proyecto"
-    [system]="Ajustes de /etc: zram, sysctl, reflector, pacman, Wi-Fi ES (sudo)"
+    [system]="Ajustes de /etc: pacman, zram, sysctl, reflector, idioma, autologin tty1 (sudo)"
 )
 
 # Dependencias recomendadas (solo se avisa; nada falla si faltan)

@@ -22,16 +22,48 @@ kernels `linux` y `linux-zen`, zsh + Oh My Zsh, kitty y tema Catppuccin Mocha co
   (si ya tienes `paru`, lo usa en su lugar).
 - Opcional: `gum` o `fzf` para menús más cómodos (si no, usa menús numerados).
 
-## Instalación rápida
+## Instalación en un Arch nuevo (el caso para el que está pensado)
+
+**1. Instala Arch base**, por ejemplo con `archinstall`:
+- Perfil mínimo, sin escritorio: Hyprland lo pone el script.
+- Un usuario con `sudo` (grupo `wheel`).
+- GRUB, y red con NetworkManager.
+- Kernels `linux` y `linux-zen`, si los quieres como ahora.
+
+**2. Arranca, entra en la TTY con tu usuario y ejecuta un solo comando:**
 
 ```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/JoseMValeroPalomares/DotFIles/main/bootstrap.sh) --first-time --yes
+```
+
+`bootstrap.sh` instala git, clona el repo en `~/dotfiles` y lanza `install.sh`. Con `--yes`
+no pregunta nada: instala todos los paquetes, aplica todas las configs, detecta el hardware y
+lo configura. También activa los servicios, el autologin en tty1, el idioma y la zona horaria.
+Quita `--yes` si prefieres confirmar cada paso con sudo.
+
+Si prefieres hacerlo a mano:
+
+```bash
+sudo pacman -Syu --needed git
 git clone https://github.com/JoseMValeroPalomares/DotFIles.git ~/dotfiles
 cd ~/dotfiles
 ./install.sh --first-time --dry-run   # mira qué haría
-./install.sh --first-time             # y hazlo
+./install.sh --first-time --yes       # y hazlo
 ```
 
-> El repo debe quedarse en su sitio (`~/dotfiles`): los enlaces de stow apuntan ahí.
+**3. Reinicia.** El autologin en tty1 y `.zprofile` arrancan Hyprland con uwsm.
+
+**4. Lo que queda a mano** (no se puede o no debe ir en un repo):
+- Copia tus fondos a `~/Pictures/wallpapers` desde tu drive y elige uno con el selector de
+  fondos. Wallust regenera los colores de todo.
+- Abre Spotify una vez, ciérralo y ejecuta `~/dotfiles/scripts/post/spicetify.sh`.
+  Spicetify necesita el archivo de preferencias que Spotify crea al abrirse por primera vez.
+- Restaura lo privado: claves `~/.ssh` y `~/.gnupg`, tus tokens y el perfil del navegador.
+- Proyectos que no están en el repo: `~/Projects/panel-maestro` (los servicios de usuario
+  se activan solos en la siguiente ejecución si su carpeta existe), `~/cronometro`…
+
+> El repo debe quedarse en `~/dotfiles`: los enlaces de stow apuntan ahí.
+> Volver a ejecutar `install.sh` es seguro: lo que ya está al día no se toca.
 
 ## Modos
 
@@ -99,13 +131,13 @@ con lo instalado, lo omitido y los errores. Si un componente falla, se anota y s
 | `git` | `~/.gitconfig` | git | — |
 | `wallpapers` | Crea `~/Pictures/wallpapers` (los fondos **no** van en el repo) | — | — |
 | `systemd-user` | `panel-maestro` y `panel-estudio-server` (solo si existe su proyecto) | — | — |
-| `system` | `/etc`: zram, sysctl, reflector, opciones de pacman, Wi-Fi ES, `/usr/local/bin` | — | — |
+| `system` | `/etc`: opciones de pacman, zram, sysctl, reflector, Wi-Fi ES, idioma (en_US + es_ES), teclado us, zona Europe/Madrid, autologin en tty1, `/usr/local/bin` | — | — |
 
 Perfiles de hardware (`hardware/`):
 
 | Perfil | Qué hace |
 |---|---|
-| `intel` | intel-ucode, VA-API (intel-media-driver, libva-intel-driver) |
+| `intel` | intel-ucode, VA-API (intel-media-driver, libva-intel-driver), `i915` en el initramfs |
 | `amd` | amd-ucode, mesa, vulkan-radeon |
 | `nvidia` | nvidia-open-dkms, PRIME, CUDA, nouveau en lista negra; con Intel, `envycontrol -s hybrid --rtd3 2` |
 | `laptop` | power-profiles-daemon, thermald, brightnessctl |
@@ -133,6 +165,7 @@ Ningún componente falla si falta otro; como mucho, algo deja de responder:
 
 ```
 dotfiles/
+├── bootstrap.sh          # arranque en un sistema vacío: git + clone + install.sh
 ├── install.sh            # punto de entrada
 ├── lib/                  # common (log, run, confirm), pkg (pacman/AUR), backup, stow, ui, hardware, components
 ├── packages/             # <componente>.pacman.txt / .aur.txt, hw-*.txt, code-extensions.txt

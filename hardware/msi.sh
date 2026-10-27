@@ -15,7 +15,7 @@ hw_msi() {
     local grub=/etc/default/grub param=acpi_enforce_resources=lax
     if [[ -f $grub ]] && ! grep -q "$param" "$grub"; then
         log_info "En este portátil GRUB arranca con '$param' (sensores/EC de MSI)."
-        if confirm "¿Añadirlo a GRUB_CMDLINE_LINUX_DEFAULT y regenerar grub.cfg?" n; then
+        if confirm "¿Añadirlo a GRUB_CMDLINE_LINUX_DEFAULT y regenerar grub.cfg?" s; then
             backup_system_file "$grub"
             run_sudo sed -i -E "s/^(GRUB_CMDLINE_LINUX_DEFAULT=\"[^\"]*)\"/\1 $param\"/" "$grub"
             run_sudo grub-mkconfig -o /boot/grub/grub.cfg

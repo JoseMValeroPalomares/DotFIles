@@ -103,7 +103,20 @@ post_spicetify() {
     fi
     spicetify_assets
     spicetify_permissions || { mark skip "spicetify: sin permisos en /opt/spotify"; return 0; }
+
+    # En un sistema recién instalado Spotify aún no ha creado su archivo de preferencias, y sin él
+    # Spicetify no puede aplicar: queda todo preparado y se termina tras abrir Spotify una vez.
+    local prefs="$HOME/.config/spotify/prefs"
+    if [[ ! -f $prefs ]] && ! ((DRY_RUN)); then
+        log_warn "Spotify no se ha abierto nunca (falta $prefs)."
+        log_info "Ábrelo una vez, ciérralo y ejecuta: ~/dotfiles/scripts/post/spicetify.sh"
+        mark skip "spicetify: abre Spotify una vez y ejecuta scripts/post/spicetify.sh"
+        return 0
+    fi
+    grep -qE '^prefs_path *= *\S' "$SPICETIFY_CFG/config-xpui.ini" 2>/dev/null ||
+        spicetify_cmd config prefs_path "$prefs"
     spicetify_configure
+
     if pgrep -x spotify >/dev/null; then
         log_info "Spotify está abierto: se reiniciará al aplicar"
     fi

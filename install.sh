@@ -201,11 +201,13 @@ run_hardware() {
     for h in "${HARDWARE[@]}"; do run_step "hardware:$h" install_hardware "$h"; done
 }
 
-# Orden: base -> hardware (drivers) -> resto de componentes
-[[ " ${SELECTED[*]} " == *" base "* ]] && run_step base install_component base
+# Orden: base -> system (pacman más rápido, mirrors) -> hardware (drivers) -> resto
+for c in base system; do
+    if [[ " ${SELECTED[*]} " == *" $c "* ]]; then run_step "$c" install_component "$c"; fi
+done
 run_hardware
 for c in "${COMPONENTS[@]}"; do
-    [[ $c != base && " ${SELECTED[*]} " == *" $c "* ]] || continue
+    [[ $c != base && $c != system && " ${SELECTED[*]} " == *" $c "* ]] || continue
     run_step "$c" install_component "$c"
 done
 

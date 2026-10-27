@@ -23,3 +23,11 @@
 - Subir los wallpapers a un drive y copiarlos a `~/Pictures/wallpapers` tras reinstalar.
 - Añadir el remote y hacer push (comandos en el README / conversación).
 - Opcional: `sudo pacman -S gitleaks` para un escaneo extra antes de subir.
+
+## 2026-10-27
+- Pensado para un Arch vacío: `bootstrap.sh` (git + clone + install.sh), `pacman -Syu` al empezar,
+  `system` justo después de `base` (pacman rápido y mirrors antes de descargar el resto).
+- `system` añade autologin en tty1 (plantilla con el usuario), locale en_US + es_ES, teclado us
+  y zona Europe/Madrid. Perfil intel: `i915` en MODULES. MSI: parámetro de GRUB por defecto «sí».
+- Tema: `gsettings` con `dbus-run-session` si no hay sesión (instalación desde TTY).
+- Spicetify: si Spotify nunca se abrió (sin `prefs`), lo deja preparado y avisa.
