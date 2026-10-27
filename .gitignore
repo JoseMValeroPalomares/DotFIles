@@ -56,3 +56,6 @@ __pycache__/
 # --- Wallpapers: van a un drive aparte ---
 /Pictures/
 /wallpapers/
+
+# Script local para limpiar las pruebas de este equipo (no va al repo)
+/limpiar-pruebas.sh
