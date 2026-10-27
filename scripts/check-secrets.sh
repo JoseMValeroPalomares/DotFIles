@@ -10,7 +10,7 @@ if [[ -t 1 ]]; then R=$'\e[31m' G=$'\e[32m' Y=$'\e[33m' B=$'\e[1m' N=$'\e[0m'; e
 found=0
 
 # Archivos que nunca deberían estar en el repo (por nombre)
-FORBIDDEN_NAMES='(^|/)(\.ssh|\.gnupg)/|(^|/)id_(rsa|ed25519|ecdsa)(\.pub)?$|\.(pem|p12|pfx|key)$|(^|/)\.?(zsh|bash|python)_history$|(^|/)\.jarvis_history\.json$|(^|/)token$|(^|/)\.env$|(^|/)local\.env$|spotify/prefs|spotify/Users/|stellar/identity|pulse/cookie|Code - OSS/User/(globalStorage|workspaceStorage|History)/|(^|/)cookies?(\.sqlite)?$'
+FORBIDDEN_NAMES='(^|/)(\.ssh|\.gnupg)/|(^|/)id_(rsa|ed25519|ecdsa)(\.pub)?$|\.(pem|p12|pfx|key)$|(^|/)\.?(zsh|bash|python)_history$|(^|/)\.jarvis_history\.json$|(^|/)token$|(^|/)\.env$|(^|/)local\.env$|(^|/)\.git-credentials$|spotify/prefs|spotify/Users/|stellar/identity|pulse/cookie|Code - OSS/User/(globalStorage|workspaceStorage|History)/|(^|/)cookies?(\.sqlite)?$'
 
 # Contenido sospechoso
 PATTERNS=(
