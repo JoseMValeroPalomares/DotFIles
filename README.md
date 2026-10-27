@@ -137,7 +137,7 @@ con lo instalado, lo omitido y los errores. Si un componente falla, se anota y s
 | `bin` | `~/.local/bin/brillo` y `screenshot-ocr` | ddcutil, tesseract | — |
 | `cli` | btop, fastfetch, cava, ghostty, wezterm, peaclock, swappy, yad, clangd… | btop, fastfetch | — |
 | `apps` | zen-browser, kicad, wireshark, qalculate, mousepad | — | — |
-| `dev` | Compiladores, Python, Rust, Java, Bun, Docker, Arduino (grupos docker/uucp/lock) | clang, cmake, docker… | — |
+| `dev` | Compiladores, Python, Rust, Java, Bun, Arduino (grupos uucp/lock para el puerto serie) | clang, cmake, rust, bun… | — |
 | `net` | nmap, mtr, arp-scan, lftp, wol… | — | — |
 | `xdg` | `mimeapps.list`, `user-dirs.dirs` | — | — |
 | `git` | `~/.gitconfig` | git | — |

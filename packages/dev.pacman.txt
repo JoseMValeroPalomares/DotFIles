@@ -13,7 +13,6 @@ shellcheck
 umockdev
 arduino-cli
 dfu-util
-docker
 python-pip
 python-pipx
 python-flask

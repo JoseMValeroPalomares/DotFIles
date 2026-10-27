@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-# Desarrollo: Docker y grupos para puertos serie (Arduino/ESP32)
+# Desarrollo: grupos para puertos serie (Arduino/ESP32)
 
 post_dev() {
-    enable_service docker.service
-    add_to_group docker
     add_to_group uucp
     add_to_group lock
 }
