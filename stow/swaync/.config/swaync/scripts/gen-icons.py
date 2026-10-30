@@ -24,6 +24,9 @@ SIZE = 128
 # Si wallust aún no ha corrido (primera instalación)
 DEFAULT_PALETTE = {"background": "#171718", "foreground": "#E6CED3", "color12": "#52576C"}
 
+# Neutros fijos, los mismos que @ink y @glass en style.css
+INK, GLASS = "#f2f4f7", "#12141a"
+
 # Colores con significado: no dependen del fondo para que un error siempre parezca un error
 FIXED_ROLES = {"ok": "#86dca3", "warn": "#f7c873", "danger": "#ff7f85"}
 
@@ -126,15 +129,12 @@ def contrast(a, b):
     return (hi + 0.05) / (lo + 0.05)
 
 
-def vivid_accent(palette, bg):
-    """El color con más croma de la paleta, aclarado hasta que destaque sobre el fondo.
-    Si el fondo es casi monocromo no se inventa un tono: se queda en gris claro."""
-    candidates = [c for n, c in palette.items() if re.fullmatch(r"color\d+", n)]
-    best = max(candidates, key=lambda c: max(to_rgb(c)) - min(to_rgb(c)))
-    colorful = max(to_rgb(best)) - min(to_rgb(best)) >= 24
-    h, l, s = colorsys.rgb_to_hls(*(c / 255 for c in to_rgb(best)))
-    s = max(s, 0.50) if colorful else s
-    accent = best
+def soft_accent(palette, bg):
+    """El tono de color12, igual que el acento de style.css: saturación limitada para que un
+    fondo cálido no acabe en naranja, y aclarado hasta que destaque sobre el fondo."""
+    h, l, s = colorsys.rgb_to_hls(*(c / 255 for c in to_rgb(palette["color12"])))
+    s = min(s, 0.15)
+    accent = palette["color12"]
     while l < 0.9:
         accent = to_hex(c * 255 for c in colorsys.hls_to_rgb(h, l, s))
         if contrast(accent, bg) >= 6.5:
@@ -144,8 +144,7 @@ def vivid_accent(palette, bg):
 
 
 def roles(palette):
-    bg, fg = palette["background"], palette["foreground"]
-    return {**FIXED_ROLES, "accent": vivid_accent(palette, bg), "muted": mix(fg, bg, 0.30)}, bg
+    return {**FIXED_ROLES, "accent": soft_accent(palette, GLASS), "muted": mix(INK, GLASS, 0.30)}, GLASS
 
 
 def svg(glyph, role, role_color, bg):

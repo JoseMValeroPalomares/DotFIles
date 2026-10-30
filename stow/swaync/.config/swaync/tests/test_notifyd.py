@@ -258,6 +258,14 @@ class Icons(unittest.TestCase):
             for role, color in colors.items():
                 self.assertGreaterEqual(gi.contrast(color, bg), 4.5, f"{role} en {palette['background']}")
 
+    def test_warm_wallpaper_does_not_tint_the_icons(self):
+        warm = {"background": "#2a1a10", "foreground": "#f5d9b8", "color12": "#CA9681"}
+        colors, bg = gi.roles(warm)
+        self.assertEqual(bg, gi.GLASS)
+        r, g, b = gi.to_rgb(colors["accent"])
+        self.assertLess(r - b, 40)
+        self.assertEqual(colors["muted"], gi.mix(gi.INK, gi.GLASS, 0.30))
+
     def test_missing_colors_file_uses_defaults(self):
         original = gi.COLORS
         gi.COLORS = Path("/nonexistent/colors.css")

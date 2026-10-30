@@ -153,6 +153,13 @@ Ojo: la shell puede quedarse con una firma de Hyprland antigua tras un reinicio 
 5. [ ] Rofi: tema base único con wallust, temas sin uso, apertura.
 6. [x] Validación final (falta que el usuario desinstale las herramientas).
 
+# Tema fijo y colores sin cambiar el fondo (2026-10-30)
+- [x] Tema fijo: `UserConfigs/WallustFixed` existe = el fondo no cambia los colores. Lo respetan `WallustSwww.sh` y `WallpaperEffects.sh`.
+- [x] `WallustSwww.sh --colors [ruta]`: aplica los colores de una imagen aunque el tema esté fijo, sin contar como cambio de fondo.
+- [x] Selector (SUPER+U): casilla del modo, Ctrl+Intro y «Solo sus colores» en el menú de prueba.
+- [x] Izquierda y derecha mueven siempre la cuadrícula (`rofi/config-wallpaper.rasi`).
+- [ ] Probar en real activar y desactivar con un cambio de fondo y `Ctrl+Intro`: las pruebas no han cambiado el tema del usuario.
+
 ## Proyectos aparcados
 
 - **hyprplane (plano infinito solo en el workspace 10)**: desactivado y limpio. Contexto y cómo retomarlo en

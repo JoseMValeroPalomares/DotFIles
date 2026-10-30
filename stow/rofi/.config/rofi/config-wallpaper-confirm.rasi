@@ -10,11 +10,11 @@ window {
   y-offset: -90px;
 }
 
-/* Sin barra de búsqueda: solo el mensaje y las tres opciones */
+/* Sin barra de búsqueda: solo el mensaje y las cuatro opciones */
 mainbox {
   children: [ "message", "listview" ];
 }
 
 listview {
-  lines: 3;
+  lines: 4;
 }

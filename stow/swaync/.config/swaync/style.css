@@ -1,5 +1,5 @@
 /* swaync · glass sobrio con acento de wallust
- * Colores: ~/.config/waybar/wallust/colors-waybar.css (cambian con el fondo)
+ * Acento: ~/.config/waybar/wallust/colors-waybar.css (cambia con el fondo); neutros fijos
  * GTK4 no soporta backdrop-filter: el desenfoque lo pone Hyprland (layerrule en
  * hypr/UserConfigs/WindowRules.lua), solo si decoration.blur está activo.
  * Recargar: swaync-client -rs
@@ -8,15 +8,20 @@
 @import '../waybar/wallust/colors-waybar.css';
 
 /* ── Tokens ─────────────────────────────────────────────── */
-@define-color accent      @color12;
-@define-color text        @foreground;
-@define-color text-muted  alpha(@foreground, 0.72);
-@define-color text-faint  alpha(@foreground, 0.62);
-@define-color surface     alpha(@background, 0.80);   /* panel y popups; sin blur global en Hyprland */
-@define-color card        alpha(@foreground, 0.06);   /* tarjetas dentro del panel */
-@define-color card-hover  alpha(@foreground, 0.10);
-@define-color stroke      alpha(@foreground, 0.10);
-@define-color stroke-hi   alpha(@foreground, 0.18);
+/* Neutros fijos: el foreground/background de wallust traen el tinte del fondo de
+ * pantalla y calentaban todo el panel. El color solo entra por el acento. */
+@define-color ink         #f2f4f7;
+@define-color glass       #12141a;
+/* Acento: tono de wallust con luz fija y croma limitado; legible con cualquier fondo */
+@define-color accent      oklch(from @color12 0.74 min(c, 0.03) h);
+@define-color text        @ink;
+@define-color text-muted  alpha(@ink, 0.78);
+@define-color text-faint  alpha(@ink, 0.73);
+@define-color surface     alpha(@glass, 0.80);   /* panel y popups; sin blur global en Hyprland */
+@define-color card        alpha(@ink, 0.06);   /* tarjetas dentro del panel */
+@define-color card-hover  alpha(@ink, 0.10);
+@define-color stroke      alpha(@ink, 0.10);
+@define-color stroke-hi   alpha(@ink, 0.18);
 @define-color danger      #ffa3a7;
 
 :root {
@@ -74,10 +79,10 @@ scrollbar slider {
   min-width: 4px;
   min-height: 24px;
   border-radius: 99px;
-  background: alpha(@foreground, 0.25);
+  background: alpha(@ink, 0.25);
 }
-scrollbar.overlay-indicator:not(.hovering) slider { min-width: 3px; background: alpha(@foreground, 0.18); }
-scrollbar slider:hover { background: alpha(@foreground, 0.4); }
+scrollbar.overlay-indicator:not(.hovering) slider { min-width: 3px; background: alpha(@ink, 0.18); }
+scrollbar slider:hover { background: alpha(@ink, 0.4); }
 
 /* ── Tarjeta de notificación (común) ────────────────────── */
 .notification-row { background: none; outline: none; }
@@ -102,7 +107,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
   padding: 10px 12px;
   color: @text;
 }
-.notification .notification-default-action:hover { background: alpha(@foreground, 0.04); }
+.notification .notification-default-action:hover { background: alpha(@ink, 0.04); }
 .notification .notification-default-action:not(:only-child) {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -151,7 +156,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification progressbar trough {
   min-height: 6px;
   border-radius: 99px;
-  background: alpha(@foreground, 0.12);
+  background: alpha(@ink, 0.12);
 }
 .notification progressbar progress {
   min-height: 6px;
@@ -166,11 +171,11 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
   padding: 0;
   margin: 8px 8px 0 0;
   border-radius: 99px;
-  background: alpha(@foreground, 0.08);
+  background: alpha(@ink, 0.08);
   color: @text-muted;
   border: none;
 }
-.close-button:hover { background: alpha(@danger, 0.85); color: @background; }
+.close-button:hover { background: alpha(@danger, 0.85); color: @glass; }
 
 /* Acciones alternativas */
 .notification .notification-alt-actions {
@@ -182,7 +187,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification .notification-action > button {
   min-height: 30px;
   font-weight: 600;
-  background: alpha(@foreground, 0.07);
+  background: alpha(@ink, 0.07);
   border-radius: var(--radius-sm);
 }
 .notification .notification-action > button:hover {
@@ -193,7 +198,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 /* Respuesta en línea */
 .notification .inline-reply { margin-top: 8px; }
 .notification .inline-reply-entry {
-  background: alpha(@background, 0.5);
+  background: alpha(@glass, 0.5);
   color: @text;
   caret-color: @accent;
   border: 1px solid @stroke;
@@ -204,7 +209,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification .inline-reply-button:disabled { background: transparent; color: @text-faint; }
 
 /* Urgencias */
-.notification.low { border-color: alpha(@foreground, 0.06); }
+.notification.low { border-color: alpha(@ink, 0.06); }
 .notification.low .summary { color: @text-muted; }
 .notification.critical {
   border-color: alpha(@danger, 0.65);
@@ -213,9 +218,9 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification.critical .summary { color: @danger; }
 
 /* ── Notificaciones flotantes ───────────────────────────── */
-/* Acento más claro que @color12 para que destaque sobre el fondo oscuro */
-@define-color accent-hi   mix(@accent, @foreground, 0.35);
-@define-color surface-hi  alpha(mix(@background, @foreground, 0.05), 0.80);
+/* Acento más claro para que destaque sobre el fondo oscuro */
+@define-color accent-hi   mix(@accent, @ink, 0.35);
+@define-color surface-hi  alpha(mix(@glass, @ink, 0.05), 0.80);
 
 /* Hueco con el borde derecho (49 px) y con la tarjeta de arriba */
 .floating-notifications .notification-row .notification-background { padding: 6px 49px 4px 10px; }
@@ -224,17 +229,17 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 
 .floating-notifications .notification {
   background-color: @surface-hi;
-  background-image: linear-gradient(to bottom, alpha(@foreground, 0.05), alpha(@foreground, 0.0) 60%);
-  border: 1px solid alpha(@foreground, 0.14);
+  background-image: linear-gradient(to bottom, alpha(@ink, 0.05), alpha(@ink, 0.0) 60%);
+  border: 1px solid alpha(@ink, 0.14);
   border-radius: var(--radius);
   /* franja de acento a la izquierda + brillo superior + sombra */
   box-shadow: inset 3px 0 0 @accent-hi,
-              inset 0 1px 0 alpha(@foreground, 0.08),
+              inset 0 1px 0 alpha(@ink, 0.08),
               0 8px 22px alpha(black, 0.40);
 }
 .floating-notifications .notification:hover {
   border-color: alpha(@accent-hi, 0.60);
-  background-color: alpha(mix(@background, @foreground, 0.08), 0.84);
+  background-color: alpha(mix(@glass, @ink, 0.08), 0.84);
 }
 .floating-notifications .notification .notification-default-action { padding: 12px 12px 12px 15px; }
 .floating-notifications .notification .notification-default-action:hover { background: transparent; }
@@ -243,7 +248,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
   border-radius: 12px;
 }
 .floating-notifications .notification .summary { font-size: 14px; font-weight: 700; color: @text; }
-.floating-notifications .notification .body { color: alpha(@foreground, 0.80); }
+.floating-notifications .notification .body { color: alpha(@ink, 0.80); }
 .floating-notifications .notification progressbar progress { background: @accent-hi; }
 .floating-notifications .notification .notification-action > button:hover {
   background: alpha(@accent-hi, 0.22);
@@ -251,8 +256,8 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 }
 
 .floating-notifications .notification.low {
-  box-shadow: inset 3px 0 0 alpha(@foreground, 0.30),
-              inset 0 1px 0 alpha(@foreground, 0.06),
+  box-shadow: inset 3px 0 0 alpha(@ink, 0.30),
+              inset 0 1px 0 alpha(@ink, 0.06),
               0 8px 22px alpha(black, 0.35);
 }
 .floating-notifications .notification.critical {
@@ -273,7 +278,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification-group .notification-group-icon { -gtk-icon-size: var(--notification-group-icon-size); color: @text-muted; }
 .notification-group .notification-group-close-button .close-button { margin: 8px 16px; }
 .notification-group.collapsed.not-expanded { opacity: 0.45; }
-.notification-group.collapsed .notification-row .notification { background-color: alpha(@foreground, 0.08); }
+.notification-group.collapsed .notification-row .notification { background-color: alpha(@ink, 0.08); }
 .notification-group.collapsed:hover .notification-row:not(:only-child) .notification { background-color: @card-hover; }
 
 /* ── Centro de control ──────────────────────────────────── */
@@ -317,7 +322,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
   font-weight: 600;
   color: @text-muted;
 }
-.widget-title > button:hover { background: alpha(@danger, 0.85); color: @background; }
+.widget-title > button:hover { background: alpha(@danger, 0.85); color: @glass; }
 
 /* Botonera rápida */
 .widget-buttons-grid { padding: 0; background: transparent; }
@@ -339,7 +344,7 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .widget-buttons-grid flowboxchild > button.active {
   background: @accent;
   border-color: @accent;
-  color: @background;
+  color: @glass;
 }
 .widget-buttons-grid flowboxchild > button:checked:hover,
 .widget-buttons-grid flowboxchild > button.active:hover { background: shade(@accent, 1.08); }
@@ -364,7 +369,7 @@ scale { padding: 6px 4px; }
 scale trough {
   min-height: 6px;
   border-radius: 99px;
-  background: alpha(@foreground, 0.14);
+  background: alpha(@ink, 0.14);
   border: none;
 }
 scale highlight {
@@ -376,7 +381,7 @@ scale slider {
   min-height: 16px;
   margin: -6px;
   border-radius: 99px;
-  background: @foreground;
+  background: @ink;
   border: none;
   box-shadow: 0 1px 4px alpha(black, 0.45);
   transition: transform var(--t-fast) var(--ease);
@@ -406,7 +411,7 @@ scale:hover slider { transform: scale(1.12); }
 .widget-mpris .widget-mpris-player .mpris-background { filter: blur(16px) brightness(0.7); }
 .widget-mpris .widget-mpris-player .mpris-overlay {
   padding: 12px;
-  background-color: alpha(@background, 0.55);
+  background-color: alpha(@glass, 0.55);
 }
 .widget-mpris .widget-mpris-album-art {
   border-radius: var(--radius-sm);
@@ -423,9 +428,9 @@ scale:hover slider { transform: scale(1.12); }
   border-radius: 99px;
   color: @text;
 }
-.widget-mpris .mpris-overlay button:hover { background: alpha(@foreground, 0.14); }
+.widget-mpris .mpris-overlay button:hover { background: alpha(@ink, 0.14); }
 .widget-mpris > box > button { background: transparent; color: @text-muted; min-width: 24px; }
-.widget-mpris > box > button:disabled { color: alpha(@foreground, 0.2); }
+.widget-mpris > box > button:disabled { color: alpha(@ink, 0.2); }
 
 /* No molestar */
 .widget-dnd {
@@ -437,7 +442,7 @@ scale:hover slider { transform: scale(1.12); }
   min-width: 40px;
   min-height: 22px;
   border-radius: 99px;
-  background: alpha(@foreground, 0.16);
+  background: alpha(@ink, 0.16);
   border: none;
   box-shadow: none;
 }
@@ -447,7 +452,7 @@ scale:hover slider { transform: scale(1.12); }
   min-height: 18px;
   margin: 2px;
   border-radius: 99px;
-  background: @foreground;
+  background: @ink;
   border: none;
   box-shadow: 0 1px 3px alpha(black, 0.4);
 }

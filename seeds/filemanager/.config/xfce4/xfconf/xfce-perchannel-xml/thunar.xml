@@ -12,7 +12,7 @@
   <property name="misc-thumbnail-mode" type="string" value="THUNAR_THUMBNAIL_MODE_ONLY_LOCAL"/>
   <property name="last-show-hidden" type="bool" value="true"/>
   <property name="last-details-view-zoom-level" type="string" value="THUNAR_ZOOM_LEVEL_38_PERCENT"/>
-  <property name="last-details-view-column-widths" type="string" value="50,50,147,138,98,512,50,50,1285,50,50,98,50,179"/>
+  <property name="last-details-view-column-widths" type="string" value="50,50,147,138,98,512,50,50,552,50,50,89,50,539"/>
   <property name="last-sort-column" type="string" value="THUNAR_COLUMN_NAME"/>
   <property name="last-sort-order" type="string" value="GTK_SORT_ASCENDING"/>
   <property name="last-renamer-dialog-maximized" type="bool" value="true"/>

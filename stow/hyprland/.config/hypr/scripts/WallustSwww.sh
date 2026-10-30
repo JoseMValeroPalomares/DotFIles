@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 # Wallust: derive colors from the current wallpaper and update templates
-# Usage: WallustSwww.sh [absolute_path_to_wallpaper]
+# Usage: WallustSwww.sh [--colors] [absolute_path_to_wallpaper]
+#   Sin --colors: el fondo ha cambiado. Con tema fijo (ver wallust_fixed) los colores no se tocan.
+#   Con --colors: aplica los colores de esa imagen aunque el tema esté fijo y no cuenta como cambio de fondo.
 
 set -euo pipefail
 
 # Inputs and paths
+colors_only=false
+if [[ "${1:-}" == "--colors" ]]; then
+  colors_only=true
+  shift
+fi
 passed_path="${1:-}"
+wallust_fixed="$HOME/.config/hypr/UserConfigs/WallustFixed" # existe = tema fijo; lo cambia WallpaperSelect.sh
 cache_dir="$(ls -d "$HOME"/.cache/awww/*/ 2>/dev/null | tail -1)"
 rofi_link="$HOME/.config/rofi/.current_wallpaper"
 wallpaper_current="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
@@ -60,9 +68,12 @@ if [[ -z "${wallpaper_path:-}" || ! -f "$wallpaper_path" ]]; then
 fi
 
 # Update helpers that depend on the path
-ln -sf "$wallpaper_path" "$rofi_link" || true
-mkdir -p "$(dirname "$wallpaper_current")"
-cp -f "$wallpaper_path" "$wallpaper_current" || true
+if ! $colors_only; then
+  ln -sf "$wallpaper_path" "$rofi_link" || true
+  mkdir -p "$(dirname "$wallpaper_current")"
+  cp -f "$wallpaper_path" "$wallpaper_current" || true
+  [[ -e "$wallust_fixed" ]] && exit 0
+fi
 
 # Ensure Ghostty directory exists so Wallust can write target even if Ghostty isn't installed
 mkdir -p "$HOME/.config/ghostty" || true

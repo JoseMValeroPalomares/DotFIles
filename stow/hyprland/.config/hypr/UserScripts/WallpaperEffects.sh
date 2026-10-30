@@ -138,6 +138,6 @@ fi
 awww img -o "$focused_monitor" "$image" "${AWWW_PARAMS[@]}"
 cp -f "$cache/$id.png" "$wallpaper_output"
 echo "$id" > "$cache/applied"
-wallust run -s "$image"
+[[ -e "$HOME/.config/hypr/UserConfigs/WallustFixed" ]] || wallust run -s "$image"   # tema fijo: ver WallustSwww.sh
 "$SCRIPTSDIR/Refresh.sh"
 notify "Efectos de fondo" "$name"

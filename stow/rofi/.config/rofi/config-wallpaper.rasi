@@ -3,6 +3,15 @@
 
 @import "~/.config/rofi/config.rasi"
 
+/* Izquierda y derecha mueven siempre la cuadrícula. Por defecto mueven antes el cursor de la búsqueda   */
+/* y la cuadrícula no responde hasta que llega a un extremo del texto. El cursor queda en Ctrl+B y Ctrl+F. */
+configuration {
+  kb-move-char-back:    "Control+b";
+  kb-move-char-forward: "Control+f";
+  kb-row-left:          "Left,Control+Page_Up";
+  kb-row-right:         "Right,Control+Page_Down";
+}
+
 * {
   /* Selección clara de Wallust (como el resto de menús renovados) */
   selected: @color15;
@@ -27,7 +36,7 @@ inputbar {
 entry {
   expand:           true;
   padding:          0.55em 0.9em;
-  placeholder:      " 🎞️  Buscar por nombre · Intro: poner · Shift+Intro: probar";
+  placeholder:      " 🎞️  Buscar por nombre · Intro: poner · Shift+Intro: probar · Ctrl+Intro: solo sus colores";
   horizontal-align: 0.5;
 }
 
