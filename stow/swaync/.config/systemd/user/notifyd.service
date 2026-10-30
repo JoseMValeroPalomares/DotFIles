@@ -1,0 +1,12 @@
+[Unit]
+Description=Avisos del sistema para swaync (batería, red, USB, actualizaciones...)
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/.config/swaync/scripts/notifyd.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=graphical-session.target
