@@ -49,7 +49,7 @@ hl.bind(mainMod .. " + SHIFT + G", hl.dsp.exec_cmd("superproductivity --enable-f
 hl.bind(mainMod .. " + ALT + L", function()
     local layout = hl.get_config("general.layout") == "master" and "dwindle" or "master"
     hl.config({ general = { layout = layout } })
-    hl.exec_cmd('notify-send -e -u low -i "$HOME/.config/swaync/images/ja.png" " ' .. layout:gsub("^%l", string.upper) .. ' Layout"')
+    hl.exec_cmd('notify-send -e -u low -i "$HOME/.config/swaync/icons/layout.png" " ' .. layout:gsub("^%l", string.upper) .. ' Layout"')
 end, { description = "toggle master/dwindle layout" })
 hl.bind(mainMod .. " + V", hl.dsp.exec_cmd(scriptsDir .. "/ClipManager.sh"), { description = "clipboard manager" })
 

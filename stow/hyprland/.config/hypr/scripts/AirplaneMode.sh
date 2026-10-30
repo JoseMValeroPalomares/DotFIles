@@ -2,7 +2,7 @@
 # Modo avión (tecla XF86Rfkill): bloquea wifi y Bluetooth con rfkill.
 # Al desactivarlo, cada uno vuelve a como estaba (si el Bluetooth estaba apagado, sigue apagado).
 
-notif="$HOME/.config/swaync/images/ja.png"
+notif="$HOME/.config/swaync/icons/airplane.png"
 state="${XDG_RUNTIME_DIR:-/tmp}/airplane-mode"   # tipos que estaban activos antes de activarlo
 
 notify() { notify-send -e -u low -h string:x-canonical-private-synchronous:airplane -i "$notif" "Modo avión" "$1"; }

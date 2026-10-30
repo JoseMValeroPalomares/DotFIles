@@ -326,3 +326,5 @@
       desde cero (binario idéntico). Primer paso al retomarlo: preguntar qué cambiar/arreglar.
 - [x] 2026-10-27 hypridle: bloqueo 5 min, pantalla off 5,5, suspensión 15. Modo pensando (SUPER+ALT+C, scripts/ThinkingMode.sh):
       inhibidor systemd sleep+tapa; hypridle comprueba `systemd-inhibit --list` porque logind deja suspender al propio usuario.
+
+- 2026-10-30: avisos con icono propio (juego, turbo, touchpad, modo avión, teclado, luz nocturna, emoji, polkit, distribución) y sin espacio inicial en el título. `WallustSwww.sh` regenera los iconos de notificación con la paleta nueva.

@@ -11,5 +11,5 @@ for agent in "${agents[@]}"; do
     [[ -x "$agent" && ! -d "$agent" ]] && exec "$agent"
 done
 
-notify-send -u critical "Polkit" "No hay ningún agente de Polkit instalado: las ventanas de contraseña no aparecerán"
+notify-send -u critical -i "$HOME/.config/swaync/icons/shield.png" "Polkit" "No hay ningún agente de Polkit instalado: las ventanas de contraseña no aparecerán"
 exit 1

@@ -24,5 +24,5 @@ if command -v ags >/dev/null 2>&1; then
   ags -t 'overview' >/dev/null 2>&1 && exit 0
 fi
 
-notify-send "Overview" "No se pudo abrir Quickshell ni AGS" -u low 2>/dev/null
+notify-send -i "$HOME/.config/swaync/images/error.png" "Overview" "No se pudo abrir Quickshell ni AGS" -u low 2>/dev/null
 exit 1

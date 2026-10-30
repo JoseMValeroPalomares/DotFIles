@@ -5,13 +5,13 @@
 
 set -euo pipefail
 
-notif="$HOME/.config/swaync/images/ja.png"
+notif="$HOME/.config/swaync/icons/touchpad.png"
 status_file="${XDG_RUNTIME_DIR:-/tmp}/touchpad.status"
 
 touchpad_device="${TOUCHPAD_DEVICE:-$(hyprctl -j devices | jq -r '[.mice[].name | select(test("touchpad"; "i"))][0] // empty')}"
 
 if [[ -z "$touchpad_device" ]]; then
-    notify-send -u low -i "$notif" " Touchpad" " No se ha encontrado ningún touchpad"
+    notify-send -u low -i "$notif" "Touchpad" "No se ha encontrado ningún touchpad"
     exit 1
 fi
 
@@ -26,8 +26,8 @@ current_state="true"
 
 if [[ "$current_state" == "true" ]]; then
     set_touchpad false
-    notify-send -u low -i "$notif" " Touchpad" " Desactivado"
+    notify-send -u low -i "$notif" "Touchpad" "Desactivado"
 else
     set_touchpad true
-    notify-send -u low -i "$notif" " Touchpad" " Activado"
+    notify-send -u low -i "$notif" "Touchpad" "Activado"
 fi

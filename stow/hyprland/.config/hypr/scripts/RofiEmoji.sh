@@ -82,7 +82,7 @@ done
 # Sin -format: rofi devuelve el texto visible, es decir, el emoji (una línea por cada uno marcado)
 emojis="${selection//$'\n'/}"
 printf '%s' "$emojis" | wl-copy
-notify-send -e -u low -h string:x-canonical-private-synchronous:emoji "$emojis copiado" "Ctrl+V para pegar"
+notify-send -e -u low -i "$HOME/.config/swaync/icons/emoji.png" -h string:x-canonical-private-synchronous:emoji "$emojis copiado" "Ctrl+V para pegar"
 
 # Guardar recientes: los elegidos primero, sin repetir, como mucho RECENT_MAX
 mkdir -p "${recent_file%/*}"

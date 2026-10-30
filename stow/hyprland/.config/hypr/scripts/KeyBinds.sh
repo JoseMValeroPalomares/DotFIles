@@ -14,7 +14,7 @@ fi
 scripts_dir="$HOME/.config/hypr/scripts"
 rows=$(python3 -I "$scripts_dir/keybinds_menu.py")
 if [[ -z "$rows" ]]; then
-  notify-send -u low "Atajos" "No se pudieron leer los atajos de Hyprland"
+  notify-send -u low -i "$HOME/.config/swaync/images/error.png" "Atajos" "No se pudieron leer los atajos de Hyprland"
   exit 1
 fi
 

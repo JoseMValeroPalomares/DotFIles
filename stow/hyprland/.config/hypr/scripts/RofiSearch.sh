@@ -2,7 +2,7 @@
 # For Searching via web browsers
 
 if ! command -v jq >/dev/null 2>&1; then
-    notify-send -u low "Rofi Search" "jq is required for URL encoding. Please install jq."
+    notify-send -u low -i "$HOME/.config/swaync/images/error.png" "Rofi Search" "jq is required for URL encoding. Please install jq."
     exit 1
 fi
 

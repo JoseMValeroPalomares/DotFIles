@@ -101,6 +101,9 @@ wallust_targets=(
 )
 wait_for_templates "$start_ts" "${wallust_targets[@]}" || true
 
+# Iconos de las notificaciones con la paleta nueva
+"$HOME/.config/swaync/scripts/gen-icons.py" >/dev/null 2>&1 &
+
 # Kitty: SIGUSR1 recarga kitty.conf (incluye wallust-accents.conf) en las ventanas abiertas
 for pid in $(pidof kitty); do kill -SIGUSR1 "$pid" 2>/dev/null || true; done
 

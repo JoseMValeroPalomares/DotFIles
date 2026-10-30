@@ -4,7 +4,7 @@
 # - Con modo activo: lo desactiva y restaura tus ajustes y perfil de energía
 # Los ajustes de Hyprland los guarda/restaura configs/GameMode.lua (sin hyprctl reload)
 
-notif="$HOME/.config/swaync/images/ja.png"
+notif="$HOME/.config/swaync/icons/game.png"
 rofi_theme="$HOME/.config/rofi/config-edit.rasi"
 state_file="${XDG_RUNTIME_DIR:-/tmp}/hypr-gamemode" # contiene: modo hz perfil_anterior
 
@@ -21,7 +21,7 @@ restore_profile() {
 # Llamado por GameMode.lua cuando Hyprland recarga la config con un modo activo
 if [[ "$1" == "--restore-profile" ]]; then
     restore_profile
-    notify-send -e -u low -i "$notif" " Modo normal" "Config recargada: ajustes restaurados"
+    notify-send -e -u low -i "$notif" "Modo normal" "Config recargada: ajustes restaurados"
     exit 0
 fi
 
@@ -29,7 +29,7 @@ fi
 if [[ -f "$state_file" ]]; then
     hyprctl eval 'require("configs.GameMode").disable()' >/dev/null
     restore_profile
-    notify-send -e -u low -i "$notif" " Modo normal" "Ajustes restaurados"
+    notify-send -e -u low -i "$notif" "Modo normal" "Ajustes restaurados"
     exit 0
 fi
 
@@ -60,14 +60,14 @@ echo "$mode $hz $prev" >"$state_file"
 
 if [[ "$(hyprctl eval "require(\"configs.GameMode\").enable(\"$mode\", $hz)" 2>&1)" != "ok" ]]; then
     rm -f "$state_file"
-    notify-send -e -u critical -i "$notif" " Modo rendimiento" "No se pudo activar (ver hyprctl rollinglog)"
+    notify-send -e -u critical -i "$notif" "Modo rendimiento" "No se pudo activar (ver hyprctl rollinglog)"
     exit 1
 fi
 
 [[ -n "$prev" ]] && powerprofilesctl set "$profile"
 
 if [[ "$mode" == "game" ]]; then
-    notify-send -e -u low -i "$notif" " Modo juego" "${hz} Hz · perfil ${profile}"
+    notify-send -e -u low -i "$notif" "Modo juego" "${hz} Hz · perfil ${profile}"
 else
-    notify-send -e -u low -i "$notif" " Ahorro de energía" "${hz} Hz · perfil ${profile}"
+    notify-send -e -u low -i "$notif" "Ahorro de energía" "${hz} Hz · perfil ${profile}"
 fi

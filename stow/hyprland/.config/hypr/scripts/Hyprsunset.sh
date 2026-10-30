@@ -60,14 +60,14 @@ if [[ "$state" == "on" ]]; then
       sleep 0.3 && pkill -x hyprsunset || true
     fi
     echo off > "$STATE_FILE"
-    notify-send -e -u low -h string:x-canonical-private-synchronous:hyprsunset "Luz nocturna" "Desactivada" || true
+    notify-send -e -u low -i "$HOME/.config/swaync/icons/night.png" -h string:x-canonical-private-synchronous:hyprsunset "Luz nocturna" "Desactivada" || true
   else
     # Turning ON: start hyprsunset at target temp in background
     if command -v hyprsunset >/dev/null 2>&1; then
       nohup hyprsunset -t "$TARGET_TEMP" >/dev/null 2>&1 &
     fi
     echo on > "$STATE_FILE"
-    notify-send -e -u low -h string:x-canonical-private-synchronous:hyprsunset "Luz nocturna" "Activada · ${TARGET_TEMP} K" || true
+    notify-send -e -u low -i "$HOME/.config/swaync/icons/night.png" -h string:x-canonical-private-synchronous:hyprsunset "Luz nocturna" "Activada · ${TARGET_TEMP} K" || true
   fi
 }
 
