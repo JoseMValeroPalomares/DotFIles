@@ -1,0 +1,6 @@
+# Se generan con scripts/gen-icons.py a partir de los colores de wallust
+icons/*.png
+images/*.png
+icons/.palette
+__pycache__/
+backup/iconos-antiguos/
