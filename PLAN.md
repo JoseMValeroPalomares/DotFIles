@@ -19,6 +19,7 @@ personalizado (`--custom`) y mínimo (`--minimal`).
   (`~/token`, `~/.config/panel-maestro/token`, `~/.config/stellar/identity`, `pulse/cookie`),
   `.ssh`, `.gnupg`, navegador (zen), globalStorage/workspaceStorage/History de Code.
 - Super+L se queda como está (wlogout); el bloqueo es Ctrl+Alt+L.
+- Iconos de notificaciones: se generan con wallust al instalar y al cambiar de fondo; los PNG no se versionan.
 - Sin `git push` ni remotos: lo sube Jose.
 
 ## Fases

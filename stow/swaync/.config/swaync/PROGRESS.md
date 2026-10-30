@@ -24,3 +24,12 @@
 - 2026-10-21: popups 20 px más a la izquierda (margen derecho 34 px); la ventana sube a 360 px para que la tarjeta conserve su ancho.
 - 2026-10-21: popups 10 px más estrechos (ventana 350 px, tarjeta ~305 px), mismo margen derecho.
 - 2026-10-21: popups 15 px más a la izquierda (margen derecho 49 px, ventana 365 px, tarjeta ~305 px).
+
+- 2026-10-30: Fase 7.
+  - Diagnóstico: Zen no tenía permiso de notificaciones para ningún sitio; por eso Discord nunca avisaba.
+  - Lo que manda Zen (capturado con un perfil temporal): app `Zen`, `desktop-entry=zen`, avatar en `image-data`, sin hint `urgency` y sin indicar la web de origen. swaync no permite reescribir el icono por app.
+  - Sin hint de urgencia los avisos duraban 3 s: `override-urgency` a normal para `desktop-entry` zen.
+  - swaync escala `image-data` al tamaño del widget **con margen incluido** (`functions.vala`): el margen lateral de `.image` deformaba los avatares. El margen pasa a `.text-box`.
+  - Con Hyprland en Lua, `hyprctl dispatch` espera una expresión Lua: `hl.dsp.focus({ window = "class:^(zen)$" })`.
+  - Zen descarga en `x.part`, lo renombra a `x.AZAR.ext.part` y al acabar a `x.ext`: solo el último paso cuenta como terminado.
+  - 26 tests en `tests/`. Probado en real: lectura de datos de todos los módulos, una descarga y el foco de Zen. Los eventos de USB, Bluetooth, red y cargador, solo con tests y objetos simulados.

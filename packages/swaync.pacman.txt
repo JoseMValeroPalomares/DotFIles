@@ -1,3 +1,9 @@
 # swaync.pacman.txt — una entrada por línea; '#' para comentarios
 swaync
 libnotify
+# notifyd e iconos
+python-gobject
+librsvg
+pacman-contrib
+upower
+udisks2

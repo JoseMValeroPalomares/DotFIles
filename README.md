@@ -122,7 +122,7 @@ con lo instalado, lo omitido y los errores. Si un componente falla, se anota y s
 | `hyprland` | `~/.config/hypr` completo (Lua, scripts, UserConfigs, animaciones) | hyprland, uwsm, awww, cliphist, nwg-* | waybar, swaync, rofi, lock, wallust, kitty, filemanager |
 | `lock` | `hyprlock.conf`, `hypridle.conf`, scripts de bloqueo y foto de perfil | hyprlock, hypridle | hyprland, wallust |
 | `waybar` | Configs, estilos, módulos y `clima.py` (Open-Meteo) | waybar, playerctl, pavucontrol | hyprland, swaync |
-| `swaync` | Notificaciones | swaync | — |
+| `swaync` | Notificaciones, iconos generados con wallust y avisos del sistema (`notifyd`) | swaync, python-gobject, librsvg, pacman-contrib, upower, udisks2 | — |
 | `rofi` | Lanzador, menús (calc, emoji, portapapeles, fondos) y temas | rofi | wallust |
 | `wlogout` | Menú de energía parcheado (se compila al instalar) | gtk3, gtk-layer-shell, wlogout (AUR) | hyprland, lock |
 | `wallust` | Config y plantillas de colores | wallust (AUR) | — |

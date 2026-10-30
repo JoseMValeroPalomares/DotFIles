@@ -47,3 +47,9 @@
   genera `docs/capturas/*.png` en un escritorio vacío.
 - Capturas en `docs/capturas/` (14): todas las apps salvo Spotify, que va sin captura a propósito.
   Revisadas una a una; datos visibles aceptados por Jose (IP local, foto y ciudad en el bloqueo).
+
+## 2026-10-30
+- swaync: iconos generados con la paleta de wallust (`gen-icons.py`, PNG fuera del repo), servicio
+  `notifyd` con avisos del sistema y arreglos para los avisos de Zen (detalle en
+  `stow/swaync/.config/swaync/PROGRESS.md`). Paso nuevo `scripts/post/swaync.sh`.
+- hyprland: icono propio en los avisos que usaban `ja.png` o ninguno, y `WallustSwww.sh` regenera los iconos.

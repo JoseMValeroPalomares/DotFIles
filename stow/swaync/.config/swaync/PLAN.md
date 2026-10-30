@@ -83,6 +83,12 @@ Versión instalada: **swaync 0.12.6** (GTK4) · Hyprland · 2 monitores 1920×10
 - [x] Comprobar el contraste de los pares texto/fondo con los colores reales de wallust.
 - [x] Navegar con teclado por el panel (foco visible) y revisar que el journal está limpio.
 
+### Fase 7 — Más avisos e iconos coherentes (2026-10-30)
+- [x] Iconos generados con la paleta de wallust (`scripts/gen-icons.py`), mismos nombres de archivo.
+- [x] `notifyd`: batería, Bluetooth, USB, red, descargas, actualizaciones, reinicio, disco, temperatura y servicios.
+- [x] Avisos de Zen: avatar sin deformar, duración normal y foco al pulsar.
+- [ ] Probar con hardware real: USB y Bluetooth.
+
 ## 4. Decisiones (resueltas el 2026-10-20)
 1. Las notificaciones van arriba a la derecha.
 2. Estética "glass sobrio".
