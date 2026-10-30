@@ -32,10 +32,22 @@
   "hide-on-action": true,
   "text-empty": "Sin notificaciones",
   "script-fail-notify": true,
+  "scripts": {
+    "zen-foco": {
+      "exec": "$HOME/.config/swaync/scripts/focus-zen.sh",
+      "desktop-entry": "^zen$",
+      "run-on": "action"
+    }
+  },
   "notification-visibility": {
     "spotify": {
       "state": "transient",
       "app-name": "[Ss]potify"
+    },
+    "zen": {
+      "state": "enabled",
+      "desktop-entry": "^zen$",
+      "override-urgency": "normal"
     }
   },
   "widgets": [

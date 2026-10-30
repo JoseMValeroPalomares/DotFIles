@@ -113,8 +113,10 @@ scrollbar slider:hover { background: alpha(@foreground, 0.4); }
 .notification .image {
   -gtk-icon-size: var(--notification-icon-size);
   border-radius: var(--radius-sm);
-  margin: 0 12px 0 0;
+  margin: 0;    /* sin márgenes: swaync escala image-data (avatares de Discord en Zen) al tamaño
+                   del widget margen incluido, y con margen lateral la imagen sale deformada */
 }
+.notification .text-box { margin-left: 12px; }
 .notification .app-icon {
   -gtk-icon-size: var(--notification-app-icon-size);
   -gtk-icon-shadow: 0 1px 3px alpha(black, 0.6);
