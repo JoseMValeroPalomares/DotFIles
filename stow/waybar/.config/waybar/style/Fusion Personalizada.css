@@ -4,22 +4,23 @@
 @import '../../.config/waybar/wallust/colors-waybar.css';
 
 /* --- Catppuccin Mocha Palette --- */
+/* Aclarada un poco y con el mismo tono: sobre el halo oscuro se leen mejor con cualquier fondo. */
 @define-color mocha-rosewater #f5e0dc;
-@define-color mocha-flamingo #f2cdcd;
-@define-color mocha-pink #f5c2e7;
-@define-color mocha-mauve #cba6f7;
-@define-color mocha-red #f38ba8;
-@define-color mocha-maroon #eba0ac;
-@define-color mocha-peach #fab387;
-@define-color mocha-yellow #f9e2af;
-@define-color mocha-green #a6e3a1;
-@define-color mocha-teal #94e2d5;
-@define-color mocha-sky #89dceb;
-@define-color mocha-sapphire #74c7ec;
-@define-color mocha-blue #89b4fa;
-@define-color mocha-lavender #b4befe;
-@define-color mocha-text #cdd6f4;
-@define-color mocha-subtext0 #a6adc8;
+@define-color mocha-flamingo #f5d5d5;
+@define-color mocha-pink #f8cbec;
+@define-color mocha-mauve #d9bcfb;
+@define-color mocha-red #ff9fb7;
+@define-color mocha-maroon #f2afb9;
+@define-color mocha-peach #ffbf95;
+@define-color mocha-yellow #fbe6b8;
+@define-color mocha-green #b0ecab;
+@define-color mocha-teal #9fe9dd;
+@define-color mocha-sky #96e3f0;
+@define-color mocha-sapphire #8dd6f5;
+@define-color mocha-blue #a3c7ff;
+@define-color mocha-lavender #c3ccff;
+@define-color mocha-text #dde4f8;
+@define-color mocha-subtext0 #bac2de;
 
 @define-color critical @mocha-red; 
 @define-color warning @mocha-yellow;  
@@ -35,12 +36,18 @@
     
 /* Barra transparente: un halo oscuro y difuso tras texto e iconos los separa */
 /* de los fondos claros sin dibujar ninguna caja. Se hereda a todos los módulos. */
+/* Las capas se apilan porque una sola, aunque sea opaca, se queda corta sobre blanco; */
+/* sobre fondos oscuros apenas se nota. */
 window#waybar {
     background: transparent;
     border-radius: 1px;
     color: @mocha-text;
-    text-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 0.6);
-    -gtk-icon-shadow: 0 0 2px rgba(0, 0, 0, 0.9), 0 0 5px rgba(0, 0, 0, 0.6);
+    text-shadow: 0 0 1px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1),
+                 0 0 3px rgba(0, 0, 0, 1), 0 0 3px rgba(0, 0, 0, 1),
+                 0 0 4px rgba(0, 0, 0, 0.9), 0 1px 7px rgba(0, 0, 0, 0.6);
+    -gtk-icon-shadow: 0 0 1px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1), 0 0 2px rgba(0, 0, 0, 1),
+                      0 0 3px rgba(0, 0, 0, 1), 0 0 3px rgba(0, 0, 0, 1),
+                      0 0 4px rgba(0, 0, 0, 0.9), 0 1px 7px rgba(0, 0, 0, 0.6);
 }
     
 window#waybar.hidden {
@@ -128,7 +135,7 @@ tooltip label {
 #custom-cava_mviz, #custom-cycle_wall,
 #custom-file_manager, #custom-keybinds, #custom-keyboard,
 #custom-light_dark, #custom-nightlight, #custom-lock,
-#custom-hint, #custom-hypridle, #custom-menu,
+#custom-hint, #custom-hypridle, #custom-menu, #custom-modo-pensando,
 #custom-playerctl, #custom-power_vertical, #custom-power,
 #custom-quit, #custom-reboot, #custom-settings,
 #custom-spotify, #custom-swaync, #custom-tty,
@@ -165,6 +172,9 @@ tooltip label {
 
 #pulseaudio { color: @mocha-lavender; }
 #backlight { color: @mocha-lavender; }
+/* Modo pensando: discreto si todo es normal; resalta cuando el portátil no se va a suspender */
+#custom-modo-pensando { color: @mocha-lavender; }
+#custom-modo-pensando.activo { color: @mocha-yellow; }
 
 #mpris { color: @mocha-pink; }
 #custom-cava_mviz { color: @mocha-pink; }
@@ -182,6 +192,8 @@ tooltip label {
 #temperature.critical {
     background-color: @critical;
     color: #1e1e2e;
+    text-shadow: none;  /* Texto oscuro sobre caja roja: el halo lo emborrona */
+    -gtk-icon-shadow: none;
 }
        
 #battery.critical:not(.charging) {

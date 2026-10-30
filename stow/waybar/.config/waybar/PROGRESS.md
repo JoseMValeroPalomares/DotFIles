@@ -33,3 +33,13 @@
 - [x] Quitadas 4 `animation: gradient_f`, que apuntaban a un `@keyframes` inexistente.
 - [x] Waybar arranca sin avisos (solo los del applet de red). Uso medido: ~1,8 % de CPU en 30 s.
 - [ ] Separadores `blank_3`: se mantienen. Cambiarlos por márgenes no ahorra nada y podría mover la barra.
+
+## Fase 5: Legibilidad y suspensión (2026-10-30)
+- [x] Medido con una Waybar temporal sobre fondos difíciles: contraste real de cada color frente a los píxeles que lo rodean. Antes, 1,0 a 1,3 sobre blanco y amarillo.
+- [x] Halo de 7 capas apiladas (`text-shadow` y `-gtk-icon-shadow`). Una capa opaca sola se queda corta sobre blanco. Sobre fondo oscuro casi no se aprecia.
+- [x] Paleta aclarada sin cambiar el tono. Resultado: mínimo 3,1 sobre blanco, 3,8 sobre amarillo y fondos muy variados, 6 sobre gris y azul, 12 sobre negro. Blanco puro sigue por debajo de 4,5: subirlo más exigiría fondo, descartado en la fase 1.
+- [x] `#temperature.critical` sin halo: es texto oscuro sobre caja roja.
+- [x] `custom/modo-pensando` junto al brillo: luna = suspensión normal, café = no se suspende. Clic: `ThinkingMode.sh` (el mismo del atajo) y señal 10. El atajo se refleja en 2 s como mucho, por el intervalo: `ThinkingMode.sh` está en hypr y no manda señal.
+- [x] `scripts/modo_pensando.sh` ancla el `pgrep`. Ojo: el `pgrep` sin anclar de `ThinkingMode.sh` coincide con cualquier proceso que cite el texto completo del inhibidor, y lo mata al desactivar.
+- [x] `clima.py`: temporal por proceso. Con dos monitores se lanzaba dos veces, uno fallaba al renombrar y ese monitor se quedaba sin tiempo hasta 15 min.
+- Uso de CPU: ~1,0 % → ~1,7 % (30 s). Captura en `capturas/fase5-antes-despues.png`.

@@ -91,6 +91,22 @@
 	"tooltip-format": "Left Click: Quick Tips\nRight Click: Keybinds",
 },
 
+// Modo pensando (SUPER+ALT+C): luna si el portátil se suspende como siempre, café si se queda despierto.
+// Clic: lo cambia con el mismo script que el atajo. Señal 10 refresca al instante; el intervalo recoge el atajo.
+"custom/modo-pensando": {
+	"format": "{icon}",
+	"format-icons": {
+		"normal": "󰤄 ",
+		"activo": "󰅶 ",
+	},
+	"return-type": "json",
+	"interval": 2,
+	"signal": 10,
+	"exec": "$HOME/.config/waybar/scripts/modo_pensando.sh",
+	"on-click": "$HOME/.config/hypr/scripts/ThinkingMode.sh; pkill -RTMIN+10 waybar",
+	"tooltip": true,
+},
+
 // Hypridle inhibitor
 "custom/hypridle": {
 	"format": "󱫗 ",

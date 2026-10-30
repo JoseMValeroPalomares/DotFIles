@@ -22,6 +22,8 @@ Colores de iconos: Catppuccin Mocha fijos. Wallust aporta fondo y acentos.
    (rueda = mes, clic derecho = mes/año, clic central = hoy). `format-alt` con la fecha larga.
 4. **Optimización y pulido**: `network#speed` a 2–3 s, separadores con `margin` en CSS,
    quitar las animaciones `gradient_f` que no existen, revisión final.
+5. **Legibilidad y suspensión**: la barra sigue transparente. Halo más denso y paleta aclarada
+   para que se lea con cualquier fondo, e icono del modo pensando (SUPER+ALT+C) junto al brillo.
 
 ## Verificación de cada fase
 - `pkill -SIGUSR2 waybar` para recargar.

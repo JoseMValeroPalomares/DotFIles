@@ -10,6 +10,7 @@ Además escribe ~/.cache/.weather_cache, el texto del tiempo de hyprlock.
   clima.py --vista dias    el tooltip muestra los próximos días
 """
 import json
+import os
 import re
 import sys
 import time
@@ -117,14 +118,20 @@ def leer_cache():
         return None
 
 
+def escribir(ruta, texto):
+    """Escritura atómica: Waybar nunca lee un archivo a medias. El temporal lleva el PID
+    porque con dos monitores hay dos clima.py a la vez y compartirlo hace fallar a uno."""
+    tmp = ruta.with_suffix(f".{os.getpid()}.tmp")
+    tmp.write_text(texto, encoding="utf-8")
+    tmp.replace(ruta)
+
+
 def descargar():
     with urllib.request.urlopen(URL, timeout=8) as r:
         datos = json.load(r)
     datos["obtenido"] = time.time()
     CACHE.mkdir(parents=True, exist_ok=True)
-    tmp = DATOS.with_suffix(".tmp")
-    tmp.write_text(json.dumps(datos), encoding="utf-8")
-    tmp.replace(DATOS)  # escritura atómica: Waybar nunca lee un archivo a medias
+    escribir(DATOS, json.dumps(datos))
     return datos
 
 
@@ -255,9 +262,7 @@ def main(args):
         return
     datos, sin_conexion = obtener(forzar="--forzar" in args)
     if datos:
-        tmp = HYPRLOCK.with_suffix(".tmp")
-        tmp.write_text(texto_hyprlock(datos), encoding="utf-8")
-        tmp.replace(HYPRLOCK)
+        escribir(HYPRLOCK, texto_hyprlock(datos))
     print(json.dumps(salida(datos, sin_conexion), ensure_ascii=False), flush=True)
 
 
