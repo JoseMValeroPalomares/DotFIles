@@ -4,10 +4,11 @@
 post_swaync() {
     run "$HOME/.config/swaync/scripts/gen-icons.py" --force
     # notifyd avisa de red y Bluetooth con el mismo estilo que el resto: se apagan los avisos propios
-    run gsettings set org.gnome.nm-applet disable-connected-notifications true &&
+    if ! { run gsettings set org.gnome.nm-applet disable-connected-notifications true &&
         run gsettings set org.gnome.nm-applet disable-disconnected-notifications true &&
-        run gsettings set org.blueman.general plugin-list "['!ConnectionNotifier']" ||
+        run gsettings set org.blueman.general plugin-list "['!ConnectionNotifier']"; }; then
         log_warn "Sin nm-applet, blueman o sesión gráfica: sus avisos propios siguen activos"
+    fi
 
     if ! ((DRY_RUN)) && ! systemctl --user show-environment >/dev/null 2>&1; then
         log_warn "No hay gestor de usuario de systemd: ejecuta ./install.sh --only swaync tras iniciar sesión"
