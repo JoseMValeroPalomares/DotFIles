@@ -324,3 +324,5 @@
       árbol dwindle reconstruido con master→dwindle, fullscreen de kitty restaurado). Al usuario le gustó pero quiere cambios → APARCADO (2026-10-24):
       desactivado y limpio, proyecto en experiments/hyprplane/ (CLAUDE.md, parche, setup/load/clean.sh); reproducible
       desde cero (binario idéntico). Primer paso al retomarlo: preguntar qué cambiar/arreglar.
+- [x] 2026-10-27 hypridle: bloqueo 5 min, pantalla off 5,5, suspensión 15. Modo pensando (SUPER+ALT+C, scripts/ThinkingMode.sh):
+      inhibidor systemd sleep+tapa; hypridle comprueba `systemd-inhibit --list` porque logind deja suspender al propio usuario.

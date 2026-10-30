@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# copy ARCHIVO... — copia al portapapeles el contenido de uno o varios archivos.
+# Sin argumentos, copia lo que llegue por la entrada estándar (p. ej. `ls | copy`).
+set -euo pipefail
+
+if command -v wl-copy >/dev/null && [[ -n "${WAYLAND_DISPLAY:-}" ]]; then
+    clip() { wl-copy; }
+elif command -v xclip >/dev/null; then
+    clip() { xclip -selection clipboard; }
+elif command -v xsel >/dev/null; then
+    clip() { xsel --clipboard --input; }
+else
+    echo "copy: no encuentro wl-copy, xclip ni xsel" >&2
+    exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+    if [[ -t 0 ]]; then
+        echo "Uso: copy ARCHIVO...  (o: comando | copy)" >&2
+        exit 1
+    fi
+    clip
+    echo "Copiado desde la entrada estándar"
+    exit 0
+fi
+
+for f in "$@"; do
+    if [[ ! -f "$f" ]]; then
+        echo "copy: '$f' no existe o no es un archivo" >&2
+        exit 1
+    fi
+    if [[ ! -r "$f" ]]; then
+        echo "copy: no tengo permiso para leer '$f'" >&2
+        exit 1
+    fi
+done
+
+cat -- "$@" | clip
+lineas=$(cat -- "$@" | wc -l)
+echo "Copiado al portapapeles: $* ($lineas líneas)"

@@ -63,6 +63,9 @@ hl.bind(mainMod .. " + K", hl.dsp.exec_cmd(os.getenv("HOME") .. "/Projects/panel
 -- Agenda del Panel (rofi; Super+Ctrl+K ya es «Move left into group»)
 hl.bind(mainMod .. " + ALT + K", hl.dsp.exec_cmd(os.getenv("HOME") .. "/Projects/panel-maestro/scripts/desktop/panel_agenda.py --menu"), { description = "panel agenda" })
 
+-- Modo pensando: no suspender mientras Claude Code trabaja (C de Claude; vuelve a pulsar para quitarlo)
+hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd(scriptsDir .. "/ThinkingMode.sh"), { description = "thinking mode (no suspend)" })
+
 -- For passthrough keyboard into a VM
 
 -- bind = $mainMod ALT, P, submap, passthru
