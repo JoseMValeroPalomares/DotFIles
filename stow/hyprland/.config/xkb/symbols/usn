@@ -1,0 +1,9 @@
+// Distribución US con ñ y Ñ en una tecla que no existe en el teclado físico.
+// Hyprland la pulsa con send_shortcut desde el atajo Ctrl+Shift+;
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "us(basic)"
+    name[Group1] = "English (US)";
+
+    key <I149> { [ ntilde, Ntilde ] };
+};

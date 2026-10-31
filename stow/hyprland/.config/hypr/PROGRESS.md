@@ -328,3 +328,4 @@
       inhibidor systemd sleep+tapa; hypridle comprueba `systemd-inhibit --list` porque logind deja suspender al propio usuario.
 
 - 2026-10-30: avisos con icono propio (juego, turbo, touchpad, modo avión, teclado, luz nocturna, emoji, polkit, distribución) y sin espacio inicial en el título. `WallustSwww.sh` regenera los iconos de notificación con la paleta nueva.
+- 2026-10-31: Ctrl+Shift+; (ñ) y con Alt (Ñ) dejaron de escribir; coincide con el paso a Hyprland 0.57 y Zen 1.24b, sin confirmar que sea la causa. `wtype` funciona solo, pero con Ctrl y Shift físicos apretados la ñ no llegaba. Esperar a soltarlos funcionaba con retraso, así que se descartó. Ahora Hyprland pulsa con `send_shortcut` la tecla sin uso `<I149>`, con ñ/Ñ en la distribución propia `usn` (`~/.config/xkb/symbols/usn`, va en el componente hyprland). Las pruebas con teclado virtual engañan: con wtype, `send_shortcut` no escribe porque el keymap activo es el suyo.

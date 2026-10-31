@@ -54,9 +54,10 @@ for i = 1, 8 do
     hl.bind(mainMod .. " + ALT + " .. i, hl.dsp.group.active({ index = i }), { description = "go to window " .. i .. " in group" })
 end
 
--- Escribir ñ / Ñ con teclado US (code:47 es la tecla ;)
-hl.bind("CTRL + SHIFT + code:47", hl.dsp.exec_cmd("wtype ñ"), { description = "type ñ" })
-hl.bind("CTRL + SHIFT + ALT + code:47", hl.dsp.exec_cmd("wtype Ñ"), { description = "type Ñ" })
+-- Escribir ñ / Ñ (code:47 es la tecla ;). code:149 es la tecla sin uso con ñ/Ñ de ~/.config/xkb/symbols/usn
+-- send_shortcut fija sus propios modificadores: con wtype, Ctrl y Shift apretados impedían que llegase
+hl.bind("CTRL + SHIFT + code:47", hl.dsp.send_shortcut({ mods = "", key = "code:149" }), { description = "type ñ" })
+hl.bind("CTRL + SHIFT + ALT + code:47", hl.dsp.send_shortcut({ mods = "SHIFT", key = "code:149" }), { description = "type Ñ" })
 
 -- Captura rápida del Panel (rofi)
 hl.bind(mainMod .. " + K", hl.dsp.exec_cmd(os.getenv("HOME") .. "/Projects/panel-maestro/scripts/desktop/quick_capture.sh"), { description = "panel quick capture" })

@@ -27,7 +27,7 @@ hl.config({
     },
 
     input = {
-        kb_layout = "us",
+        kb_layout = "usn", -- US con ñ en <I149>: ~/.config/xkb/symbols/usn
         kb_variant = "",
         kb_model = "",
         kb_options = "",

@@ -53,3 +53,6 @@
   `notifyd` con avisos del sistema y arreglos para los avisos de Zen (detalle en
   `stow/swaync/.config/swaync/PROGRESS.md`). Paso nuevo `scripts/post/swaync.sh`.
 - hyprland: icono propio en los avisos que usaban `ja.png` o ninguno, y `WallustSwww.sh` regenera los iconos.
+
+## 2026-10-31
+- hyprland: la ñ se escribe con `send_shortcut` y la distribución propia `usn`, sin `wtype` (detalle en `stow/hyprland/.config/hypr/PROGRESS.md`).
